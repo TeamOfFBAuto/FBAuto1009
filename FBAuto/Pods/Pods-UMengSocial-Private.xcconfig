@@ -1,0 +1,7 @@
+#include "Pods-UMengSocial.xcconfig"
+FRAMEWORK_SEARCH_PATHS = ${PODS_UMENGSOCIAL_FRAMEWORK_SEARCH_PATHS}
+GCC_PREPROCESSOR_DEFINITIONS = COCOAPODS=1
+HEADER_SEARCH_PATHS = "${PODS_ROOT}/BuildHeaders" "${PODS_ROOT}/BuildHeaders/UMengSocial" "${PODS_ROOT}/Headers" "${PODS_ROOT}/Headers/AFNetworking" "${PODS_ROOT}/Headers/ASIHTTPRequest" "${PODS_ROOT}/Headers/CocoaAsyncSocket" "${PODS_ROOT}/Headers/CocoaLumberjack" "${PODS_ROOT}/Headers/JSONKit" "${PODS_ROOT}/Headers/MBProgressHUD" "${PODS_ROOT}/Headers/Reachability" "${PODS_ROOT}/Headers/RegexKitLite" "${PODS_ROOT}/Headers/SDWebImage" "${PODS_ROOT}/Headers/UMeng" "${PODS_ROOT}/Headers/UMengSocial" "${PODS_ROOT}/Headers/XMPPFramework" "${PODS_ROOT}/Headers/iCarousel"
+LIBRARY_SEARCH_PATHS = ${PODS_UMENGSOCIAL_LIBRARY_SEARCH_PATHS}
+OTHER_LDFLAGS = -ObjC ${PODS_UMENGSOCIAL_OTHER_LDFLAGS}
+PODS_ROOT = ${SRCROOT}

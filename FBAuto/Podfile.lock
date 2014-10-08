@@ -1,0 +1,70 @@
+PODS:
+  - AFNetworking (2.4.1):
+    - AFNetworking/NSURLConnection
+    - AFNetworking/NSURLSession
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+    - AFNetworking/UIKit
+  - AFNetworking/NSURLConnection (2.4.1):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/NSURLSession (2.4.1):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (2.4.1)
+  - AFNetworking/Security (2.4.1)
+  - AFNetworking/Serialization (2.4.1)
+  - AFNetworking/UIKit (2.4.1):
+    - AFNetworking/NSURLConnection
+    - AFNetworking/NSURLSession
+  - ASIHTTPRequest (1.8.2):
+    - ASIHTTPRequest/ASIWebPageRequest
+    - ASIHTTPRequest/CloudFiles
+    - ASIHTTPRequest/Core
+    - ASIHTTPRequest/S3
+  - ASIHTTPRequest/ASIWebPageRequest (1.8.2):
+    - ASIHTTPRequest/Core
+  - ASIHTTPRequest/CloudFiles (1.8.2):
+    - ASIHTTPRequest/Core
+  - ASIHTTPRequest/Core (1.8.2):
+    - Reachability
+  - ASIHTTPRequest/S3 (1.8.2):
+    - ASIHTTPRequest/Core
+  - GDataXML-HTML (1.1.0)
+  - iCarousel (1.7.6)
+  - JSONKit (1.5pre)
+  - MBProgressHUD (0.9)
+  - Reachability (3.1.1)
+  - RegexKitLite (4.0)
+  - SDWebImage (3.7.1):
+    - SDWebImage/Core
+  - SDWebImage/Core (3.7.1)
+  - UMeng (2.2.1)
+
+DEPENDENCIES:
+  - AFNetworking (~> 2.4.1)
+  - ASIHTTPRequest
+  - GDataXML-HTML (~> 1.1.0)
+  - iCarousel (~> 1.7.6)
+  - JSONKit
+  - MBProgressHUD (~> 0.8)
+  - RegexKitLite (~> 4.0)
+  - SDWebImage (~> 3.6)
+  - UMeng (~> 2.2.1)
+
+SPEC CHECKSUMS:
+  AFNetworking: 0aabc6fae66d6e5d039eeb21c315843c7aae51ab
+  ASIHTTPRequest: 2c8335b49410c0e2ad42829c438e74d454b77590
+  GDataXML-HTML: 3f6537789b55edbc4d83283566f9779abd9680bc
+  iCarousel: c35a4e26b3c657847e523012b593e70ddbd84992
+  JSONKit: efef3bbd3372ff33f96b9c6f34cf4fe18e74ab69
+  MBProgressHUD: 2038dbcf3dce73215abed6001657043d53aa79a8
+  Reachability: 8e9635e3cb4f98e7f825e51147f677ecc694d0e7
+  RegexKitLite: c0e4c12e6e7de0769f3a3ed679f0f61604170661
+  SDWebImage: 116e88633b5b416ea0ca4b334a4ac59cf72dd38d
+  UMeng: e5b6c6a06215aeba33cb59159341ab3d6d292935
+
+COCOAPODS: 0.33.1

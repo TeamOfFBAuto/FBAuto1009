@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5064" systemVersion="13D65" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="CarBrand" representedClassName="CarBrand" syncable="YES">
+        <attribute name="brandFirstLetter" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="brandId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="brandName" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="CarStyle" representedClassName="CarStyle" syncable="YES">
+        <attribute name="parentId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="styleId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="styleName" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="CarType" representedClassName="CarType" syncable="YES">
+        <attribute name="firstLetter" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="parentId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="typeId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="typeName" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="CarBrand" positionX="-63" positionY="-18" width="128" height="90"/>
+        <element name="CarType" positionX="-54" positionY="18" width="128" height="103"/>
+        <element name="CarStyle" positionX="-36" positionY="45" width="128" height="90"/>
+    </elements>
+</model>

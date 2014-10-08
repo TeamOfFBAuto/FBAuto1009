@@ -1,0 +1,5 @@
+#include "Pods-UIView+JMFrame.xcconfig"
+GCC_PREPROCESSOR_DEFINITIONS = COCOAPODS=1
+HEADER_SEARCH_PATHS = "${PODS_ROOT}/BuildHeaders" "${PODS_ROOT}/BuildHeaders/UIView+JMFrame" "${PODS_ROOT}/Headers" "${PODS_ROOT}/Headers/AFNetworking" "${PODS_ROOT}/Headers/ASIHTTPRequest" "${PODS_ROOT}/Headers/CocoaAsyncSocket" "${PODS_ROOT}/Headers/CocoaLumberjack" "${PODS_ROOT}/Headers/JSONKit" "${PODS_ROOT}/Headers/Reachability" "${PODS_ROOT}/Headers/SDWebImage" "${PODS_ROOT}/Headers/UIView+JMFrame" "${PODS_ROOT}/Headers/UMeng" "${PODS_ROOT}/Headers/XMPPFramework" "${PODS_ROOT}/Headers/iCarousel"
+OTHER_LDFLAGS = -ObjC ${PODS_UIVIEW_JMFRAME_OTHER_LDFLAGS}
+PODS_ROOT = ${SRCROOT}

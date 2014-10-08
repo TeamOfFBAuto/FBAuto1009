@@ -1,0 +1,11 @@
+pod 'AFNetworking', '~> 2.4.1'
+pod 'JSONKit'
+pod 'ASIHTTPRequest'
+pod 'UMeng', '~> 2.2.1'
+pod 'SDWebImage', '~> 3.6'
+pod 'iCarousel', '~> 1.7.6'
+pod 'RegexKitLite', '~> 4.0'
+pod 'MBProgressHUD', '~> 0.8'
+pod 'GDataXML-HTML', '~> 1.1.0'
+
+
