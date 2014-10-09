@@ -214,7 +214,7 @@
 - (void)updateTabbarNumber:(int)number
 {
     NSString *number_str = nil;
-    if (number != 0) {
+    if (number > 0) {
         number_str = [NSString stringWithFormat:@"%d",number];
     }
     _perSonalVC.tabBarItem.badgeValue = number_str;

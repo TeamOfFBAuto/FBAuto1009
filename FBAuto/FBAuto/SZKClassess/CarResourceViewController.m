@@ -110,45 +110,6 @@
         
     }else{
         NSLog(@"xxname===%@ id:%@",[GMAPI getUsername],[GMAPI getUid]);
-        
-//        NSString *loginToken;//需要后台返回loginToken
-//        //test by lcw
-//        
-//        if ([[GMAPI getUid] isEqualToString:@"1"]) {
-//            
-//            loginToken = @"BqiKmIOBtVmeRIRi7nH7uQ1/1/88rgRNJYRMrIIogCt5AGSpFGULe4nFY4+byD/R4ClHNRPlhjc=";
-//            
-//        }else
-//        {
-//            loginToken = @"Nfp9nT6I5rtmbzjVZGNiHVJXDuHO80gM3BZ3uMIJSiZoCVGCTLZHPO21PYjEEpnPdTx/eO7m14MqcGF8+9Gk7g==";
-//        }
-//        
-//        
-//        
-//        typeof(self) __weak weakSelf = self;
-//        [RCIM connectWithToken:loginToken completion:^(NSString *userId) {
-//            
-//            NSLog(@"登录成功!");
-//            
-//            [weakSelf dismissViewControllerAnimated:YES completion:^{
-//                
-//            }];
-//            
-//            
-//        } error:^(RCConnectErrorCode status) {
-//            if(status == 0)
-//            {
-//                NSLog(@"登录成功!");
-//                
-//            }
-//            else
-//            {
-//                NSLog(@"%@",[NSString stringWithFormat:@"登录失败！\n Code: %d！",status]);
-//                
-//            }
-//        }];
-//
-        
     }
     
 }
@@ -511,15 +472,23 @@
         
         NSLog(@"failDic %@",failDic);
         
-        [_table loadFail];
-        
-        if (_table.isReloadData) {
-            
+//        [_table loadFail];
+//        
+//        if (_table.isReloadData) {
+//            
 //            [_table loadFail];
-        }else
-        {
-            
-            [LCWTools showDXAlertViewWithText:[failDic objectForKey:ERROR_INFO]];
+//        }else
+//        {
+//            
+//            [LCWTools showDXAlertViewWithText:[failDic objectForKey:ERROR_INFO]];
+//        }
+        
+        [LCWTools showDXAlertViewWithText:[failDic objectForKey:ERROR_INFO]];
+        
+        int errocode = [[failDic objectForKey:@"errocode"]integerValue];
+        if (errocode == 1) {
+            NSLog(@"结果为空");
+            [_table reloadData:nil total:0];
         }
     }];
     
@@ -769,6 +738,9 @@
         if (errocode == 1) {
             NSLog(@"结果为空");
             [_table reloadData:nil total:0];
+        }else
+        {
+            [_table loadFail];
         }
         
     }];
@@ -956,7 +928,7 @@
 {
     NSLog(@"loadNewData");
     
-    if (_searchKeyword.length > 0) {
+    if (searchView.searchField.text.length > 0) {
         
         [self searchCarSourceWithKeyword:_searchKeyword page:_table.pageNum];
         
@@ -964,6 +936,7 @@
     {
          [self getCarSourceList];
     }
+    
 }
 
 - (void)loadMoreData

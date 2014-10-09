@@ -31,7 +31,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.chatListTableView.backgroundColor = [UIColor whiteColor];
+//    self.chatListTableView.backgroundColor = [UIColor whiteColor];
     
     UIButton *rightButton =[[UIButton alloc]initWithFrame:CGRectMake(0,8,30,21.5)];
     [rightButton addTarget:self action:@selector(clickToHome:) forControlEvents:UIControlEventTouchUpInside];

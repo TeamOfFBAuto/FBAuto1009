@@ -280,7 +280,7 @@
 //        NSArray *text =  @[@"微信",@"QQ",@"朋友圈",@"微博",@"站内好友"];
         
         ////@"发河北 寻美规 奥迪Q7 14款 豪华"
-        NSString *contentText = [NSString stringWithFormat:@"我在e族汽车上发布了一条求购信息，有车源的朋友来看看，（%@）",[self labelWithTag:110].text];
+        NSString *contentText = [NSString stringWithFormat:@"我在e车上发布了一条求购信息，有车源的朋友来看看，（%@）",[self labelWithTag:110].text];
         
         NSString *shareUrl = [NSString stringWithFormat:FBAUTO_SHARE_CAR_FIND,self.infoId];
         

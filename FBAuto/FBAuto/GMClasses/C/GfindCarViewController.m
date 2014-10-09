@@ -480,13 +480,13 @@
         if (weakSelf.gtype == 2) {
             //车源
             
-            contentText = [NSString stringWithFormat:@"我在e族汽车上发了一辆新车，有兴趣的来看(%@）。",title];
+            contentText = [NSString stringWithFormat:@"我在e车上发了一辆新车，有兴趣的来看(%@）。",title];
             shareUrl = [NSString stringWithFormat:FBAUTO_SHARE_CAR_SOURCE,ainfoId];
             
         }else if (weakSelf.gtype == 3)
         {
             //寻车
-            contentText = [NSString stringWithFormat:@"我在e族汽车上发布了一条求购信息，有车源的朋友来看看，（%@）",title];
+            contentText = [NSString stringWithFormat:@"我在e车上发布了一条求购信息，有车源的朋友来看看，（%@）",title];
             
             shareUrl = [NSString stringWithFormat:FBAUTO_SHARE_CAR_FIND,ainfoId];
         }

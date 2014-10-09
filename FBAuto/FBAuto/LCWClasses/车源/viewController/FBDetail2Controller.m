@@ -401,7 +401,7 @@
         
 //        NSArray *text =  @[@"微信",@"QQ",@"朋友圈",@"微博",@"站内好友"];
         
-        NSString *contentText = [NSString stringWithFormat:@"我在e族汽车上发了一辆新车，有兴趣的来看(%@）。",weakSelf.car_modle_label.text];
+        NSString *contentText = [NSString stringWithFormat:@"我在e车上发了一辆新车，有兴趣的来看(%@）。",weakSelf.car_modle_label.text];
         
         NSString *shareUrl = [NSString stringWithFormat:FBAUTO_SHARE_CAR_SOURCE,weakSelf.infoId];
         NSString *contentWithUrl = [NSString stringWithFormat:@"%@%@",contentText,shareUrl];
