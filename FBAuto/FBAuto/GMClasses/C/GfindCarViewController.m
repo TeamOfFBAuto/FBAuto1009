@@ -236,7 +236,7 @@
         
         weakSelf.indexPathArray = nil;
         
-        [weakTable deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
+//        [weakTable deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
         [weakTable reloadData];
         
         

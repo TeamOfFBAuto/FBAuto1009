@@ -282,7 +282,9 @@
             
             [self clearSearchCondition];
             
-//            [self searchCarSourceWithKeyword:text page:1];
+//            _table.isReloadData = YES;//刷新
+            
+            [self searchCarSourceWithKeyword:text page:1];
             
             [_table showRefreshHeader:YES];
             
@@ -445,7 +447,7 @@
     
     NSLog(@"搜索车源列表 %@",url);
     
-    __weak typeof(CarResourceViewController *)weakSelf = self;
+//    __weak typeof(CarResourceViewController *)weakSelf = self;
     
     LCWTools *tool = [[LCWTools alloc]initWithUrl:url isPost:NO postData:nil];
     [tool requestCompletion:^(NSDictionary *result, NSError *erro) {
