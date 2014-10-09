@@ -17,6 +17,8 @@
 
 #import "PersonalViewController.h"//个人中心
 
+#import "GloginViewController.h"//登录页面
+
 #import "ASIHTTPRequest.h"
 
 #import <ShareSDK/ShareSDK.h>
@@ -89,6 +91,60 @@
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
+    //网络监控
+    
+    [self observeNetwork];
+
+    //注册远程通知
+    
+    [RCIM initWithAppKey:RCIM_APPKEY deviceToken:nil];
+    
+    if ([application respondsToSelector:@selector(registerUserNotificationSettings:)]) {
+        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeSound|UIRemoteNotificationTypeAlert) categories:nil];
+        [application registerUserNotificationSettings:settings];
+    } else {
+        UIRemoteNotificationType myTypes = UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound;
+        [application registerForRemoteNotificationTypes:myTypes];
+    }
+    
+    //UIApplicationLaunchOptionsRemoteNotificationKey,判断是通过推送消息启动的
+    
+    NSDictionary *infoDic = [launchOptions objectForKey:@"UIApplicationLaunchOptionsRemoteNotificationKey"];
+    if (infoDic)
+    {
+        NSLog(@"infoDic %@",infoDic);
+        
+        self.pushUserInfo = infoDic;
+    }
+    
+    [self rongCloud]; //融云即时通讯
+    
+    [ShareSDK registerApp:Appkey]; //ShareSDK 分享
+    [self initSharePlat];
+    
+    [MobClick startWithAppkey:UMENG_APPKEY]; //友盟统计
+
+    
+    //版本更新
+    
+     //test FBLife 605673005 fbauto
+    [[LCWTools shareInstance]versionForAppid:@"904576362" Block:^(BOOL isNewVersion, NSString *updateUrl, NSString *updateContent) {
+       
+        NSLog(@"updateContent %@ %@",updateUrl,updateContent);
+        
+    }];
+
+    self.window.rootViewController = [self preprareViewControllers];
+    self.window.backgroundColor = [UIColor whiteColor];
+    [self.window makeKeyAndVisible];
+    
+    return YES;
+}
+
+#pragma mark - 创建视图
+
+- (UITabBarController *)preprareViewControllers
+{
     CarResourceViewController * rootVC = [[CarResourceViewController alloc] init];
     
     SendCarViewController * fabuCarVC = [[SendCarViewController alloc] init];
@@ -124,7 +180,7 @@
     [[UITabBar appearance] setTintColor:[UIColor colorWithRed:232.0/255.0f green:128/255.0f blue:24/255.0f alpha:1]];
     
     tabbar.viewControllers = [NSArray arrayWithObjects:navc1,navc2,navc3,navc4,nil];
-
+    
     //将状态栏设置成自定义颜色
     
     if (IOS7_OR_LATER) {
@@ -132,64 +188,9 @@
         [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
         [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
     }
-
-    //注册远程通知
     
-    [RCIM initWithAppKey:RCIM_APPKEY deviceToken:nil];
-    
-    if ([application respondsToSelector:@selector(registerUserNotificationSettings:)]) {
-        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIRemoteNotificationTypeBadge
-                                                                                             |UIRemoteNotificationTypeSound
-                                                                                             |UIRemoteNotificationTypeAlert) categories:nil];
-        [application registerUserNotificationSettings:settings];
-    } else {
-        UIRemoteNotificationType myTypes = UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound;
-        [application registerForRemoteNotificationTypes:myTypes];
-    }
-    
-    [[RCIM sharedRCIM]setReceiveMessageDelegate:self];
-    
-    
-    //开启网络状况的监听
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChanged:) name:kReachabilityChangedNotification object:nil];
-    self.hostReach = [Reachability reachabilityWithHostname:@"http://fbautoapp.fblife.com"];
-    
-    //开始监听，会启动一个run loop
-    [self.hostReach startNotifier];
-    
-    //分享
-    [ShareSDK registerApp:Appkey];
-    [self initSharePlat];
-    
-    [MobClick startWithAppkey:UMENG_APPKEY];
-
-    
-    //版本更新
-     //test FBLife 605673005 fbauto
-    [[LCWTools shareInstance]versionForAppid:@"904576362" Block:^(BOOL isNewVersion, NSString *updateUrl, NSString *updateContent) {
-       
-        NSLog(@"updateContent %@ %@",updateUrl,updateContent);
-        
-    }];
-    
-    
-    //UIApplicationLaunchOptionsRemoteNotificationKey,判断是通过推送消息启动的
-    NSDictionary *infoDic = [launchOptions objectForKey:@"UIApplicationLaunchOptionsRemoteNotificationKey"];
-    if (infoDic)
-    {
-        NSLog(@"infoDic %@",infoDic);
-        
-        self.pushUserInfo = infoDic;
-    }
-
-    self.window.rootViewController=tabbar;
-    self.window.backgroundColor = [UIColor whiteColor];
-    [self.window makeKeyAndVisible];
-    
-    return YES;
+    return tabbar;
 }
-
-
 
 #pragma mark - 消息提示
 
@@ -209,8 +210,7 @@
     _statusBarBack.hidden = YES;
 }
 
-
-//更新底部数字
+#pragma mark - 更新底部数字
 - (void)updateTabbarNumber:(int)number
 {
     NSString *number_str = nil;
@@ -220,7 +220,45 @@
     _perSonalVC.tabBarItem.badgeValue = number_str;
 }
 
-#pragma - mark 分享
+#pragma mark -  融云即时通讯
+
+- (void)rongCloud
+{
+    [[RCIM sharedRCIM]setReceiveMessageDelegate:self];
+    [[RCIM sharedRCIM]setConnectionStatusDelegate:self];
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    BOOL loginSuccess = [defaults boolForKey:LOGIN_SUCCESS];
+    NSString *loginToken = [defaults objectForKey:RONGCLOUD_TOKEN];
+    
+    if (loginSuccess && loginToken.length > 0)
+    {
+        
+        [RCIM connectWithToken:loginToken completion:^(NSString *userId) {
+            
+            NSLog(@"登录成功!");
+            
+            
+        } error:^(RCConnectErrorCode status) {
+            if(status == 0)
+            {
+                NSLog(@"登录成功!");
+            }
+            else
+            {
+                NSLog(@"%@",[NSString stringWithFormat:@"登录失败！\n Code: %d！",status]);
+                
+                [defaults setBool:NO forKey:LOGIN_SUCCESS];
+                
+                [defaults synchronize];
+                
+            }
+        }];
+    }
+
+}
+
+#pragma mark -  ShareSDK分享
 
 - (void)initSharePlat
 {
@@ -245,7 +283,17 @@
 }
 
 
-#pragma - mark 监控网络状态
+#pragma  mark - 监控网络状态
+
+- (void)observeNetwork
+{
+    //开启网络状况的监听
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChanged:) name:kReachabilityChangedNotification object:nil];
+    self.hostReach = [Reachability reachabilityWithHostname:@"http://fbautoapp.fblife.com"];
+    
+    //开始监听，会启动一个run loop
+    [self.hostReach startNotifier];
+}
 
 -(void)reachabilityChanged:(NSNotification *)note
 {
@@ -284,7 +332,7 @@
     }
 }
 
-#pragma mark - @protocol UITabBarControllerDelegate<NSObject>
+#pragma mark - UITabBarControllerDelegate
 
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
 {
@@ -350,6 +398,9 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     NSLog(@"applicationDidBecomeActive");
+    
+    int number = [[RCIM sharedRCIM] getTotalUnreadCount];;
+    [self updateTabbarNumber:number];
     
 //    if (self.pushUserInfo) {
 //        
@@ -433,30 +484,7 @@
     NSError *error = nil;
     _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
     if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
-        /*
-         Replace this implementation with code to handle the error appropriately.
-         
-         abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. 
-         
-         Typical reasons for an error here include:
-         * The persistent store is not accessible;
-         * The schema for the persistent store is incompatible with current managed object model.
-         Check the error message to determine what the actual problem was.
-         
-         
-         If the persistent store is not accessible, there is typically something wrong with the file path. Often, a file URL is pointing into the application's resources directory instead of a writeable directory.
-         
-         If you encounter schema incompatibility errors during development, you can reduce their frequency by:
-         * Simply deleting the existing store:
-         [[NSFileManager defaultManager] removeItemAtURL:storeURL error:nil]
-         
-         * Performing automatic lightweight migration by passing the following dictionary as the options parameter:
-         @{NSMigratePersistentStoresAutomaticallyOption:@YES, NSInferMappingModelAutomaticallyOption:@YES}
-         
-         Lightweight migration will only work for a limited set of schema changes; consult "Core Data Model Versioning and Data Migration Programming Guide" for details.
-         
-         */
-        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+                NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
         abort();
     }    
     
@@ -470,9 +498,6 @@
 {
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
 }
-
-
-
 
 
 #pragma mark - 上传的代理回调方法
@@ -624,17 +649,59 @@
 
 }
 
-#pragma mark 接受消息代理
+#pragma mark - RCIM接受消息代理
 
 -(void)didReceivedMessage:(RCMessage *)message left:(int)nLeft
 {
     if (0 == nLeft) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [UIApplication sharedApplication].applicationIconBadgeNumber = [UIApplication sharedApplication].applicationIconBadgeNumber+1;
+            
+            [[NSNotificationCenter defaultCenter]postNotificationName:@"unReadNumber" object:nil];
+            
+            int number = [[RCIM sharedRCIM] getTotalUnreadCount];;
+            [self updateTabbarNumber:number];
+            
         });
     }
-    
-    
 }
+
+#pragma mark - RCIM监控连接状态
+
+-(void)responseConnectionStatus:(RCConnectionStatus)status{
+    if (ConnectionStatus_KICKED_OFFLINE_BY_OTHER_CLIENT == status) {
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            UIAlertView *alert= [[UIAlertView alloc]initWithTitle:@"" message:@"您已下线，重新连接？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles: @"确定",nil];
+            alert.tag = 2000;
+            [alert show];
+        });
+        
+        
+    }
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (2000 == alertView.tag) {
+        
+        if (0 == buttonIndex) {
+            
+            NSLog(@"NO");
+            
+            //不重新连接直接跳转到登录页面
+            
+            [_perSonalVC tuichuDenglu];
+        }
+        
+        if (1 == buttonIndex) {
+            
+            NSLog(@"YES");
+            
+            [RCIMClient reconnect:nil];
+        }
+    }
+}
+
 
 @end

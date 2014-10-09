@@ -37,6 +37,6 @@
 @property(nonatomic,strong)UILabel *xiaoxiNumLabel;//显示消息数量的label
 @property(nonatomic,strong)UILabel *tongzhiNumLabel;//显示通知数量的label
 
-
+-(void)tuichuDenglu;//退出登录
 
 @end

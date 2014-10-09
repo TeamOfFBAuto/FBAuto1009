@@ -980,4 +980,14 @@
     return NO;
 }
 
+#pragma mark - 退出登录
+
+//退出登录清除defaults数据
+
+- (void)logout
+{
+    
+}
+
+
 @end

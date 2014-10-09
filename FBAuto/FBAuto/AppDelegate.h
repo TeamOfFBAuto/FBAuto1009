@@ -9,9 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "Reachability.h"
 #import "RCIM.h"
+#import "RCIMClientHeader.h"
 
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate,UITabBarDelegate,UITabBarControllerDelegate, RCIMReceiveMessageDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate,UITabBarDelegate,UITabBarControllerDelegate, RCIMReceiveMessageDelegate,RCIMConnectionStatusDelegate,RCConnectDelegate>
 {
 //    UIWindow *statusBarBack;
 }
@@ -34,5 +35,7 @@
 
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;
+
+- (void)updateTabbarNumber:(int)number;
 
 @end

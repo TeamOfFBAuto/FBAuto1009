@@ -26,19 +26,21 @@
 //用户主页
 
 #import "GuserZyViewController.h"
+#import "FBChatListController.h"
 
 //退出登录
 #import "CarResourceViewController.h"
 #import "FBCityData.h"
+
+#import "GloginViewController.h"
+
+
 
 @interface PersonalViewController ()
 
 @end
 
 @implementation PersonalViewController
-
-
-
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -85,6 +87,9 @@
     self.userFaceImv.backgroundColor = RGBCOLOR(180, 180, 180);
     if ([GlocalUserImage getUserFaceImage]) {
         [self.userFaceImv setImage:[GlocalUserImage getUserFaceImage]];
+    }else
+    {
+        [self.userFaceImv setImage:[UIImage imageNamed:@"defaultFace"]];
     }
     
     [self.view addSubview:self.userFaceImv];
@@ -202,21 +207,23 @@
 
 - (void)updateUnreadNumber:(NSNotification *)notification
 {
-//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-//    NSString *currentUserPhone = [defaults objectForKey:XMPP_USERID];
-//    
-//    int number = [FBCityData numberOfUnreadMessage:currentUserPhone];
-//    
-//    if (number == 0) {
-//        self.xiaoxiRedPointView.hidden = YES;
-//        self.xiaoxiNumLabel.hidden = YES;
-//    }else{
-//        self.xiaoxiNumLabel.text = [NSString stringWithFormat:@"%d",number];
-//        self.xiaoxiNumLabel.hidden = NO;
-//        self.xiaoxiRedPointView.hidden = NO;
-//    }
-//    
-//    NSLog(@"未读条数:%d",number);
+    
+    int number = [[RCIM sharedRCIM] getTotalUnreadCount];
+    
+    if (number == 0) {
+        self.xiaoxiRedPointView.hidden = YES;
+        self.xiaoxiNumLabel.hidden = YES;
+    }else{
+        self.xiaoxiNumLabel.text = [NSString stringWithFormat:@"%d",number];
+        self.xiaoxiNumLabel.hidden = NO;
+        self.xiaoxiRedPointView.hidden = NO;
+    }
+    
+    NSLog(@"未读条数:%d",number);
+    
+    AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    
+    [delegate updateTabbarNumber:number];
 }
 
 
@@ -228,7 +235,7 @@
             NSLog(@"请求用户信息成功");
             //公司头像
              
-             [self.userFaceImv sd_setImageWithURL:[NSURL URLWithString:[dataInfo objectForKey:@"headimage"]]];
+             [self.userFaceImv sd_setImageWithURL:[NSURL URLWithString:[dataInfo objectForKey:@"headimage"]] placeholderImage:[UIImage imageNamed:@"defaultFace"]];
              
             //公司名称
             self.nameLabel.text = [dataInfo objectForKey:@"name"];
@@ -402,7 +409,13 @@
         friends.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:friends animated:YES];
     }else if (sender.tag == 51){//消息
-        [self.navigationController pushViewController:[[GxiaoxiViewController alloc]init] animated:YES];
+        
+        FBChatListController *temp = [[FBChatListController alloc]init];
+        
+        [self.navigationController pushViewController:temp animated:YES];
+        temp.portraitStyle = UIPortraitViewRound;
+        
+//        [self.navigationController pushViewController:[[GxiaoxiViewController alloc]init] animated:YES];
     }else if(sender.tag == 52){//通知
         [self.navigationController pushViewController:[[GpersonTZViewController alloc]init] animated:YES];
     }
@@ -427,14 +440,13 @@
     [standUDef setObject:@""  forKey:USERID];
     [standUDef setObject:@""  forKey:USERNAME];
 
+    [standUDef setBool:NO forKey:LOGIN_SUCCESS];
     
     [standUDef setObject:NO forKey:@"switchOnorOff"];
     
     [standUDef synchronize];
     
     NSLog(@"authkey===%@",[GMAPI getAuthkey]);
-    
-    
     
     //清除沙盒里的数据
     
@@ -451,30 +463,30 @@
     //清除 头像和 banner
     [fileM removeItemAtPath:[documentPathStr stringByAppendingString:userFace] error:nil];
     
-    
-    
-    
-    
-    
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
         if (connectionError==0) {
             NSLog(@"成功");
+            
+            
+            [[RCIM sharedRCIM] disconnect:NO];
             
         }else{
             NSLog(@"xxssx===%@",connectionError);
         }
     }];
     
-    
-    self.tabBarController.selectedIndex = 0;
-    
-    
-    
+    if (self.tabBarController.selectedIndex == 0) {
+        
+        UIViewController *vc = [[self.tabBarController viewControllers]objectAtIndex:0];
+        [vc presentViewController:[[UINavigationController alloc]initWithRootViewController:[[GloginViewController alloc]init]] animated:NO completion:^{
+        }];
+
+    }else
+    {
+        self.tabBarController.selectedIndex = 0;
+
+    }
     
 }
-
-
-
-
 
 @end

@@ -101,7 +101,9 @@
     
     NSLog(@"%d",[GMAPI getUsername].length);
     
-    if (![GMAPI getUsername].length) {
+    BOOL loginSuccess = [[NSUserDefaults standardUserDefaults]boolForKey:LOGIN_SUCCESS];
+    
+    if (!loginSuccess) {
         
         [self presentViewController:[[UINavigationController alloc]initWithRootViewController:[[GloginViewController alloc]init]] animated:NO completion:^{
         }];
@@ -109,43 +111,43 @@
     }else{
         NSLog(@"xxname===%@ id:%@",[GMAPI getUsername],[GMAPI getUid]);
         
-        NSString *loginToken;//需要后台返回loginToken
-        //test by lcw
-        
-        if ([[GMAPI getUid] isEqualToString:@"1"]) {
-            
-            loginToken = @"BqiKmIOBtVmeRIRi7nH7uQ1/1/88rgRNJYRMrIIogCt5AGSpFGULe4nFY4+byD/R4ClHNRPlhjc=";
-            
-        }else
-        {
-            loginToken = @"Nfp9nT6I5rtmbzjVZGNiHVJXDuHO80gM3BZ3uMIJSiZoCVGCTLZHPO21PYjEEpnPdTx/eO7m14MqcGF8+9Gk7g==";
-        }
-        
-        
-        
-        typeof(self) __weak weakSelf = self;
-        [RCIM connectWithToken:loginToken completion:^(NSString *userId) {
-            
-            NSLog(@"登录成功!");
-            
-            [weakSelf dismissViewControllerAnimated:YES completion:^{
-                
-            }];
-            
-            
-        } error:^(RCConnectErrorCode status) {
-            if(status == 0)
-            {
-                NSLog(@"登录成功!");
-                
-            }
-            else
-            {
-                NSLog(@"%@",[NSString stringWithFormat:@"登录失败！\n Code: %d！",status]);
-                
-            }
-        }];
-
+//        NSString *loginToken;//需要后台返回loginToken
+//        //test by lcw
+//        
+//        if ([[GMAPI getUid] isEqualToString:@"1"]) {
+//            
+//            loginToken = @"BqiKmIOBtVmeRIRi7nH7uQ1/1/88rgRNJYRMrIIogCt5AGSpFGULe4nFY4+byD/R4ClHNRPlhjc=";
+//            
+//        }else
+//        {
+//            loginToken = @"Nfp9nT6I5rtmbzjVZGNiHVJXDuHO80gM3BZ3uMIJSiZoCVGCTLZHPO21PYjEEpnPdTx/eO7m14MqcGF8+9Gk7g==";
+//        }
+//        
+//        
+//        
+//        typeof(self) __weak weakSelf = self;
+//        [RCIM connectWithToken:loginToken completion:^(NSString *userId) {
+//            
+//            NSLog(@"登录成功!");
+//            
+//            [weakSelf dismissViewControllerAnimated:YES completion:^{
+//                
+//            }];
+//            
+//            
+//        } error:^(RCConnectErrorCode status) {
+//            if(status == 0)
+//            {
+//                NSLog(@"登录成功!");
+//                
+//            }
+//            else
+//            {
+//                NSLog(@"%@",[NSString stringWithFormat:@"登录失败！\n Code: %d！",status]);
+//                
+//            }
+//        }];
+//
         
     }
     

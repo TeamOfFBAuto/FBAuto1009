@@ -206,6 +206,7 @@
 		139ED56B19BEB01D00C931D6 /* elogo440_120@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 139ED56A19BEB01D00C931D6 /* elogo440_120@2x.png */; };
 		13A1A9421980AC7A00E09666 /* LShareSheetView.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A1A9411980AC7A00E09666 /* LShareSheetView.m */; };
 		13A1A9451980ADB100E09666 /* LImageButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A1A9441980ADB100E09666 /* LImageButton.m */; };
+		13A8E8AA19E669CA004E7DB1 /* FBChatListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A8E8A919E669CA004E7DB1 /* FBChatListController.m */; };
 		13B626D219CC04DB008FB162 /* defaultFace.png in Resources */ = {isa = PBXBuildFile; fileRef = 13B626D119CC04DB008FB162 /* defaultFace.png */; };
 		13C4D8751986573E00281521 /* XMPPMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 13C4D8741986573E00281521 /* XMPPMessageModel.m */; };
 		13C7172619824B5A008F7B42 /* QQConnection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13C7170C19824B5A008F7B42 /* QQConnection.framework */; };
@@ -391,7 +392,6 @@
 		E351A0C6196FB91800C78CFE /* UILabel+GautoMatchedText.m in Sources */ = {isa = PBXBuildFile; fileRef = E351A0C5196FB91800C78CFE /* UILabel+GautoMatchedText.m */; };
 		E35871ED196A946F0002813C /* GPersonTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E35871EC196A946F0002813C /* GPersonTableViewCell.m */; };
 		E35871F6196AA63E0002813C /* duihuahuang@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E35871F4196AA63E0002813C /* duihuahuang@2x.png */; };
-		E35871F7196AA63E0002813C /* duihuahuang1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E35871F5196AA63E0002813C /* duihuahuang1@2x.png */; };
 		E359273F1988D0C800A3F1B0 /* GtzDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E359273E1988D0C800A3F1B0 /* GtzDetailViewController.m */; };
 		E35927421988E56C00A3F1B0 /* GpersonTZdetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E35927411988E56C00A3F1B0 /* GpersonTZdetailTableViewCell.m */; };
 		E3611459197BA8E000F9234E /* DXAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = E3611457197BA8E000F9234E /* DXAlertView.m */; };
@@ -703,6 +703,8 @@
 		13A1A9411980AC7A00E09666 /* LShareSheetView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LShareSheetView.m; sourceTree = "<group>"; };
 		13A1A9431980ADB100E09666 /* LImageButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LImageButton.h; sourceTree = "<group>"; };
 		13A1A9441980ADB100E09666 /* LImageButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LImageButton.m; sourceTree = "<group>"; };
+		13A8E8A819E669CA004E7DB1 /* FBChatListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBChatListController.h; sourceTree = "<group>"; };
+		13A8E8A919E669CA004E7DB1 /* FBChatListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBChatListController.m; sourceTree = "<group>"; };
 		13B626D119CC04DB008FB162 /* defaultFace.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = defaultFace.png; sourceTree = "<group>"; };
 		13C4D8731986573E00281521 /* XMPPMessageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPMessageModel.h; sourceTree = "<group>"; };
 		13C4D8741986573E00281521 /* XMPPMessageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPMessageModel.m; sourceTree = "<group>"; };
@@ -1246,6 +1248,8 @@
 			children = (
 				13896C0F19E53881008BB77C /* FBChatViewController.h */,
 				13896C1019E53881008BB77C /* FBChatViewController.m */,
+				13A8E8A819E669CA004E7DB1 /* FBChatListController.h */,
+				13A8E8A919E669CA004E7DB1 /* FBChatListController.m */,
 				13C4D872198656DE00281521 /* model */,
 				1336BC19196B91F70011B4D9 /* views */,
 				138B4B011966A51700B974A5 /* RichViewAndGif */,
@@ -2340,7 +2344,7 @@
 		190BFD33195AA0FB0098E0F4 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0510;
+				LastUpgradeCheck = 0600;
 				ORGANIZATIONNAME = szk;
 				TargetAttributes = {
 					190BFD3A195AA0FB0098E0F4 = {
@@ -2570,7 +2574,6 @@
 				138B4AF91966A4BD00B974A5 /* face92.png in Resources */,
 				13D5DFE41961758E00804835 /* fabu_down46_46@2x.png in Resources */,
 				138B4AD01966A4BD00B974A5 /* face55.gif in Resources */,
-				E35871F7196AA63E0002813C /* duihuahuang1@2x.png in Resources */,
 				138B4AAE1966A4BD00B974A5 /* face24.png in Resources */,
 				138B4A9F1966A4BD00B974A5 /* face103.png in Resources */,
 				138B4AC31966A4BD00B974A5 /* face43.png in Resources */,
@@ -2716,6 +2719,7 @@
 				1336BC25196B91F70011B4D9 /* SJAvatarBrowser.m in Sources */,
 				138B4A0619664E9800B974A5 /* FBFriend2Cell.m in Sources */,
 				E35927421988E56C00A3F1B0 /* GpersonTZdetailTableViewCell.m in Sources */,
+				13A8E8AA19E669CA004E7DB1 /* FBChatListController.m in Sources */,
 				E35871ED196A946F0002813C /* GPersonTableViewCell.m in Sources */,
 				138B4B0F1966A51700B974A5 /* OHAttributedLabel.m in Sources */,
 				13D5E0F91964061100804835 /* FBPhotoBrowserController.m in Sources */,
@@ -2840,11 +2844,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = (
-					"$(ARCHS_STANDARD)",
-					armv7s,
-					armv7,
-				);
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -2877,7 +2876,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE = "28b23bd8-a16c-4a4b-b1d8-9c2ffabe0318";
-				SDKROOT = iphoneos7.1;
+				SDKROOT = iphoneos;
 				VALID_ARCHS = "armv7 armv7s";
 			};
 			name = Debug;
@@ -2886,11 +2885,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = (
-					"$(ARCHS_STANDARD)",
-					armv7s,
-					armv7,
-				);
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -2917,7 +2911,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE = "28b23bd8-a16c-4a4b-b1d8-9c2ffabe0318";
-				SDKROOT = iphoneos7.1;
+				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 				VALID_ARCHS = "armv7 armv7s";
 			};
@@ -2927,7 +2921,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F2B6939735024693BB7F96CA /* Pods.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
 				CODE_SIGN_IDENTITY = "iPhone Developer: Bing Jin (KMZ2AD5LZY)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Bing Jin (KMZ2AD5LZY)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2964,7 +2957,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F2B6939735024693BB7F96CA /* Pods.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
 				CODE_SIGN_IDENTITY = "iPhone Developer: Bing Jin (KMZ2AD5LZY)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Bing Jin (KMZ2AD5LZY)";
 				FRAMEWORK_SEARCH_PATHS = (

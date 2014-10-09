@@ -28,6 +28,8 @@
 #define RONG_SERVICE_ID @"KEFU1411191287435" //客服号
 #define RONGCLOUD_TOKEN @"RONGCLOUD_TOKEN" //用户对应的融云token
 
+#define LOGIN_SUCCESS @"LOGIN_SUCCESS" //登录成功
+
 
 //保存用户信息
 

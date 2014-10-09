@@ -31,9 +31,6 @@
 }
 
 
-
-
-
 //-(void)viewDidAppear:(BOOL)animated{
 //
 //    [super viewDidAppear:animated];
@@ -93,15 +90,9 @@
             [bself dengluWithUserName:usern pass:passw];
         }
         
-        
     }];
     
 }
-
-
-
-
-
 
 #pragma mark - 登录
 -(void)dengluWithUserName:(NSString *)name pass:(NSString *)passw{
@@ -124,10 +115,8 @@
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
         
-        
         NSLog(@"error-----------%@",connectionError);
-        
-        [j stopAnimating];
+
         if ([data length] == 0) {
             return;
         }
@@ -135,6 +124,7 @@
         NSLog(@"%@ %@",dic,[dic objectForKey:@"errinfo"]);
         
         
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         
         if ([[dic objectForKey:@"errcode"] intValue] == 0) {
             
@@ -143,16 +133,6 @@
             NSString *username = [datainfo objectForKey:@"name"];
             NSString *authkey = [datainfo objectForKey:@"authkey"];
             NSString *open = [datainfo objectForKey:@"open"];
-                        
-            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-            
-            
-            [defaults setObject:userid forKey:USERID];
-            [defaults setObject:username forKey:USERNAME];
-            [defaults setObject:authkey forKey:USERAUTHKEY];
-            [defaults setObject:passw forKey:USERPASSWORD];
-            [defaults synchronize];
-            
             
             
             NSString *loginToken;//需要后台返回loginToken
@@ -168,11 +148,22 @@
             }
             
             
+            [defaults setObject:userid forKey:USERID];
+            [defaults setObject:username forKey:USERNAME];
+            [defaults setObject:authkey forKey:USERAUTHKEY];
+            [defaults setObject:passw forKey:USERPASSWORD];
+            
+            [defaults setObject:loginToken forKey:RONGCLOUD_TOKEN];
+            
             
             typeof(self) __weak weakSelf = self;
             [RCIM connectWithToken:loginToken completion:^(NSString *userId) {
                 
                 NSLog(@"登录成功!");
+                
+                [defaults setBool:YES forKey:LOGIN_SUCCESS];
+                
+                [j stopAnimating];
                 
                 [weakSelf dismissViewControllerAnimated:YES completion:^{
                     
@@ -184,6 +175,8 @@
                 {
                     NSLog(@"登录成功!");
                     
+                    [defaults setBool:YES forKey:LOGIN_SUCCESS];
+                    
                     [weakSelf dismissViewControllerAnimated:YES completion:^{
                         
                     }];
@@ -192,16 +185,25 @@
                 else
                 {
                     NSLog(@"%@",[NSString stringWithFormat:@"登录失败！\n Code: %d！",status]);
+                    
+                    [defaults setBool:NO forKey:LOGIN_SUCCESS];
 
                 }
+                
+                [j stopAnimating];
             }];
-
             
         }else{
+            
+            [j stopAnimating];
+            
             UIAlertView *al = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请核对用户名或密码是否正确" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
             [al show];
+            
+            [defaults setBool:NO forKey:LOGIN_SUCCESS];
         }
         
+        [defaults synchronize];
         
     }];
     

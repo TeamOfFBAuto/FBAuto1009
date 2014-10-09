@@ -14,27 +14,25 @@
 
 + (void)chatWithUserId:(NSString *)userId userName:(NSString *)userName target:(UIViewController *)target
 {
-    FBChatViewController *chat = (FBChatViewController *)[[RCIM sharedRCIM]createPrivateChat:userId title:nil completion:^(){
-        // 创建 ViewController 后，调用的 Block，可以用来实现自定义行为。
-    }];
+    NSString *currentTarget;
+    NSString *currentTargetName;
     
-//    chat.currentTarget = userId;
-//    chat.currentTargetName = userName;
+    //test
     
     if ([[GMAPI getUid] isEqualToString:@"1"]) {
-        
-        chat.currentTarget = @"2";
-        chat.currentTargetName = @"test";
+                currentTarget = @"2";
+                currentTargetName = @"test";
         
     }else
     {
-        chat.currentTarget = @"1";
-        chat.currentTargetName = @"Rnai";
+        currentTarget = @"1";
+        currentTargetName = @"Rnai";
     }
-    
-    
+    FBChatViewController *chat =[[FBChatViewController alloc]init];
+    chat.portraitStyle = UIPortraitViewRound;
+    chat.currentTarget = currentTarget;
+    chat.currentTargetName = currentTargetName;
     chat.conversationType = ConversationType_PRIVATE;
-    
     [target.navigationController pushViewController:chat animated:YES];
 }
 
