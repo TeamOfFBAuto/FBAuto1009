@@ -14,24 +14,11 @@
 
 + (void)chatWithUserId:(NSString *)userId userName:(NSString *)userName target:(UIViewController *)target
 {
-    NSString *currentTarget;
-    NSString *currentTargetName;
-    
-    //test
-    
-    if ([[GMAPI getUid] isEqualToString:@"1"]) {
-                currentTarget = @"2";
-                currentTargetName = @"test";
-        
-    }else
-    {
-        currentTarget = @"1";
-        currentTargetName = @"Rnai";
-    }
+
     FBChatViewController *chat =[[FBChatViewController alloc]init];
     chat.portraitStyle = UIPortraitViewRound;
-    chat.currentTarget = currentTarget;
-    chat.currentTargetName = currentTargetName;
+    chat.currentTarget = userId;
+    chat.currentTargetName = userName;
     chat.conversationType = ConversationType_PRIVATE;
     [target.navigationController pushViewController:chat animated:YES];
 }

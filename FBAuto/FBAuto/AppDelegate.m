@@ -236,23 +236,17 @@
         
         [RCIM connectWithToken:loginToken completion:^(NSString *userId) {
             
-            NSLog(@"登录成功!");
+            NSLog(@"登录成功! %@",userId);
             
             
         } error:^(RCConnectErrorCode status) {
-            if(status == 0)
-            {
-                NSLog(@"登录成功!");
-            }
-            else
-            {
+            
                 NSLog(@"%@",[NSString stringWithFormat:@"登录失败！\n Code: %d！",status]);
                 
                 [defaults setBool:NO forKey:LOGIN_SUCCESS];
                 
                 [defaults synchronize];
                 
-            }
         }];
     }
 

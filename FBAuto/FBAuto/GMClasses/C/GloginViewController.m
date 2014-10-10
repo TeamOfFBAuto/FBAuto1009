@@ -14,6 +14,9 @@
 #import "MBProgressHUD.h"
 
 @interface GloginViewController ()
+{
+    UIActivityIndicatorView *j;
+}
 
 @end
 
@@ -97,7 +100,7 @@
 #pragma mark - 登录
 -(void)dengluWithUserName:(NSString *)name pass:(NSString *)passw{
     //菊花
-    UIActivityIndicatorView *j = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    j = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
     j.center = CGPointMake(160, 235);
     [self.view addSubview:j];
     [j startAnimating];
@@ -111,6 +114,8 @@
     
     NSLog(@"登录请求接口======%@",str);
     
+    __weak typeof(self)weakSelf = self;
+    
     NSURL *url = [NSURL URLWithString:str];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
@@ -123,7 +128,6 @@
         NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
         NSLog(@"%@ %@",dic,[dic objectForKey:@"errinfo"]);
         
-        
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         
         if ([[dic objectForKey:@"errcode"] intValue] == 0) {
@@ -132,66 +136,9 @@
             NSString *userid = [datainfo objectForKey:@"uid"];
             NSString *username = [datainfo objectForKey:@"name"];
             NSString *authkey = [datainfo objectForKey:@"authkey"];
-            NSString *open = [datainfo objectForKey:@"open"];
+//            NSString *open = [datainfo objectForKey:@"open"];
             
-            
-            NSString *loginToken;//需要后台返回loginToken
-            //test by lcw
-            
-            if ([userid isEqualToString:@"1"]) {
-                
-                loginToken = @"BqiKmIOBtVmeRIRi7nH7uQ1/1/88rgRNJYRMrIIogCt5AGSpFGULe4nFY4+byD/R4ClHNRPlhjc=";
-                
-            }else
-            {
-                loginToken = @"Nfp9nT6I5rtmbzjVZGNiHVJXDuHO80gM3BZ3uMIJSiZoCVGCTLZHPO21PYjEEpnPdTx/eO7m14MqcGF8+9Gk7g==";
-            }
-            
-            
-            [defaults setObject:userid forKey:USERID];
-            [defaults setObject:username forKey:USERNAME];
-            [defaults setObject:authkey forKey:USERAUTHKEY];
-            [defaults setObject:passw forKey:USERPASSWORD];
-            
-            [defaults setObject:loginToken forKey:RONGCLOUD_TOKEN];
-            
-            
-            typeof(self) __weak weakSelf = self;
-            [RCIM connectWithToken:loginToken completion:^(NSString *userId) {
-                
-                NSLog(@"登录成功!");
-                
-                [defaults setBool:YES forKey:LOGIN_SUCCESS];
-                
-                [j stopAnimating];
-                
-                [weakSelf dismissViewControllerAnimated:YES completion:^{
-                    
-                }];
-                
-                
-            } error:^(RCConnectErrorCode status) {
-                if(status == 0)
-                {
-                    NSLog(@"登录成功!");
-                    
-                    [defaults setBool:YES forKey:LOGIN_SUCCESS];
-                    
-                    [weakSelf dismissViewControllerAnimated:YES completion:^{
-                        
-                    }];
-                    
-                }
-                else
-                {
-                    NSLog(@"%@",[NSString stringWithFormat:@"登录失败！\n Code: %d！",status]);
-                    
-                    [defaults setBool:NO forKey:LOGIN_SUCCESS];
-
-                }
-                
-                [j stopAnimating];
-            }];
+            [weakSelf loginRongCloudWithUserId:userid name:username headImageUrl:[LCWTools headImageForUserId:userid] pass:passw authkey:authkey];
             
         }else{
             
@@ -208,6 +155,82 @@
     }];
     
     
+}
+
+#pragma mark - 融云获取token
+
+- (void)loginRongCloudWithUserId:(NSString *)userId
+                            name:(NSString *)name
+                    headImageUrl:(NSString *)imageUrl
+                            pass:(NSString *)pass
+                         authkey:(NSString *)authkey
+{
+    NSString *url = [NSString stringWithFormat:FBAUTO_RONGCLOUD_TOKEN,userId,name,imageUrl];
+    LCWTools *tool = [[LCWTools alloc]initWithUrl:url isPost:NO postData:nil];
+    
+    [tool requestCompletion:^(NSDictionary *result, NSError *erro) {
+        
+        NSLog(@"融云 result%@",result);
+        int code = [[result objectForKey:@"code"]integerValue];
+        
+        if (code == 200) {
+            
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            NSString *userId = [result objectForKey:@"userId"];
+            NSString *loginToken = [result objectForKey:@"token"];
+            
+            
+            [defaults setObject:userId forKey:USERID];
+            [defaults setObject:name forKey:USERNAME];
+            [defaults setObject:authkey forKey:USERAUTHKEY];
+            [defaults setObject:pass forKey:USERPASSWORD];
+            
+            [defaults setObject:loginToken forKey:RONGCLOUD_TOKEN];
+            
+            //mwnrOTV2cDrNDC3SoyiHZfLyOKy7yy366rmw6z+PnBjpWE9XUQNU2Ofso9zhZOEI5WvfXMGOZU/pD+IdsMsjqQ==
+            //6YJbgRceE4dxU5fJGoRPP/LyOKy7yy366rmw6z+PnBjpWE9XUQNU2CFs8N6Ox5PsKlHh5ZwuAuLpD+IdsMsjqQ==
+            
+            
+            typeof(self) __weak weakSelf = self;
+            [RCIM connectWithToken:loginToken completion:^(NSString *userId) {
+                
+                NSLog(@"登录成功! %@",userId);
+                
+                [defaults setBool:YES forKey:LOGIN_SUCCESS];
+                
+                [j stopAnimating];
+                
+                [defaults synchronize];
+                
+                [weakSelf dismissViewControllerAnimated:YES completion:^{
+                    
+                }];
+                
+                
+            } error:^(RCConnectErrorCode status) {
+                
+                [j stopAnimating];
+                
+                
+                NSLog(@"%@",[NSString stringWithFormat:@"登录失败！\n Code: %d！",status]);
+                    
+                [defaults setBool:NO forKey:LOGIN_SUCCESS];
+                
+                [defaults synchronize];
+                
+                
+            }];
+            
+            
+        }
+        
+    } failBlock:^(NSDictionary *failDic, NSError *erro) {
+        NSLog(@"failDic %@",failDic);
+        
+        [LCWTools showDXAlertViewWithText:[failDic objectForKey:ERROR_INFO]];
+        
+    }];
+
 }
 
 

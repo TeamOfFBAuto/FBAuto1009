@@ -80,6 +80,10 @@ alpha:(a)]
 //用户登录
 #define FBAUTO_LOG_IN @"http://fbautoapp.fblife.com/index.php?c=interface&a=dologin&phone=%@&upass=%@&token=%@"
 
+//融云获取token
+
+#define FBAUTO_RONGCLOUD_TOKEN @"http://fbautoapp.fblife.com/rongcloud_api.php?userid=%@&name=%@&portraituri=%@"
+
 //用户退出登录
 #define  FBAUTO_LOG_OUT @"http://fbautoapp.fblife.com/index.php?c=interface&a=dologout&uid=%@"
 
