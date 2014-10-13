@@ -36,6 +36,8 @@
 
 #import "FBCityData.h"
 
+#import "DXAlertView.h"
+
 //shareSDK fbauto2014@qq.com 123abc
 //新浪 fbauto2014@qq.com  123abc 或者 fbauto2014
 // 邮箱 fbauto2014@qq.com
@@ -48,6 +50,8 @@
 /*********
  shareSDK 和 Umeng
  *********/
+
+//e车是国内专业的针对车商的汽车流通信息平台，销售人员必备的汽车销售利器。
 
 #define UMENG_APPKEY @"540ea323fd98c54048003577" //友盟appkey
 
@@ -66,8 +70,11 @@
  融云
  *********/
 
-#define RCIM_APPKEY @"x18ywvqf82x0c" //融云appkey
-#define RCIM_APPSECRET @"DhrWK1MvzCIcoK" //appSecret
+//#define RCIM_APPKEY @"x18ywvqf82x0c" //融云appkey
+//#define RCIM_APPSECRET @"qaOLno5Zgm" //appSecret
+
+#define RCIM_APPKEY @"cpj2xarlj0xdn" //融云appkey
+#define RCIM_APPSECRET @"BJs1fiJAvGtqAy" //appSecret  （）
 
 
 @implementation AppDelegate
@@ -226,7 +233,11 @@
 {
     [[RCIM sharedRCIM]setReceiveMessageDelegate:self];
     [[RCIM sharedRCIM]setConnectionStatusDelegate:self];
-    
+    // 设置用户信息提供者。
+    [RCIM setUserInfoFetcherWithDelegate:self isCacheUserInfo:YES];
+}
+- (void)loginRongCloud
+{
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     BOOL loginSuccess = [defaults boolForKey:LOGIN_SUCCESS];
     NSString *loginToken = [defaults objectForKey:RONGCLOUD_TOKEN];
@@ -241,12 +252,28 @@
             
         } error:^(RCConnectErrorCode status) {
             
-                NSLog(@"%@",[NSString stringWithFormat:@"登录失败！\n Code: %d！",status]);
+            NSLog(@"%@",[NSString stringWithFormat:@"登录失败！\n Code: %d！",status]);
+            
+            [defaults setBool:NO forKey:LOGIN_SUCCESS];
+            
+            [defaults synchronize];
+            
+            
+            if(status == ConnectErrorCode_TOKEN_INCORRECT){
                 
-                [defaults setBool:NO forKey:LOGIN_SUCCESS];
+                NSLog(@"令牌有问题");
                 
-                [defaults synchronize];
+                __weak typeof(_perSonalVC)weakVc = _perSonalVC;
                 
+                DXAlertView *alert = [[DXAlertView alloc]initWithTitle:@"令牌失效,重新登录" contentText:nil leftButtonTitle:nil rightButtonTitle:@"确定"];
+                [alert show];
+                
+                alert.rightBlock = ^(){
+                    NSLog(@"取消");
+                    [weakVc tuichuDenglu];
+                };
+            }
+            
         }];
     }
 
@@ -393,25 +420,10 @@
 {
     NSLog(@"applicationDidBecomeActive");
     
+    [self loginRongCloud];
+    
     int number = [[RCIM sharedRCIM] getTotalUnreadCount];;
     [self updateTabbarNumber:number];
-    
-//    if (self.pushUserInfo) {
-//        
-//        [self dealOfflineMessage:self.pushUserInfo];
-//        self.pushUserInfo = nil;
-//    }
-//    
-//    //图标显示
-//    application.applicationIconBadgeNumber = 0;
-//    
-//    [[XMPPServer shareInstance]loginTimes:10 loginBack:^(BOOL result) {
-//        if (result) {
-//            NSLog(@"连接并且登录成功");
-//        }else{
-//            NSLog(@"连接登录不成功");
-//        }
-//    }];
     
 }
 
@@ -697,5 +709,81 @@
     }
 }
 
+#pragma mark - RCIMUserInfoFetcherDelegagte <NSObject>
+
+/**
+ *  获取用户信息。
+ *
+ *  @param userId 用户 Id。
+ *
+ *  @return 用户信息。
+ */
+-(RCUserInfo*)getUserInfoWithUserId:(NSString*)userId
+{
+    NSLog(@"userId %@",userId);
+    
+    if ([userId isEqualToString:[GMAPI getUid]]) {
+        
+        NSString *headImage = [NSString stringWithFormat:@"%@?%@",[LCWTools headImageForUserId:userId],[LCWTools timechangeToDateline]];
+        RCUserInfo *user = [[RCUserInfo alloc]initWithUserId:userId name:[GMAPI getUsername] portrait:headImage];
+        
+        NSLog(@"user image %@",[LCWTools headImageForUserId:@"2"]);
+        
+        return user;
+    }else
+    {
+        NSString *headImage = [NSString stringWithFormat:@"%@?%@",[LCWTools headImageForUserId:userId],[LCWTools timechangeToDateline]];
+        RCUserInfo *user = [[RCUserInfo alloc]initWithUserId:userId name:[FBChatTool getUserNameForUserId:userId] portrait:headImage];
+        
+        return user;
+    }
+    
+    
+    return nil;
+}
+
+/**
+ *  连接服务器的回调。
+ */
+#pragma mark -  RCConnectDelegate <NSObject>
+
+/**
+ *  回调成功。
+ *
+ *  @param userId 当前登录的用户 Id，既换取登录 Token 时，App 服务器传递给融云服务器的用户 Id。
+ */
+- (void)responseConnectSuccess:(NSString*)userId
+{
+    
+}
+
+/**
+ *  回调出错。
+ *
+ *  @param errorCode 连接错误代码。
+ */
+- (void)responseConnectError:(RCConnectErrorCode)errorCode
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    [defaults setBool:NO forKey:LOGIN_SUCCESS];
+    
+    [defaults synchronize];
+    
+    if(errorCode == ConnectErrorCode_TOKEN_INCORRECT){
+        
+        NSLog(@"令牌有问题");
+        
+        __weak typeof(_perSonalVC)weakVc = _perSonalVC;
+        
+        DXAlertView *alert = [[DXAlertView alloc]initWithTitle:@"令牌失效,重新登录" contentText:nil leftButtonTitle:nil rightButtonTitle:@"确定"];
+        [alert show];
+        
+        alert.rightBlock = ^(){
+            NSLog(@"取消");
+            [weakVc tuichuDenglu];
+        };
+    }
+}
 
 @end

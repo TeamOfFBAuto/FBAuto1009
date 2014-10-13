@@ -8,6 +8,6 @@
 
 #import "RCChatViewController.h"
 
-@interface FBChatViewController : RCChatViewController
+@interface FBChatViewController : RCChatViewController<RCIMUserInfoFetcherDelegagte>
 
 @end

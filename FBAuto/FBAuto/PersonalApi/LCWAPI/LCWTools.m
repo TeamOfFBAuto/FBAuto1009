@@ -438,6 +438,13 @@
     return date;
 }
 
+//当前时间转换为 时间戳
+
++(NSString *)timechangeToDateline
+{
+    return [NSString stringWithFormat:@"%ld", (long)[[NSDate date] timeIntervalSince1970]];
+}
+
 //alert 提示
 
 + (void)alertText:(NSString *)text

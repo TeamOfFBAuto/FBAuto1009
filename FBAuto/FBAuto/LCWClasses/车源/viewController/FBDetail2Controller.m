@@ -184,6 +184,9 @@
         
         userId = [dic objectForKey:@"uid"];//用户id
         
+        //保存name 对应id
+        [FBChatTool cacheUserName:[dic objectForKey:@"username"] forUserId:userId];
+        
         //车辆图片
         
         NSArray *image = [dic objectForKey:@"image"];

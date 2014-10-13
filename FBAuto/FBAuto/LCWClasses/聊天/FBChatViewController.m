@@ -26,6 +26,12 @@
     return self;
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    // 设置用户信息提供者。
+//    [RCIM setUserInfoFetcherWithDelegate:self isCacheUserInfo:NO];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -141,6 +147,33 @@
         NSLog(@"failDic %@",failDic);
         [LCWTools showDXAlertViewWithText:[failDic objectForKey:ERROR_INFO]];
     }];
+}
+
+#pragma mark - RCIMUserInfoFetcherDelegagte <NSObject>
+
+/**
+ *  获取用户信息。
+ *
+ *  @param userId 用户 Id。
+ *
+ *  @return 用户信息。
+ */
+-(RCUserInfo*)getUserInfoWithUserId:(NSString*)userId
+{
+    NSLog(@"userId %@",userId);
+    
+    if ([userId isEqualToString:[GMAPI getUid]]) {
+        
+        NSString *headImage = [NSString stringWithFormat:@"%@?%@",[LCWTools headImageForUserId:userId],[LCWTools timechangeToDateline]];
+        RCUserInfo *user = [[RCUserInfo alloc]initWithUserId:userId name:[GMAPI getUsername] portrait:headImage];
+        
+        NSLog(@"user image %@",[LCWTools headImageForUserId:@"2"]);
+        
+        return user;
+    }
+    
+    
+    return nil;
 }
 
 

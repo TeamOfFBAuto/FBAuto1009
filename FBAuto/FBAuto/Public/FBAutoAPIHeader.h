@@ -25,7 +25,7 @@
 #import "RCIM.h"//融云
 #import "FBChatTool.h"
 
-#define RONG_SERVICE_ID @"KEFU1411191287435" //客服号
+#define RONG_SERVICE_ID @"KEFU1413012797478" //客服号
 #define RONGCLOUD_TOKEN @"RONGCLOUD_TOKEN" //用户对应的融云token
 
 #define LOGIN_SUCCESS @"LOGIN_SUCCESS" //登录成功

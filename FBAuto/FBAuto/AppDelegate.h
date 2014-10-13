@@ -12,7 +12,7 @@
 #import "RCIMClientHeader.h"
 
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate,UITabBarDelegate,UITabBarControllerDelegate, RCIMReceiveMessageDelegate,RCIMConnectionStatusDelegate,RCConnectDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate,UITabBarDelegate,UITabBarControllerDelegate, RCIMReceiveMessageDelegate,RCIMConnectionStatusDelegate,RCConnectDelegate,RCIMUserInfoFetcherDelegagte>
 {
 //    UIWindow *statusBarBack;
 }

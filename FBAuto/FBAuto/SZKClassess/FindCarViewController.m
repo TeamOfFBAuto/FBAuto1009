@@ -141,6 +141,8 @@
         
         _searchKeyword = nil;
         
+        searchView.searchField.text = nil;
+        
         [self clearSearchCondition];
         
         [_table showRefreshHeader:NO];
@@ -521,14 +523,22 @@
         
         NSLog(@"failDic %@",failDic);
         
-        [_table loadFail];
+//        [_table loadFail];
+//        
+//        if (_table.isReloadData) {
+//            
+//            
+//        }else
+//        {
+//            [LCWTools showDXAlertViewWithText:[failDic objectForKey:ERROR_INFO]];
+//        }
         
-        if (_table.isReloadData) {
+        int errocode = [[failDic objectForKey:@"errocode"]integerValue];
+        if (errocode == 1) {
+            NSLog(@"结果为空");
             
-            
-        }else
-        {
             [LCWTools showDXAlertViewWithText:[failDic objectForKey:ERROR_INFO]];
+            [_table reloadData:nil total:0];
         }
     }];
     
@@ -705,7 +715,7 @@
 {
     NSLog(@"loadNewData");
     
-    if (_searchKeyword.length > 0) {
+    if (searchView.searchField.text.length > 0) {
         
         [self searchCarSourceWithKeyword:_searchKeyword page:_table.pageNum];
         

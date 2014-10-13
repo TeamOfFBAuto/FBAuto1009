@@ -61,7 +61,12 @@
         //省份
         UILabel *titleL = [[UILabel alloc]initWithFrame:CGRectMake(nameLabel.frame.origin.x, CGRectGetMaxY(nameLabel.frame)+8, 30, 15)];
         titleL.font = [UIFont systemFontOfSize:13];
-        titleL.text = @"省份:";
+        if ([userModel.usertype intValue] == 1) {
+            titleL.text = @"省份:";
+        }else if ([userModel.usertype intValue] == 2){
+            titleL.text = @"全称:";
+        }
+        
         [self.contentView addSubview:titleL];
         
         UILabel *cityLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(titleL.frame)+7, CGRectGetMaxY(nameLabel.frame)+8, 200, 15)];
@@ -156,7 +161,7 @@
         [self.contentView addSubview:pLabel];
         
         //描述1
-        self.carClabel1 = [[UILabel alloc]initWithFrame:CGRectMake(tLabel.frame.origin.x, CGRectGetMaxY(tLabel.frame)+9, 48, 13)];
+        self.carClabel1 = [[UILabel alloc]initWithFrame:CGRectMake(tLabel.frame.origin.x, CGRectGetMaxY(tLabel.frame)+9, 80, 13)];
         self.carClabel1.font = [UIFont systemFontOfSize:12];
         self.carClabel1.textColor = RGBCOLOR(129, 129, 129);
         [self.contentView addSubview:self.carClabel1];
@@ -226,11 +231,22 @@
     self.carPriceLabel.text = [NSString stringWithFormat:@"%@万元",car.price];
     NSString *carfrom = car.carfrom;//汽车版本
     NSString *spot_future = car.spot_future;//现货或期货
-    NSString *color_out = [car.color_out substringWithRange:NSMakeRange(0, 1)];//外观颜色
-    NSString *color_in = [car.color_in substringWithRange:NSMakeRange(0, 1)];//内饰颜色
+    
+    
+    NSString *color_in = @"其他";
+    NSString *color_out = @"其他";
+    
+    //判断 其他 后台返回空得的情况
+    if (car.color_in.length>0) {
+        color_in = [car.color_in substringWithRange:NSMakeRange(0, 1)];//内饰颜色
+    }
+    if (car.color_out.length>0) {
+         color_out = [car.color_out substringWithRange:NSMakeRange(0, 1)];//外观颜色
+    }
     
     self.carClabel1.text = [NSString stringWithFormat:@"%@%@",carfrom,spot_future];
     self.carClale2.text = [NSString stringWithFormat:@"外%@内%@",color_out,color_in];
+    
     NSString *str = nil;
     if ([userModel.usertype intValue] == 1 ) {
         str = @"个人";

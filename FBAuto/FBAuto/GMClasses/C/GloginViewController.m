@@ -12,6 +12,7 @@
 #import "GfindPasswViewController.h"//找回密码
 #import "RCIM.h"
 #import "MBProgressHUD.h"
+#import "DXAlertView.h"
 
 @interface GloginViewController ()
 {
@@ -165,6 +166,8 @@
                             pass:(NSString *)pass
                          authkey:(NSString *)authkey
 {
+//    userId = [NSString stringWithFormat:@"%@@fbauto",userId];
+    
     NSString *url = [NSString stringWithFormat:FBAUTO_RONGCLOUD_TOKEN,userId,name,imageUrl];
     LCWTools *tool = [[LCWTools alloc]initWithUrl:url isPost:NO postData:nil];
     
@@ -172,6 +175,7 @@
         
         NSLog(@"融云 result%@",result);
         int code = [[result objectForKey:@"code"]integerValue];
+        NSString *errorMessage = [result objectForKey:@"errorMessage"];
         
         if (code == 200) {
             
@@ -222,6 +226,17 @@
             }];
             
             
+        }else
+        {
+            [j stopAnimating];
+            
+            DXAlertView *alert = [[DXAlertView alloc]initWithTitle:errorMessage contentText:nil leftButtonTitle:nil rightButtonTitle:@"确定"];
+            [alert show];
+            
+            alert.rightBlock = ^(){
+                NSLog(@"取消");
+                
+            };
         }
         
     } failBlock:^(NSDictionary *failDic, NSError *erro) {

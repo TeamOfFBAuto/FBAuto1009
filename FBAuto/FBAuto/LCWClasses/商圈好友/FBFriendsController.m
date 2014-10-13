@@ -127,6 +127,10 @@
             for (NSDictionary *aDic in dataInfo) {
                 FBFriendModel *aFriend = [[FBFriendModel alloc]initWithDictionary:aDic];
                 
+                NSString *name = aFriend.buddyname ? aFriend.buddyname : aFriend.name;
+                //保存name 对应id
+                [FBChatTool cacheUserName:name forUserId:aFriend.buddyid];
+                
                 if (aFriend.buddyname.length > 0) {
                     [dataArr addObject:aFriend];
                 }
@@ -266,6 +270,7 @@
     NSArray *arr = [friendsDic objectForKey:[firstLetterArr objectAtIndex:indexPath.section]];
     FBFriendModel *aModel = [arr objectAtIndex:indexPath.row];
     
+    NSLog(@"-->%@",aModel.buddyid);
     __weak typeof(self)weakSelf = self;
     
     [cell getCellData:aModel cellBlock:^(NSString *friendInfo,int tag) {

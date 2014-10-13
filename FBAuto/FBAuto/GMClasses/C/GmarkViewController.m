@@ -134,7 +134,7 @@
     
     [_tableview showRefreshHeader:YES];
     
-    [self prepareNetData];
+//    [self prepareNetData];
 }
 
 - (void)didReceiveMemoryWarning

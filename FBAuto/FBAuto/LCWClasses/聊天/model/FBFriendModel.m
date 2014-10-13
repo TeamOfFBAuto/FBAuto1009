@@ -15,6 +15,7 @@
     self = [super init];
     if (self) {
         [self setValuesForKeysWithDictionary:dic];
+        
     }
     return self;
 }
