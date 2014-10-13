@@ -15,6 +15,8 @@
 + (void)chatWithUserId:(NSString *)userId userName:(NSString *)userName target:(UIViewController *)target
 {
     
+    NSLog(@"chatWithUserId-->%@",userId);
+    
 //    userId = [NSString stringWithFormat:@"%@@fbauto",userId];//加标识
     
     FBChatViewController *chat =[[FBChatViewController alloc]init];

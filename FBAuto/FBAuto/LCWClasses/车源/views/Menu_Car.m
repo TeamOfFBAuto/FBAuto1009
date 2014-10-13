@@ -60,10 +60,12 @@
         table.tableHeaderView = header;
         
         footerBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        footerBtn.frame = CGRectMake(15, 0, 310, 40);
+        footerBtn.frame = CGRectMake(0, 0, 320, 40);
         [footerBtn setTitleColor:[UIColor colorWithHexString:@"666666"] forState:UIControlStateNormal];
+//        footerBtn
         [footerBtn setTitle:@"不限" forState:UIControlStateNormal];
         [footerBtn.titleLabel setFont:[UIFont systemFontOfSize:14]];
+        footerBtn.contentEdgeInsets = UIEdgeInsetsMake(0, 15, 0, 0);
         [footerBtn setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
         [header addSubview:footerBtn];
         
@@ -81,6 +83,12 @@
     NSString *car = [NSString stringWithFormat:@"%@%@%@",@"000",@"000",@"000"];
     selectBlock(car);
     
+    NSIndexPath *indexPath = [table indexPathForSelectedRow];
+    UITableViewCell *cell = [table cellForRowAtIndexPath:indexPath];
+    cell.selected = NO;
+    
+    [footerBtn setBackgroundColor:[UIColor colorWithHexString:@"d9d9d9"]];
+    
     [self hidden];
 }
 
@@ -93,6 +101,7 @@
 
 - (void)reloadFirstTable
 {
+    
     NSArray *brandArray = [[[LCWTools alloc]init]queryDataClassType:CARSOURCE_BRAND_QUERY pageSize:0 andOffset:0 unique:0];
     
     brandDic = [NSMutableDictionary dictionary];
@@ -203,7 +212,7 @@
     arrowPoint = CGPointMake(self.width / 10 + (self.width / 5) * 0, arrowPoint.y);
     arrowImage.center = arrowPoint;
     
-    [self reloadFirstTable];
+//    [self reloadFirstTable];
 }
 
 - (void)hidden
@@ -372,6 +381,9 @@
         NSArray *typeArr = [[[LCWTools alloc]init]queryDataClassType:CARSOURCE_TYPE_QUERY pageSize:0 andOffset:0 unique:aBrand.brandId];
         
         brandId = aBrand.brandId;
+        
+        [footerBtn setBackgroundColor:[UIColor whiteColor]];
+
         
         [self reloadSecondTable:typeArr];
         
