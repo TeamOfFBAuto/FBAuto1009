@@ -30,6 +30,21 @@
 {
     // 设置用户信息提供者。
 //    [RCIM setUserInfoFetcherWithDelegate:self isCacheUserInfo:NO];
+//    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(updateUserInfo:) name:NOTIFICATION_UPDATE_USERINFO object:nil];
+    
+    
+    [super viewWillAppear:animated];
+    
+    [self getPersonalInfo:self.currentTarget];
+}
+-(void)dealloc
+{
+//    [[NSNotificationCenter defaultCenter]removeObserver:self name:NOTIFICATION_UPDATE_USERINFO object:nil];
+}
+
+- (void)updateUserInfo:(NSNotification *)notification
+{
+    [self.chatListTableView reloadData];
 }
 
 - (void)viewDidLoad
@@ -174,6 +189,44 @@
     
     
     return nil;
+}
+
+//获取个人信息
+-(void)getPersonalInfo:(NSString *)userId
+{
+    
+//    __weak typeof(self)weakSelf = self;
+    //请求地址str
+    NSString *str = [NSString stringWithFormat:FBAUTO_GET_USER_INFORMATION,userId];
+    
+    NSLog(@"请求用户信息接口 %@",str);
+    LCWTools *tool = [[LCWTools alloc]initWithUrl:str isPost:NO postData:nil];
+    [tool requestCompletion:^(NSDictionary *result, NSError *erro) {
+        
+        if ([result isKindOfClass:[NSDictionary class]]) {
+            
+            NSDictionary *dataInfo = [result objectForKey:@"datainfo"];
+            if ([dataInfo isKindOfClass:[NSDictionary class]])
+            {
+                NSString *name = [dataInfo objectForKey:@"name"];
+                
+                NSString *headImage = [dataInfo objectForKey:@"headimage"];
+                
+                [FBChatTool cacheUserName:name forUserId:userId];
+                [FBChatTool cacheUserHeadImage:headImage forUserId:userId];
+                
+//                [[NSNotificationCenter defaultCenter]postNotificationName:NOTIFICATION_UPDATE_USERINFO object:nil];
+                
+                [self performSelectorOnMainThread:@selector(updateUserInfo:) withObject:nil waitUntilDone:YES];
+                
+//                [weakSelf.chatListTableView reloadData];
+            }
+        }
+        
+        
+    } failBlock:^(NSDictionary *failDic, NSError *erro) {
+        ;
+    }];
 }
 
 

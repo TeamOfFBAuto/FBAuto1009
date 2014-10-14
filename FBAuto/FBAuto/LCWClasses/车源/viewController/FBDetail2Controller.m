@@ -186,6 +186,7 @@
         
         //保存name 对应id
         [FBChatTool cacheUserName:[dic objectForKey:@"username"] forUserId:userId];
+        [FBChatTool cacheUserHeadImage:headImage forUserId:userId];
         
         //车辆图片
         

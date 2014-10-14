@@ -236,7 +236,9 @@
             //公司头像
              
              [self.userFaceImv sd_setImageWithURL:[NSURL URLWithString:[dataInfo objectForKey:@"headimage"]] placeholderImage:[UIImage imageNamed:@"defaultFace"]];
-             
+            
+            [FBChatTool cacheUserHeadImage:[dataInfo objectForKey:@"headimage"] forUserId:[GMAPI getUid]];
+            
             //公司名称
             self.nameLabel.text = [dataInfo objectForKey:@"name"];
             NSLog(@"公司名称：%@",self.nameLabel.text);

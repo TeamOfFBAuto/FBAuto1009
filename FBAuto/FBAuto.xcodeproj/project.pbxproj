@@ -12,6 +12,8 @@
 		1315537C1979243B0044C010 /* FindCarCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1315537A1979243B0044C010 /* FindCarCell.xib */; };
 		1315537F19792FC60044C010 /* LSearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1315537E19792FC60044C010 /* LSearchView.m */; };
 		1315C71219D11FD4002F3D88 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1315C71119D11FD4002F3D88 /* MessageUI.framework */; };
+		1327EF8319ECBE58003A73DB /* RongCloud.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 1327EF8219ECBE58003A73DB /* RongCloud.bundle */; };
+		1327EF9E19ECBE6E003A73DB /* Rong_IMKit_v1_0_4.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1327EF9D19ECBE6E003A73DB /* Rong_IMKit_v1_0_4.a */; };
 		132A81E019AEC2DD0035D0CE /* LDatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 132A81DF19AEC2DD0035D0CE /* LDatePicker.m */; };
 		1336BC06196A88410011B4D9 /* duihuahuang1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1336BC04196A88410011B4D9 /* duihuahuang1@2x.png */; };
 		1336BC09196A8CE70011B4D9 /* FBAreaFriensController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1336BC08196A8CE70011B4D9 /* FBAreaFriensController.m */; };
@@ -54,8 +56,6 @@
 		13807505196E751F00AD3D03 /* bluedown@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13807503196E751F00AD3D03 /* bluedown@2x.png */; };
 		13807506196E751F00AD3D03 /* blueup@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13807504196E751F00AD3D03 /* blueup@2x.png */; };
 		138427F1198A31EF001DAA8D /* LMessageBadge.m in Sources */ = {isa = PBXBuildFile; fileRef = 138427F0198A31EF001DAA8D /* LMessageBadge.m */; };
-		13896BFC19E521BE008BB77C /* Rong_IMKit_v1_0_3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 13896BFA19E521BE008BB77C /* Rong_IMKit_v1_0_3.a */; };
-		13896BFD19E521BF008BB77C /* RongCloud.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 13896BFB19E521BE008BB77C /* RongCloud.bundle */; };
 		13896BFF19E521E4008BB77C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13896BFE19E521E4008BB77C /* AudioToolbox.framework */; };
 		13896C0119E521F2008BB77C /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13896C0019E521F2008BB77C /* AVFoundation.framework */; };
 		13896C0319E52201008BB77C /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13896C0219E52201008BB77C /* CFNetwork.framework */; };
@@ -427,6 +427,32 @@
 		1315537D19792FC60044C010 /* LSearchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LSearchView.h; sourceTree = "<group>"; };
 		1315537E19792FC60044C010 /* LSearchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSearchView.m; sourceTree = "<group>"; };
 		1315C71119D11FD4002F3D88 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		1327EF8219ECBE58003A73DB /* RongCloud.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = RongCloud.bundle; sourceTree = "<group>"; };
+		1327EF8519ECBE6E003A73DB /* RCBasicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCBasicViewController.h; sourceTree = "<group>"; };
+		1327EF8619ECBE6E003A73DB /* RCChatListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCChatListViewController.h; sourceTree = "<group>"; };
+		1327EF8719ECBE6E003A73DB /* RCChatSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCChatSettingViewController.h; sourceTree = "<group>"; };
+		1327EF8819ECBE6E003A73DB /* RCChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCChatViewController.h; sourceTree = "<group>"; };
+		1327EF8919ECBE6E003A73DB /* RCClientDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCClientDelegate.h; sourceTree = "<group>"; };
+		1327EF8A19ECBE6E003A73DB /* RCConversation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCConversation.h; sourceTree = "<group>"; };
+		1327EF8B19ECBE6E003A73DB /* RCDiscussion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCDiscussion.h; sourceTree = "<group>"; };
+		1327EF8C19ECBE6E003A73DB /* RCGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCGroup.h; sourceTree = "<group>"; };
+		1327EF8D19ECBE6E003A73DB /* RCGroupListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCGroupListViewController.h; sourceTree = "<group>"; };
+		1327EF8E19ECBE6E003A73DB /* RCHandShakeMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCHandShakeMessage.h; sourceTree = "<group>"; };
+		1327EF8F19ECBE6E003A73DB /* RCIM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCIM.h; sourceTree = "<group>"; };
+		1327EF9019ECBE6E003A73DB /* RCImageMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCImageMessage.h; sourceTree = "<group>"; };
+		1327EF9119ECBE6E003A73DB /* RCIMClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCIMClient.h; sourceTree = "<group>"; };
+		1327EF9219ECBE6E003A73DB /* RCIMClientHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCIMClientHeader.h; sourceTree = "<group>"; };
+		1327EF9319ECBE6E003A73DB /* RCMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCMessage.h; sourceTree = "<group>"; };
+		1327EF9419ECBE6E003A73DB /* RCMessageContent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCMessageContent.h; sourceTree = "<group>"; };
+		1327EF9519ECBE6E003A73DB /* RCPreviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCPreviewViewController.h; sourceTree = "<group>"; };
+		1327EF9619ECBE6E003A73DB /* RCRenameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCRenameViewController.h; sourceTree = "<group>"; };
+		1327EF9719ECBE6E003A73DB /* RCSelectPersonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCSelectPersonViewController.h; sourceTree = "<group>"; };
+		1327EF9819ECBE6E003A73DB /* RCStatusDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCStatusDefine.h; sourceTree = "<group>"; };
+		1327EF9919ECBE6E003A73DB /* RCTextMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCTextMessage.h; sourceTree = "<group>"; };
+		1327EF9A19ECBE6E003A73DB /* RCThemeDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCThemeDefine.h; sourceTree = "<group>"; };
+		1327EF9B19ECBE6E003A73DB /* RCUserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCUserInfo.h; sourceTree = "<group>"; };
+		1327EF9C19ECBE6E003A73DB /* RCVoiceMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCVoiceMessage.h; sourceTree = "<group>"; };
+		1327EF9D19ECBE6E003A73DB /* Rong_IMKit_v1_0_4.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = Rong_IMKit_v1_0_4.a; sourceTree = "<group>"; };
 		132A81DE19AEC2DD0035D0CE /* LDatePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LDatePicker.h; sourceTree = "<group>"; };
 		132A81DF19AEC2DD0035D0CE /* LDatePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LDatePicker.m; sourceTree = "<group>"; };
 		1336BC04196A88410011B4D9 /* duihuahuang1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "duihuahuang1@2x.png"; sourceTree = "<group>"; };
@@ -502,32 +528,6 @@
 		13807504196E751F00AD3D03 /* blueup@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blueup@2x.png"; sourceTree = "<group>"; };
 		138427EF198A31EF001DAA8D /* LMessageBadge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMessageBadge.h; sourceTree = "<group>"; };
 		138427F0198A31EF001DAA8D /* LMessageBadge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMessageBadge.m; sourceTree = "<group>"; };
-		13896BE219E521BE008BB77C /* RCBasicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCBasicViewController.h; sourceTree = "<group>"; };
-		13896BE319E521BE008BB77C /* RCChatListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCChatListViewController.h; sourceTree = "<group>"; };
-		13896BE419E521BE008BB77C /* RCChatSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCChatSettingViewController.h; sourceTree = "<group>"; };
-		13896BE519E521BE008BB77C /* RCChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCChatViewController.h; sourceTree = "<group>"; };
-		13896BE619E521BE008BB77C /* RCClientDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCClientDelegate.h; sourceTree = "<group>"; };
-		13896BE719E521BE008BB77C /* RCConversation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCConversation.h; sourceTree = "<group>"; };
-		13896BE819E521BE008BB77C /* RCDiscussion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCDiscussion.h; sourceTree = "<group>"; };
-		13896BE919E521BE008BB77C /* RCGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCGroup.h; sourceTree = "<group>"; };
-		13896BEA19E521BE008BB77C /* RCGroupListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCGroupListViewController.h; sourceTree = "<group>"; };
-		13896BEB19E521BE008BB77C /* RCHandShakeMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCHandShakeMessage.h; sourceTree = "<group>"; };
-		13896BEC19E521BE008BB77C /* RCIM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCIM.h; sourceTree = "<group>"; };
-		13896BED19E521BE008BB77C /* RCImageMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCImageMessage.h; sourceTree = "<group>"; };
-		13896BEE19E521BE008BB77C /* RCIMClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCIMClient.h; sourceTree = "<group>"; };
-		13896BEF19E521BE008BB77C /* RCIMClientHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCIMClientHeader.h; sourceTree = "<group>"; };
-		13896BF019E521BE008BB77C /* RCMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCMessage.h; sourceTree = "<group>"; };
-		13896BF119E521BE008BB77C /* RCMessageContent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCMessageContent.h; sourceTree = "<group>"; };
-		13896BF219E521BE008BB77C /* RCPreviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCPreviewViewController.h; sourceTree = "<group>"; };
-		13896BF319E521BE008BB77C /* RCRenameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCRenameViewController.h; sourceTree = "<group>"; };
-		13896BF419E521BE008BB77C /* RCSelectPersonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCSelectPersonViewController.h; sourceTree = "<group>"; };
-		13896BF519E521BE008BB77C /* RCStatusDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCStatusDefine.h; sourceTree = "<group>"; };
-		13896BF619E521BE008BB77C /* RCTextMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCTextMessage.h; sourceTree = "<group>"; };
-		13896BF719E521BE008BB77C /* RCThemeDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCThemeDefine.h; sourceTree = "<group>"; };
-		13896BF819E521BE008BB77C /* RCUserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCUserInfo.h; sourceTree = "<group>"; };
-		13896BF919E521BE008BB77C /* RCVoiceMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCVoiceMessage.h; sourceTree = "<group>"; };
-		13896BFA19E521BE008BB77C /* Rong_IMKit_v1_0_3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = Rong_IMKit_v1_0_3.a; sourceTree = "<group>"; };
-		13896BFB19E521BE008BB77C /* RongCloud.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = RongCloud.bundle; sourceTree = "<group>"; };
 		13896BFE19E521E4008BB77C /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		13896C0019E521F2008BB77C /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		13896C0219E52201008BB77C /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -1012,9 +1012,9 @@
 				13C7173C19824C37008F7B42 /* libicucore.dylib in Frameworks */,
 				13C7173A19824C2E008F7B42 /* CoreTelephony.framework in Frameworks */,
 				13C7173819824C24008F7B42 /* SystemConfiguration.framework in Frameworks */,
-				13896BFC19E521BE008BB77C /* Rong_IMKit_v1_0_3.a in Frameworks */,
 				13C7173119824B5A008F7B42 /* libWeChatSDK.a in Frameworks */,
 				13C7172619824B5A008F7B42 /* QQConnection.framework in Frameworks */,
+				1327EF9E19ECBE6E003A73DB /* Rong_IMKit_v1_0_4.a in Frameworks */,
 				13C7172D19824B5A008F7B42 /* TencentOpenAPI.framework in Frameworks */,
 				13C7172919824B5A008F7B42 /* AGCommon.framework in Frameworks */,
 				138074F8196D47FD00AD3D03 /* libsqlite3.0.dylib in Frameworks */,
@@ -1093,6 +1093,47 @@
 				1315537E19792FC60044C010 /* LSearchView.m */,
 			);
 			path = views;
+			sourceTree = "<group>";
+		};
+		1327EF8119ECBE34003A73DB /* RongCloud */ = {
+			isa = PBXGroup;
+			children = (
+				1327EF8419ECBE6E003A73DB /* Headers */,
+				1327EF9D19ECBE6E003A73DB /* Rong_IMKit_v1_0_4.a */,
+				1327EF8219ECBE58003A73DB /* RongCloud.bundle */,
+			);
+			path = RongCloud;
+			sourceTree = "<group>";
+		};
+		1327EF8419ECBE6E003A73DB /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				1327EF8519ECBE6E003A73DB /* RCBasicViewController.h */,
+				1327EF8619ECBE6E003A73DB /* RCChatListViewController.h */,
+				1327EF8719ECBE6E003A73DB /* RCChatSettingViewController.h */,
+				1327EF8819ECBE6E003A73DB /* RCChatViewController.h */,
+				1327EF8919ECBE6E003A73DB /* RCClientDelegate.h */,
+				1327EF8A19ECBE6E003A73DB /* RCConversation.h */,
+				1327EF8B19ECBE6E003A73DB /* RCDiscussion.h */,
+				1327EF8C19ECBE6E003A73DB /* RCGroup.h */,
+				1327EF8D19ECBE6E003A73DB /* RCGroupListViewController.h */,
+				1327EF8E19ECBE6E003A73DB /* RCHandShakeMessage.h */,
+				1327EF8F19ECBE6E003A73DB /* RCIM.h */,
+				1327EF9019ECBE6E003A73DB /* RCImageMessage.h */,
+				1327EF9119ECBE6E003A73DB /* RCIMClient.h */,
+				1327EF9219ECBE6E003A73DB /* RCIMClientHeader.h */,
+				1327EF9319ECBE6E003A73DB /* RCMessage.h */,
+				1327EF9419ECBE6E003A73DB /* RCMessageContent.h */,
+				1327EF9519ECBE6E003A73DB /* RCPreviewViewController.h */,
+				1327EF9619ECBE6E003A73DB /* RCRenameViewController.h */,
+				1327EF9719ECBE6E003A73DB /* RCSelectPersonViewController.h */,
+				1327EF9819ECBE6E003A73DB /* RCStatusDefine.h */,
+				1327EF9919ECBE6E003A73DB /* RCTextMessage.h */,
+				1327EF9A19ECBE6E003A73DB /* RCThemeDefine.h */,
+				1327EF9B19ECBE6E003A73DB /* RCUserInfo.h */,
+				1327EF9C19ECBE6E003A73DB /* RCVoiceMessage.h */,
+			);
+			path = Headers;
 			sourceTree = "<group>";
 		};
 		1336BC19196B91F70011B4D9 /* views */ = {
@@ -1180,47 +1221,6 @@
 				13807500196E74A500AD3D03 /* EGORefreshTableHeaderView.m */,
 			);
 			path = EGORefresh;
-			sourceTree = "<group>";
-		};
-		13896BE019E521A0008BB77C /* RongCloud */ = {
-			isa = PBXGroup;
-			children = (
-				13896BE119E521BE008BB77C /* Headers */,
-				13896BFA19E521BE008BB77C /* Rong_IMKit_v1_0_3.a */,
-				13896BFB19E521BE008BB77C /* RongCloud.bundle */,
-			);
-			path = RongCloud;
-			sourceTree = "<group>";
-		};
-		13896BE119E521BE008BB77C /* Headers */ = {
-			isa = PBXGroup;
-			children = (
-				13896BE219E521BE008BB77C /* RCBasicViewController.h */,
-				13896BE319E521BE008BB77C /* RCChatListViewController.h */,
-				13896BE419E521BE008BB77C /* RCChatSettingViewController.h */,
-				13896BE519E521BE008BB77C /* RCChatViewController.h */,
-				13896BE619E521BE008BB77C /* RCClientDelegate.h */,
-				13896BE719E521BE008BB77C /* RCConversation.h */,
-				13896BE819E521BE008BB77C /* RCDiscussion.h */,
-				13896BE919E521BE008BB77C /* RCGroup.h */,
-				13896BEA19E521BE008BB77C /* RCGroupListViewController.h */,
-				13896BEB19E521BE008BB77C /* RCHandShakeMessage.h */,
-				13896BEC19E521BE008BB77C /* RCIM.h */,
-				13896BED19E521BE008BB77C /* RCImageMessage.h */,
-				13896BEE19E521BE008BB77C /* RCIMClient.h */,
-				13896BEF19E521BE008BB77C /* RCIMClientHeader.h */,
-				13896BF019E521BE008BB77C /* RCMessage.h */,
-				13896BF119E521BE008BB77C /* RCMessageContent.h */,
-				13896BF219E521BE008BB77C /* RCPreviewViewController.h */,
-				13896BF319E521BE008BB77C /* RCRenameViewController.h */,
-				13896BF419E521BE008BB77C /* RCSelectPersonViewController.h */,
-				13896BF519E521BE008BB77C /* RCStatusDefine.h */,
-				13896BF619E521BE008BB77C /* RCTextMessage.h */,
-				13896BF719E521BE008BB77C /* RCThemeDefine.h */,
-				13896BF819E521BE008BB77C /* RCUserInfo.h */,
-				13896BF919E521BE008BB77C /* RCVoiceMessage.h */,
-			);
-			path = Headers;
 			sourceTree = "<group>";
 		};
 		138B49EB196552CE00B974A5 /* cell */ = {
@@ -2025,19 +2025,19 @@
 		190BFD46195AA0FB0098E0F4 /* FBAuto */ = {
 			isa = PBXGroup;
 			children = (
-				13896BE019E521A0008BB77C /* RongCloud */,
-				13C7170A19824B5A008F7B42 /* ShareSDK */,
-				E362356B19657588003B23CC /* GMClasses */,
-				13D5DF6919612C9800804835 /* LCWClasses */,
-				190BFD79195AAAAE0098E0F4 /* SZKClassess */,
-				190BFD75195AA9BB0098E0F4 /* PersonalApi */,
-				190BFD74195AA99D0098E0F4 /* Images */,
-				190BFD73195AA98C0098E0F4 /* Public */,
+				1327EF8119ECBE34003A73DB /* RongCloud */,
 				190BFD4F195AA0FB0098E0F4 /* AppDelegate.h */,
 				190BFD50195AA0FB0098E0F4 /* AppDelegate.m */,
 				190BFD55195AA0FB0098E0F4 /* Images.xcassets */,
 				190BFD52195AA0FB0098E0F4 /* FBAuto.xcdatamodeld */,
+				E362356B19657588003B23CC /* GMClasses */,
+				190BFD74195AA99D0098E0F4 /* Images */,
+				13D5DF6919612C9800804835 /* LCWClasses */,
+				190BFD75195AA9BB0098E0F4 /* PersonalApi */,
+				190BFD73195AA98C0098E0F4 /* Public */,
+				13C7170A19824B5A008F7B42 /* ShareSDK */,
 				190BFD47195AA0FB0098E0F4 /* Supporting Files */,
+				190BFD79195AAAAE0098E0F4 /* SZKClassess */,
 			);
 			path = FBAuto;
 			sourceTree = "<group>";
@@ -2472,7 +2472,6 @@
 				13B626D219CC04DB008FB162 /* defaultFace.png in Resources */,
 				138B4ADC1966A4BD00B974A5 /* face66.png in Resources */,
 				138B4AB41966A4BD00B974A5 /* face3.png in Resources */,
-				13896BFD19E521BF008BB77C /* RongCloud.bundle in Resources */,
 				13D5E0071961758E00804835 /* huquyanzhengma_kedianji600_100@2x.png in Resources */,
 				138B4AE61966A4BD00B974A5 /* face75.png in Resources */,
 				138B4AE11966A4BD00B974A5 /* face70.gif in Resources */,
@@ -2562,6 +2561,7 @@
 				13D5DFFB1961758E00804835 /* xunche_sousuo536_58@2x.png in Resources */,
 				138B4ACF1966A4BD00B974A5 /* face54.png in Resources */,
 				138B4ABF1966A4BD00B974A5 /* face4.png in Resources */,
+				1327EF8319ECBE58003A73DB /* RongCloud.bundle in Resources */,
 				138B4ADD1966A4BD00B974A5 /* face67.png in Resources */,
 				13D5DFD91961758E00804835 /* fangdajing_icon36_36@2x.png in Resources */,
 				13D5E0ED1963E19300804835 /* yulan-button-kedian-100_58@2x.png in Resources */,

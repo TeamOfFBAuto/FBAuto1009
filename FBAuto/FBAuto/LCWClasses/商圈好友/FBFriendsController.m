@@ -18,6 +18,8 @@
 
 #import "FBCityData.h"
 #import "FBChatViewController.h"
+#import "RCIM.h"
+
 
 @interface FBFriendsController ()
 {
@@ -129,7 +131,8 @@
                 
                 NSString *name = aFriend.buddyname ? aFriend.buddyname : aFriend.name;
                 //保存name 对应id
-                [FBChatTool cacheUserName:name forUserId:aFriend.buddyid];
+//                [FBChatTool cacheUserName:name forUserId:aFriend.buddyid];
+//                [FBChatTool cacheUserHeadImage:[LCWTools headImageForUserId:aFriend.buddyid] forUserId:aFriend.buddyid];
                 
                 if (aFriend.buddyname.length > 0) {
                     [dataArr addObject:aFriend];

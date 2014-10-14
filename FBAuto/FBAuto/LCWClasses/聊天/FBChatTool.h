@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+#define NOTIFICATION_UPDATE_USERINFO @"UPDATE_USERINFO"//更新用户个人信息通知
+
 @interface FBChatTool : NSObject
 
 //单对单聊天
@@ -17,5 +19,8 @@
 + (void)cacheUserName:(NSString *)name forUserId:(NSString *)userId;
 //根据id来获取name
 + (NSString *)getUserNameForUserId:(NSString *)userId;
+
++ (void)cacheUserHeadImage:(NSString *)imageUrl forUserId:(NSString *)userId;//存储头像
++ (NSString *)getUserHeadImageForUserId:(NSString *)userId;//获取头像
 
 @end

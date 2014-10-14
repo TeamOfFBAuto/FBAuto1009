@@ -30,13 +30,32 @@
 //存储用户name 对应id
 + (void)cacheUserName:(NSString *)name forUserId:(NSString *)userId
 {
+    NSLog(@"cacheUserName %@",name);
     [[NSUserDefaults standardUserDefaults]setObject:name forKey:[NSString stringWithFormat:@"chat:%@",userId]];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 //根据id来获取name
 + (NSString *)getUserNameForUserId:(NSString *)userId
 {
-    return [[NSUserDefaults standardUserDefaults]stringForKey:[NSString stringWithFormat:@"chat:%@",userId]];
+    NSString *name = [[NSUserDefaults standardUserDefaults]stringForKey:[NSString stringWithFormat:@"chat:%@",userId]];
+    NSLog(@"getUserNameForUserId %@",name);
+    return name;
+}
+
+//存储用户name 对应id
++ (void)cacheUserHeadImage:(NSString *)imageUrl forUserId:(NSString *)userId
+{
+    NSLog(@"cacheUserHeadImage %@",imageUrl);
+    [[NSUserDefaults standardUserDefaults]setObject:imageUrl forKey:[NSString stringWithFormat:@"headImage:%@",userId]];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+//根据id来获取name
++ (NSString *)getUserHeadImageForUserId:(NSString *)userId
+{
+    NSString *name = [[NSUserDefaults standardUserDefaults]stringForKey:[NSString stringWithFormat:@"headImage:%@",userId]];
+    NSLog(@"getUserNameForUserId %@",name);
+    return name;
 }
 
 @end

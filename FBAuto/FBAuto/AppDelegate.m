@@ -70,11 +70,11 @@
  融云
  *********/
 
-//#define RCIM_APPKEY @"x18ywvqf82x0c" //融云appkey
-//#define RCIM_APPSECRET @"qaOLno5Zgm" //appSecret
+//#define RCIM_APPKEY @"cpj2xarlj0xdn" //融云appkey
+//#define RCIM_APPSECRET @"BJs1fiJAvGtqAy" //appSecret  （）
 
-#define RCIM_APPKEY @"cpj2xarlj0xdn" //融云appkey
-#define RCIM_APPSECRET @"BJs1fiJAvGtqAy" //appSecret  （）
+#define RCIM_APPKEY @"pgyu6atqyd6xu" //融云appkey
+#define RCIM_APPSECRET @"K8J5FQ5JS151l" //appSecret  （）
 
 
 @implementation AppDelegate
@@ -225,6 +225,8 @@
         number_str = [NSString stringWithFormat:@"%d",number];
     }
     _perSonalVC.tabBarItem.badgeValue = number_str;
+    
+    [UIApplication sharedApplication].applicationIconBadgeNumber = [number_str intValue];
 }
 
 #pragma mark -  融云即时通讯
@@ -235,6 +237,7 @@
     [[RCIM sharedRCIM]setConnectionStatusDelegate:self];
     // 设置用户信息提供者。
     [RCIM setUserInfoFetcherWithDelegate:self isCacheUserInfo:YES];
+    
 }
 - (void)loginRongCloud
 {
@@ -724,16 +727,24 @@
     
     if ([userId isEqualToString:[GMAPI getUid]]) {
         
-        NSString *headImage = [NSString stringWithFormat:@"%@?%@",[LCWTools headImageForUserId:userId],[LCWTools timechangeToDateline]];
+        NSString *headImage = [FBChatTool getUserHeadImageForUserId:userId];
         RCUserInfo *user = [[RCUserInfo alloc]initWithUserId:userId name:[GMAPI getUsername] portrait:headImage];
         
-        NSLog(@"user image %@",[LCWTools headImageForUserId:@"2"]);
+        NSLog(@"user image %@",headImage);
         
         return user;
     }else
     {
-        NSString *headImage = [NSString stringWithFormat:@"%@?%@",[LCWTools headImageForUserId:userId],[LCWTools timechangeToDateline]];
-        RCUserInfo *user = [[RCUserInfo alloc]initWithUserId:userId name:[FBChatTool getUserNameForUserId:userId] portrait:headImage];
+       
+        
+        NSString *userName = [FBChatTool getUserNameForUserId:userId];
+        if (userName == nil || userName.length == 0) {
+            
+            [self getPersonalInfo:userId];//获取个人信息
+        }
+        
+        NSString *headImage = [FBChatTool getUserHeadImageForUserId:userId];
+        RCUserInfo *user = [[RCUserInfo alloc]initWithUserId:userId name:userName portrait:headImage];
         
         return user;
     }
@@ -784,6 +795,38 @@
             [weakVc tuichuDenglu];
         };
     }
+}
+
+//获取个人信息
+-(void)getPersonalInfo:(NSString *)userId
+{
+    //请求地址str
+    NSString *str = [NSString stringWithFormat:FBAUTO_GET_USER_INFORMATION,userId];
+    
+    NSLog(@"请求用户信息接口 %@",str);
+    LCWTools *tool = [[LCWTools alloc]initWithUrl:str isPost:NO postData:nil];
+    [tool requestCompletion:^(NSDictionary *result, NSError *erro) {
+        
+        if ([result isKindOfClass:[NSDictionary class]]) {
+            
+            NSDictionary *dataInfo = [result objectForKey:@"datainfo"];
+            if ([dataInfo isKindOfClass:[NSDictionary class]])
+            {
+                NSString *name = [dataInfo objectForKey:@"name"];
+                
+                NSString *headImage = [dataInfo objectForKey:@"headimage"];
+                
+                [FBChatTool cacheUserName:name forUserId:userId];
+                [FBChatTool cacheUserHeadImage:headImage forUserId:userId];
+                
+                [[NSNotificationCenter defaultCenter]postNotificationName:NOTIFICATION_UPDATE_USERINFO object:nil];
+            }
+        }
+        
+        
+    } failBlock:^(NSDictionary *failDic, NSError *erro) {
+        ;
+    }];
 }
 
 @end

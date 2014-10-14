@@ -10,7 +10,30 @@
 
 #import "FBChatViewController.h"
 
+#import "FBFriendModel.h"
+
+
 @implementation FBChatListController
+
+
+//-(void)viewWillAppear:(BOOL)animated
+//{
+//    // 设置用户信息提供者。
+//    //    [RCIM setUserInfoFetcherWithDelegate:self isCacheUserInfo:NO];
+////    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(updateUserInfo:) name:NOTIFICATION_UPDATE_USERINFO object:nil];
+//    [super viewWillAppear:animated];
+//    
+//    [self getFriendlist];
+//}
+//-(void)dealloc
+//{
+//    [[NSNotificationCenter defaultCenter]removeObserver:self name:NOTIFICATION_UPDATE_USERINFO object:nil];
+//}
+
+- (void)updateUserInfo:(NSNotification *)notification
+{
+    [self.conversationListView reloadData];
+}
 
 -(void)viewDidLoad
 {
@@ -175,6 +198,54 @@
     chat.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:chat animated:YES];
 }
+
+#pragma mark - 网络请求
+
+- (void)getFriendlist
+{
+    __weak typeof (self)weakSelf = self;
+    
+    LCWTools *tools = [[LCWTools alloc]initWithUrl:[NSString stringWithFormat:FBAUTO_FRIEND_LIST,[GMAPI getUid]]isPost:NO postData:nil];
+    
+    [tools requestCompletion:^(NSDictionary *result, NSError *erro) {
+        NSLog(@"result %@ erro %@",result,erro);
+        
+        if ([result isKindOfClass:[NSDictionary class]]) {
+            
+            int erroCode = [[result objectForKey:@"errcode"]intValue];
+            
+            if (erroCode != 0) {
+                
+                return ;
+            }
+            
+            NSArray *dataInfo = [result objectForKey:@"datainfo"];
+            NSMutableArray *dataArr = [NSMutableArray arrayWithCapacity:dataInfo.count];
+            for (NSDictionary *aDic in dataInfo) {
+                FBFriendModel *aFriend = [[FBFriendModel alloc]initWithDictionary:aDic];
+                
+                NSString *name = aFriend.buddyname ? aFriend.buddyname : aFriend.name;
+                //保存name 对应id
+//                [FBChatTool cacheUserName:name forUserId:aFriend.buddyid];
+//                [FBChatTool cacheUserHeadImage:[LCWTools headImageForUserId:aFriend.buddyid] forUserId:aFriend.buddyid];
+                
+                if (aFriend.buddyname.length > 0) {
+                    [dataArr addObject:aFriend];
+                }
+                
+            }
+            
+            [weakSelf.conversationListView reloadData];
+            
+//            [[NSNotificationCenter defaultCenter]postNotificationName:NOTIFICATION_UPDATE_USERINFO object:nil];
+            
+        }
+    }failBlock:^(NSDictionary *failDic, NSError *erro) {
+        NSLog(@"failDic %@",failDic);
+        
+    }];
+}
+
 
 
 @end

@@ -154,7 +154,7 @@
         
         //保存name 对应id
         [FBChatTool cacheUserName:[dic objectForKey:@"username"] forUserId:userId];
-        
+        [FBChatTool cacheUserHeadImage:[dic objectForKey:@"headimage"] forUserId:userId];
         
     } failBlock:^(NSDictionary *failDic, NSError *erro) {
         NSLog(@"failDic %@",failDic);
