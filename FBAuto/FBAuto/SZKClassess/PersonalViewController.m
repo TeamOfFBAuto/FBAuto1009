@@ -34,6 +34,7 @@
 
 #import "GloginViewController.h"
 
+#import "UIImageView+WebCache.h"
 
 
 @interface PersonalViewController ()
@@ -234,8 +235,10 @@
         if (errcode == 0) {
             NSLog(@"请求用户信息成功");
             //公司头像
-             
-             [self.userFaceImv sd_setImageWithURL:[NSURL URLWithString:[dataInfo objectForKey:@"headimage"]] placeholderImage:[UIImage imageNamed:@"defaultFace"]];
+            
+            NSURL *faceImage = [NSURL URLWithString:[dataInfo objectForKey:@"headimage"]];
+            
+             [self.userFaceImv sd_setImageWithURL:faceImage placeholderImage:[UIImage imageNamed:@"defaultFace"]];
             
             [FBChatTool cacheUserHeadImage:[dataInfo objectForKey:@"headimage"] forUserId:[GMAPI getUid]];
             

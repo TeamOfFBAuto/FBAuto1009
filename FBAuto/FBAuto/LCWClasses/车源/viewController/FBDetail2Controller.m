@@ -178,15 +178,15 @@
         weakSelf.saleTypeBtn.titleLabel.text = [dic objectForKey:@"usertype"];//商家类型
         weakSelf.phoneNumLabel.text = [LCWTools NSStringNotNull:[dic objectForKey:@"phone"]];
         weakSelf.addressLabel.text = [NSString stringWithFormat:@"%@%@",[dic objectForKey:@"province"],[dic objectForKey:@"city"]];
-        NSString *headImage = [LCWTools NSStringNotNull:[dic objectForKey:@"headimage"]];
+        NSString *headImage1 = [LCWTools NSStringNotNull:[dic objectForKey:@"headimage"]];
         
-        [weakSelf.headImage sd_setImageWithURL:[NSURL URLWithString:headImage] placeholderImage:[UIImage imageNamed:@"defaultFace"]];
+        [weakSelf.headImage sd_setImageWithURL:[NSURL URLWithString:headImage1] placeholderImage:[UIImage imageNamed:@"defaultFace"]];
         
         userId = [dic objectForKey:@"uid"];//用户id
         
         //保存name 对应id
         [FBChatTool cacheUserName:[dic objectForKey:@"username"] forUserId:userId];
-        [FBChatTool cacheUserHeadImage:headImage forUserId:userId];
+        [FBChatTool cacheUserHeadImage:headImage1 forUserId:userId];
         
         //车辆图片
         

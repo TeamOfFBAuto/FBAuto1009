@@ -106,13 +106,29 @@
     
     [RCIM initWithAppKey:RCIM_APPKEY deviceToken:nil];
     
-    if ([application respondsToSelector:@selector(registerUserNotificationSettings:)]) {
-        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeSound|UIRemoteNotificationTypeAlert) categories:nil];
-        [application registerUserNotificationSettings:settings];
-    } else {
-        UIRemoteNotificationType myTypes = UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound;
-        [application registerForRemoteNotificationTypes:myTypes];
-    }
+#ifdef __IPHONE_8_0
+    // 在 iOS 8 下注册苹果推送，申请推送权限。
+    
+    
+        if ([application respondsToSelector:@selector(registerUserNotificationSettings:)]) {
+            UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeSound|UIRemoteNotificationTypeAlert) categories:nil];
+            [application registerUserNotificationSettings:settings];
+        } else {
+            UIRemoteNotificationType myTypes = UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound;
+            [application registerForRemoteNotificationTypes:myTypes];
+        }
+#else
+    // 注册苹果推送，申请推送权限。
+    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound];
+#endif
+    
+//    if ([application respondsToSelector:@selector(registerUserNotificationSettings:)]) {
+//        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeSound|UIRemoteNotificationTypeAlert) categories:nil];
+//        [application registerUserNotificationSettings:settings];
+//    } else {
+//        UIRemoteNotificationType myTypes = UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound;
+//        [application registerForRemoteNotificationTypes:myTypes];
+//    }
     
     //UIApplicationLaunchOptionsRemoteNotificationKey,判断是通过推送消息启动的
     
