@@ -8,6 +8,7 @@
 
 #import "GzhuceViewController.h"
 #import "GzhuceTableViewCell.h"
+#import "FBCityData.h"
 
 #define Iphone5TableViewHeight 444
 #define Iphone4TableViewHeight 360
@@ -487,7 +488,7 @@
                 self.province = @"";
             }else{
                 self.province = _data[row][@"State"];
-                self.provinceIn = (9+row)*100;//上传
+                
             }
         }
         //商家
@@ -496,11 +497,26 @@
                 self.province1 = @"";
             }else{
                 self.province1 = _data[row][@"State"];
-                self.provinceIn1 = (9+row)*100;
+                
             }
             
         }
-        return _data[row][@"State"];
+        
+        
+        NSString *provinceStr = [NSString stringWithFormat:@"%@",_data[row][@"State"]];
+        
+        
+        //字符转id
+        if (_gerenTableView.hidden == NO) {//个人注册
+            self.provinceIn = [FBCityData cityIdForName:provinceStr];//上传
+        }
+        if (_shangjiaTableView.hidden == NO) {
+            self.provinceIn1 = [FBCityData cityIdForName:provinceStr];//上传
+        }
+        
+        return provinceStr;
+        
+        
     } else if (component == 1) {
         NSArray * cities = _data[_flagRow][@"Cities"];
         if (_gerenTableView.hidden == NO) {
@@ -508,7 +524,7 @@
                 self.city = @"";
             }else{
                 self.city = cities[row][@"city"];
-                self.cityIn = self.provinceIn + row;
+                
             }
             
         }
@@ -517,12 +533,23 @@
                 self.city1 = @"";
             }else{
                 self.city1 = cities[row][@"city"];
-                self.cityIn1 = self.provinceIn1 + row;
+                
             }
             
         }
         
-        return cities[row][@"city"];
+        
+        NSString *cityStr = [NSString stringWithFormat:@"%@",cities[row][@"city"]];
+        
+        //字符转id
+        if (_gerenTableView.hidden == NO) {
+            self.cityIn = [FBCityData cityIdForName:cityStr];//上传
+        }
+        if (_shangjiaTableView.hidden == NO) {
+            self.cityIn1 = [FBCityData cityIdForName:cityStr];//上传
+        }
+        
+        return cityStr;
     }
     return 0;
 }
