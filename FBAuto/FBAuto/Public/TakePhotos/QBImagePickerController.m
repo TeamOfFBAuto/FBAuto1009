@@ -249,7 +249,7 @@
     
     cell.imageView.image = [UIImage imageWithCGImage:assetsGroup.posterImage];
     cell.titleLabel.text = [NSString stringWithFormat:@"%@", [assetsGroup valueForProperty:ALAssetsGroupPropertyName]];
-    cell.countLabel.text = [NSString stringWithFormat:@"(%ld)", assetsGroup.numberOfAssets];
+    cell.countLabel.text = [NSString stringWithFormat:@"(%ld)", (long)assetsGroup.numberOfAssets];
     
     return cell;
 }

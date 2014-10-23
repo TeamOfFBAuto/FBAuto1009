@@ -246,7 +246,7 @@
     NSString *str1 = [jiequ substringToIndex:2];
     NSString *str2 = [jiequ substringFromIndex:2];
     
-    NSString *headImageUrlStr = [NSString stringWithFormat:@"http://fbautoapp.fblife.com/resource/head/%@/%@/thumb_%@_Thu.jpg",str1,str2,userId];
+    NSString *headImageUrlStr = [NSString stringWithFormat:@"%@/resource/head/%@/%@/thumb_%@_Thu.jpg",FBAUTO_HOST,str1,str2,userId];
     
     return headImageUrlStr;
 }

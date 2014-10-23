@@ -129,14 +129,14 @@
             for (NSDictionary *aDic in dataInfo) {
                 FBFriendModel *aFriend = [[FBFriendModel alloc]initWithDictionary:aDic];
                 
-                NSString *name = aFriend.buddyname ? aFriend.buddyname : aFriend.name;
+//                NSString *name = aFriend.buddyname ? aFriend.buddyname : aFriend.name;
                 //保存name 对应id
 //                [FBChatTool cacheUserName:name forUserId:aFriend.buddyid];
 //                [FBChatTool cacheUserHeadImage:[LCWTools headImageForUserId:aFriend.buddyid] forUserId:aFriend.buddyid];
                 
-                if (aFriend.buddyname.length > 0) {
+//                if (aFriend.buddyname.length > 0) {
                     [dataArr addObject:aFriend];
-                }
+//                }
                 
             }
             
@@ -159,7 +159,14 @@
     
     for (FBFriendModel *aModel in friendsArr)
     {
-        NSString *firstLetter = [aModel.buddyname getFirstLetter];
+        NSString *firstLetter;
+        if (aModel.buddyname.length == 0) {
+            
+            firstLetter = @"W";//未知
+        }else
+        {
+           firstLetter = [aModel.buddyname getFirstLetter];
+        }
         
         aModel.city_name = [FBCityData cityNameForId:[aModel.province intValue]];
 
@@ -342,8 +349,8 @@
     DXAlertView *alert = [[DXAlertView alloc]initWithTitle:nil contentText:[self.shareContent objectForKey:@"text"] leftButtonTitle:@"取消" rightButtonTitle:@"分享" isInput:YES];
     [alert show];
     
-    __weak typeof(DXAlertView *)weakAlert = alert;
-    __weak typeof(self)weakSelf = self;
+//    __weak typeof(DXAlertView *)weakAlert = alert;
+//    __weak typeof(self)weakSelf = self;
     alert.leftBlock = ^(){
         NSLog(@"取消");
     };

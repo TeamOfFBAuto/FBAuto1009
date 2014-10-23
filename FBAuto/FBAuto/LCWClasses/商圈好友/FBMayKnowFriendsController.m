@@ -109,7 +109,7 @@
     NSString *phoneString = [phoneArr componentsJoinedByString:@","];
     NSString *nameString = [nameArr componentsJoinedByString:@","];
     
-    NSString *urlString = [NSString stringWithFormat:@"http://fbautoapp.fblife.com/index.php?c=interface&a=getphonemember&authkey=%@",[GMAPI getAuthkey]];
+    NSString *urlString = [NSString stringWithFormat:@"%@/index.php?c=interface&a=getphonemember&authkey=%@",FBAUTO_HOST,[GMAPI getAuthkey]];
     NSString *post = [NSString stringWithFormat:@"phone=%@&rname=%@",phoneString,nameString];
     NSData *postData = [post dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:YES];
     

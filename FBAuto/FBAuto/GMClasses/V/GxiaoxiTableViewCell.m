@@ -72,7 +72,7 @@
     NSString *str1 = [jiequ substringToIndex:2];
     NSString *str2 = [jiequ substringFromIndex:2];
     
-    NSString *headImageUrlStr = [NSString stringWithFormat:@"http://fbautoapp.fblife.com/resource/head/%@/%@/thumb_%@_Thu.jpg",str1,str2,model.fromId];
+    NSString *headImageUrlStr = [NSString stringWithFormat:@"%@/resource/head/%@/%@/thumb_%@_Thu.jpg",FBAUTO_HOST,str1,str2,model.fromId];
     NSLog(@"头像url地址   %@",headImageUrlStr);
     [self.headImageView sd_setImageWithURL:[NSURL URLWithString:headImageUrlStr]];
     

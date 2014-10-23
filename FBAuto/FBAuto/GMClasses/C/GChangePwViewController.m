@@ -14,6 +14,8 @@
 
 #import "GlocalUserImage.h"
 
+#import "AppDelegate.h"
+
 @interface GChangePwViewController ()
 
 @end
@@ -132,6 +134,10 @@
             UIAlertView *al = [[UIAlertView alloc]initWithTitle:@"提示" message:@"修改密码成功" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
             al.tag = 1000;
             [al show];
+            
+            PersonalViewController *personal = (PersonalViewController *)((AppDelegate *)[UIApplication sharedApplication].delegate).perSonalVC;
+            [personal tuichuDenglu];
+            
         }else{
             
             NSLog(@"修改密码失败 == %@",errorinfo);

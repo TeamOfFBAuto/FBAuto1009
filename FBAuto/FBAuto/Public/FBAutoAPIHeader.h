@@ -68,6 +68,8 @@ alpha:(a)]
 
 //用户相关API=================
 
+#define FBAUTO_HOST @"http://fbautoapp.fblife.com"
+
 //获取手机验证码
 #define FBAUTO_GET_VERIFICATION_CODE @"http://fbautoapp.fblife.com/index.php?c=interface&a=phonecode&phone=%@&optype=%d"
 

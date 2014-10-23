@@ -56,7 +56,7 @@
     
     self.flagHeight = 60;
     
-    _tableView = [[RefreshTableView alloc]initWithFrame:CGRectMake(0, 0, 320, iPhone5?568-64:415)];
+    _tableView = [[RefreshTableView alloc]initWithFrame:CGRectMake(0, 0, 320, iPhone5?568 - 64 - 49:415 - 49)];
     _tableView.refreshDelegate = self;
     _tableView.dataSource = self;
     
@@ -317,6 +317,9 @@
     __weak typeof (self)weakSelf = self;
     __weak typeof (RefreshTableView *)btableview = _tableView;
     __weak typeof(_dataArray)weakDataArray = _dataArray;
+    
+    __weak typeof(cell)weakCell = cell;
+    
     //设置上下箭头的点击
     [cell setAddviewBlock:^{
         
@@ -353,6 +356,8 @@
         }
         
         [btableview reloadRowsAtIndexPaths:weakSelf.indexPathArray withRowAnimation:UITableViewRowAnimationFade];
+        
+        [btableview scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
         
     }];
 

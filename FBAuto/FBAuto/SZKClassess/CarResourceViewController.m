@@ -80,6 +80,8 @@
     UIView *maskView;//遮罩
     
     BOOL _needRefreshCarBrand;//是否需要更新车型数据
+    
+    MBProgressHUD *loading;//车型数据更新
 }
 
 @end
@@ -635,10 +637,8 @@
             
         }
     }
-    //
-    //    [[[LCWTools alloc]init]insertDataClassType:CARSOURCE_BRAND_INSERT dataArray:brand_Arr unique:nil];
-    //    [[[LCWTools alloc]init]insertDataClassType:CARSOURCE_TYPE_INSETT dataArray:type_arr unique:nil];
-    //    [[[LCWTools alloc]init]insertDataClassType:CARSOURCE_STYLE_INSETT dataArray:style_arr unique:nil];
+    
+    
     
     NSLog(@"车型数据保存完成");
     

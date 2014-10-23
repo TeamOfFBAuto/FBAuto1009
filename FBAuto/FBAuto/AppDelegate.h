@@ -11,6 +11,7 @@
 #import "RCIM.h"
 #import "RCIMClientHeader.h"
 
+#import "PersonalViewController.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate,UITabBarDelegate,UITabBarControllerDelegate, RCIMReceiveMessageDelegate,RCIMConnectionStatusDelegate,RCConnectDelegate,RCIMUserInfoFetcherDelegagte>
 {
@@ -28,6 +29,8 @@
 @property (nonatomic,assign)BOOL isReachable;//在其他页面可根据此判断当前网络是否可用
 
 @property (nonatomic,retain)NSDictionary *pushUserInfo;//推送消息
+
+@property (nonatomic,retain)PersonalViewController * perSonalVC;
 
 @property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
