@@ -91,6 +91,7 @@
         }else if (i == 2){
             self.passWordtf = contentf;
             self.passWordtf.autocapitalizationType = UITextAutocapitalizationTypeNone;
+            self.passWordtf.secureTextEntry = YES;
         }
         
         

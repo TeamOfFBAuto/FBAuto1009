@@ -91,6 +91,7 @@
         //用户名
         self.userTf = [[UITextField alloc]initWithFrame:CGRectMake(15, 0,275, 45)];
         self.userTf.autocapitalizationType = UITextAutocapitalizationTypeNone;
+        self.userTf.keyboardType = UIKeyboardTypeNumberPad;
         self.userTf.textColor = RGBCOLOR(164, 164, 164);
         self.userTf.delegate = self;
         self.userTf.tag = 50;

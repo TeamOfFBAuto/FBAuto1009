@@ -58,6 +58,7 @@
     for (int i = 0; i<2; i++) {
         UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(15, 38+i*52, 50, 18)];
         UITextField *tf = [[UITextField alloc]initWithFrame:CGRectMake(CGRectGetMaxX(titleLabel.frame), 38+i*52, 200, 18)];
+        tf.secureTextEntry = YES;
         
         if (i ==1) {
             titleLabel.frame = CGRectMake(15, 38+i*52, 80, 18);

@@ -104,6 +104,7 @@
                 contentTf.frame = CGRectMake(85, 20+i*55, 200, 15);
             }else if (i == 5){//验证码
                 contentTf.frame = CGRectMake(70, 20+i*55, 130, 15);
+                contentTf.keyboardType = UIKeyboardTypeNumberPad;
                 _yanzhengBtn = [UIButton buttonWithType:UIButtonTypeCustom];
                 _yanzhengBtn.frame = CGRectMake(CGRectGetMaxX(contentTf.frame)+10+4, contentTf.frame.origin.y-14, 95, 45);
                 [_yanzhengBtn setTitle:@"获取验证码" forState:UIControlStateNormal];
@@ -135,6 +136,7 @@
             
             if (i == 2 || i == 3) {//密码
                 contentTf.keyboardType = UIKeyboardTypeASCIICapable;
+                contentTf.secureTextEntry = YES;
             }
             
             if (i == 4) {//手机
@@ -217,6 +219,7 @@
                 contentTf.frame = CGRectMake(85, 20+i*55, 200, 15);
             }else if (i == 7){//验证码
                 contentTf.frame = CGRectMake(70, 20+i*55, 130, 15);
+                contentTf.keyboardType = UIKeyboardTypeNumberPad;
                 _yanzhengBtn1 = [UIButton buttonWithType:UIButtonTypeCustom];
                 _yanzhengBtn1.frame = CGRectMake(CGRectGetMaxX(contentTf.frame)+10+4, contentTf.frame.origin.y-14, 95, 45);
                 [_yanzhengBtn1 setTitle:@"获取验证码" forState:UIControlStateNormal];
@@ -234,11 +237,12 @@
             
             
             
-            if (i == 4 || i == 5) {
+            if (i == 4 || i == 5) {//密码 重复密码
                 contentTf.keyboardType = UIKeyboardTypeASCIICapable;
+                contentTf.secureTextEntry = YES;
             }
             
-            if (i == 6) {
+            if (i == 6 || i == 7) {//手机 验证码
                 contentTf.keyboardType = UIKeyboardTypeNumberPad;
             }
             
