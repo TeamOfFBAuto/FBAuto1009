@@ -22,6 +22,7 @@ typedef void (^DelImvClickedBlock)(NSInteger gtag);//选择某个收藏删除
 
 @property(nonatomic,strong)UILabel *tLabel;//标题label
 @property(nonatomic,strong)UILabel *cLabel;//内容label
+@property(nonatomic,strong)UILabel *datelineLabel;//时间
 
 @property(nonatomic,assign)GmarkViewController *delegate;//拿到vc对象
 

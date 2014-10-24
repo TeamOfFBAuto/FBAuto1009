@@ -30,6 +30,9 @@
 
 #define LOGIN_SUCCESS @"LOGIN_SUCCESS" //登录成功
 
+#define LOGIN_PHONE @"LOGIN_PHONE"//登录手机号
+#define LOGIN_PASS @"LOGIN_PASS"//登录密码
+
 
 //保存用户信息
 
@@ -67,6 +70,8 @@ alpha:(a)]
 
 
 //用户相关API=================
+
+#define FBAUTO_HOST @"http://fbautoapp.fblife.com"
 
 //获取手机验证码
 #define FBAUTO_GET_VERIFICATION_CODE @"http://fbautoapp.fblife.com/index.php?c=interface&a=phonecode&phone=%@&optype=%d"

@@ -18,6 +18,7 @@
 @interface FBFindCarDetailController ()
 {
     NSString *userId;
+    UIScrollView *bgScrollView;
 }
 
 @end
@@ -73,7 +74,7 @@
 {
     NSString *url = [NSString stringWithFormat:FBAUTO_FINDCAR_SINGLE,carId];
     
-    NSLog(@"单个车源信息 %@",url);
+    NSLog(@"单个寻车信息 %@",url);
     
     LCWTools *tool = [[LCWTools alloc]initWithUrl:url isPost:NO postData:nil];
     [tool requestCompletion:^(NSDictionary *result, NSError *erro) {
@@ -139,6 +140,7 @@
             label2.top += dis;
         }
         
+        bgScrollView.contentSize = CGSizeMake(self.view.width, [self labelWithTag:116].bottom + 10);
         
         //商家信息
         
@@ -201,16 +203,22 @@
 
 - (void)createViews
 {
+    CGSize aSize = [UIScreen mainScreen].bounds.size;
+    
+    bgScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, self.view.width, aSize.height - 64 - 75)];
+    
+    [self.view addSubview:bgScrollView];
+    
     NSArray *items = @[@"车       型:",@"地       区:",@"版       本:",@"库       存:",@"外  观 色:",@"内  饰 色:",@"详细描述:"];
     for (int i = 0; i < items.count; i ++) {
         UILabel *aLabel = [self createLabelFrame:CGRectMake(10, 25 + (20 + 15) * i, 92, 20) text:[items objectAtIndex:i] alignMent:NSTextAlignmentLeft textColor:[UIColor blackColor]];
         aLabel.font = [UIFont boldSystemFontOfSize:14];
-        [self.view addSubview:aLabel];
+        [bgScrollView addSubview:aLabel];
         aLabel.tag = 100 + i;
     }
     for (int i = 0; i < items.count; i ++) {
         UILabel *aLabel = [self createLabelFrame:CGRectMake(92, 25 + (20 + 15) * i, 200, 20) text:@"" alignMent:NSTextAlignmentLeft textColor:[UIColor grayColor]];
-        [self.view addSubview:aLabel];
+        [bgScrollView addSubview:aLabel];
         aLabel.tag = 110 + i;
         NSLog(@"tag %d",aLabel.tag);
 

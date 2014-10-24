@@ -246,7 +246,7 @@
     NSString *str1 = [jiequ substringToIndex:2];
     NSString *str2 = [jiequ substringFromIndex:2];
     
-    NSString *headImageUrlStr = [NSString stringWithFormat:@"http://fbautoapp.fblife.com/resource/head/%@/%@/thumb_%@_Thu.jpg",str1,str2,userId];
+    NSString *headImageUrlStr = [NSString stringWithFormat:@"%@/resource/head/%@/%@/thumb_%@_Thu.jpg",FBAUTO_HOST,str1,str2,userId];
     
     return headImageUrlStr;
 }
@@ -369,6 +369,36 @@
 }
 
 #pragma - mark 小工具
+
+/**
+ *  关键词特殊显示
+ *
+ *  @param content   源字符串
+ *  @param aKeyword  关键词
+ *  @param textColor 关键词颜色
+ */
++ (NSAttributedString *)attributedString:(NSString *)content keyword:(NSString *)aKeyword color:(UIColor *)textColor
+{
+    NSMutableAttributedString *string = [[NSMutableAttributedString alloc]initWithString:content];
+    
+    if (content.length < aKeyword.length) {
+        return string;
+    }
+    
+    for (int i = 0; i <= content.length - aKeyword.length; i ++) {
+        
+        NSRange tmp = NSMakeRange(i, aKeyword.length);
+        
+        NSRange range = [content rangeOfString:aKeyword options:NSCaseInsensitiveSearch range:tmp];
+        
+        if (range.location != NSNotFound) {
+            [string addAttribute:NSForegroundColorAttributeName value:textColor range:range];
+        }
+    }
+    
+    return string;
+}
+
 
 //时间线转化
 
@@ -831,6 +861,39 @@
 //        }
 //    }
 }
+
+#pragma mark - NSUserDefault缓存
+
+//存
++ (void)cache:(id)dataInfo ForKey:(NSString *)key
+{
+    
+    @try {
+        
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        [defaults setObject:nil forKey:key];
+        [defaults setObject:dataInfo forKey:key];
+        [defaults synchronize];
+        
+    }
+    @catch (NSException *exception) {
+        
+        NSLog(@"exception %@",exception);
+        
+    }
+    @finally {
+        
+    }
+    
+}
+
+//取
++ (id)cacheForKey:(NSString *)key
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    return [defaults objectForKey:key];
+}
+
 
 #pragma - mark 查询数据
 

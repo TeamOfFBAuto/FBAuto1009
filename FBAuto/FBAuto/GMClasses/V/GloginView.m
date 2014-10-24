@@ -85,24 +85,39 @@
         
         
         
-        
+        UIColor *a_color = RGBCOLOR(164, 164, 164);
         
         //输入textField
         //用户名
         self.userTf = [[UITextField alloc]initWithFrame:CGRectMake(15, 0,275, 45)];
         self.userTf.autocapitalizationType = UITextAutocapitalizationTypeNone;
+
         self.userTf.keyboardType = UIKeyboardTypeNumberPad;
         self.userTf.textColor = RGBCOLOR(164, 164, 164);
+
+        self.userTf.textColor = a_color;
+
         self.userTf.delegate = self;
         self.userTf.tag = 50;
+//        self.userTf.placeholder = @"手机号";
+        
+        
+        
+        NSAttributedString *user_placeholder = [LCWTools attributedString:@"手机号" keyword:@"手机号" color:a_color];
+        self.userTf.attributedPlaceholder = user_placeholder;
         
         //密码
         self.passWordTf = [[UITextField alloc]initWithFrame:CGRectMake(15, 60, 275, 45)];
         self.passWordTf.autocapitalizationType = UITextAutocapitalizationTypeNone;
         self.passWordTf.secureTextEntry = YES;
-        self.passWordTf.textColor = RGBCOLOR(164, 164, 164);
+        self.passWordTf.textColor = a_color;
         self.passWordTf.delegate = self;
         self.passWordTf.tag = 51;
+//        self.passWordTf.placeholder = @"密码";
+        
+        
+        NSAttributedString *pass_placeholder = [LCWTools attributedString:@"密码" keyword:@"密码" color:a_color];
+        self.passWordTf.attributedPlaceholder = pass_placeholder;
         
         [self.Row3backView addSubview:_zhanghaoBackView];
         [self.Row3backView addSubview:_passWordBackView];
@@ -110,19 +125,19 @@
         [self.Row3backView addSubview:self.passWordTf];
         
         
-        _placeHolder1 = [[UILabel alloc]initWithFrame:CGRectMake(15, 0, 275, 45)];
-//        _placeHolder1.text = @"账号";
-        _placeHolder1.text = @"手机号";
-        _placeHolder1.textColor = RGBCOLOR(164, 164, 164);
-        
-        _placeHolder2 = [[UILabel alloc]initWithFrame:CGRectMake(15, 60, 275, 45)];
-        _placeHolder2.text = @"密码";
-        _placeHolder2.textColor = RGBCOLOR(164, 164, 164);
-        
-        
-        
-        [self.Row3backView addSubview:_placeHolder1];
-        [self.Row3backView addSubview:_placeHolder2];
+//        _placeHolder1 = [[UILabel alloc]initWithFrame:CGRectMake(15, 0, 275, 45)];
+////        _placeHolder1.text = @"账号";
+//        _placeHolder1.text = @"手机号";
+//        _placeHolder1.textColor = RGBCOLOR(164, 164, 164);
+//        
+//        _placeHolder2 = [[UILabel alloc]initWithFrame:CGRectMake(15, 60, 275, 45)];
+//        _placeHolder2.text = @"密码";
+//        _placeHolder2.textColor = RGBCOLOR(164, 164, 164);
+//        
+//        
+//        
+//        [self.Row3backView addSubview:_placeHolder1];
+//        [self.Row3backView addSubview:_placeHolder2];
         
         
         
@@ -277,7 +292,7 @@
 //登录
 -(void)denglu{
     if (self.dengluBlock) {
-        self.dengluBlock(self.userName,self.userPassWord);
+        self.dengluBlock(self.userTf.text,self.passWordTf.text);
     }
 }
 

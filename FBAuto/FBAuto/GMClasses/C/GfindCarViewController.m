@@ -56,7 +56,7 @@
     
     self.flagHeight = 60;
     
-    _tableView = [[RefreshTableView alloc]initWithFrame:CGRectMake(0, 0, 320, iPhone5?568-64:415)];
+    _tableView = [[RefreshTableView alloc]initWithFrame:CGRectMake(0, 0, 320, iPhone5?568 - 64 - 49:415 - 49)];
     _tableView.refreshDelegate = self;
     _tableView.dataSource = self;
     
@@ -255,6 +255,8 @@
 
 - (void)loadNewData
 {
+    
+    [self cleanAllFlag];
     _page = 1;
     
     [self prepareDataForType:self.gtype];
@@ -264,10 +266,23 @@
 {
     NSLog(@"loadMoreData");
     
+    [self cleanAllFlag];
+    
     _page ++;
+    
     
     [self prepareDataForType:self.gtype];
 }
+
+//清空所有标记符
+-(void)cleanAllFlag{
+    self.flagIndexPath = nil;
+    self.lastIndexPath = nil;
+    self.flagHeight = 60;
+    self.lastHeight = 60;
+    self.indexPathArray = nil;
+}
+
 
 - (void)didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -317,6 +332,9 @@
     __weak typeof (self)weakSelf = self;
     __weak typeof (RefreshTableView *)btableview = _tableView;
     __weak typeof(_dataArray)weakDataArray = _dataArray;
+    
+    __weak typeof(cell)weakCell = cell;
+    
     //设置上下箭头的点击
     [cell setAddviewBlock:^{
         
@@ -329,21 +347,21 @@
         weakSelf.flagIndexPath = indexPath;
         
         //把flag加到数组里
-        NSArray *indexPathArray = @[weakSelf.flagIndexPath];
+        NSArray *indexPathArray1 = @[weakSelf.flagIndexPath];
 
         //如果last有值 并且和flag不同 就加到数组里
         if (weakSelf.lastIndexPath && (weakSelf.lastIndexPath.row!=weakSelf.flagIndexPath.row || weakSelf.lastIndexPath.section != weakSelf.flagIndexPath.section)) {
-            indexPathArray = @[weakSelf.lastIndexPath,weakSelf.flagIndexPath];
+            indexPathArray1 = @[weakSelf.lastIndexPath,weakSelf.flagIndexPath];
         }
         
-        weakSelf.indexPathArray = indexPathArray;
+        weakSelf.indexPathArray = indexPathArray1;
         
         NSLog(@"%ld  %ld",(long)weakSelf.lastIndexPath.row,(long)weakSelf.flagIndexPath.row);
         
         //单元格高度标示
-        if (indexPathArray.count == 2) {//有last 有flag
+        if (indexPathArray1.count == 2) {//有last 有flag
             weakSelf.flagHeight = 120;
-        }else if (indexPathArray.count == 1){//last和flag为同一个
+        }else if (indexPathArray1.count == 1){//last和flag为同一个
             if (weakSelf.flagHeight == 120) {
                 weakSelf.flagHeight = 60;
             }else if (weakSelf.flagHeight == 60){
@@ -352,7 +370,10 @@
             }
         }
         
-        [btableview reloadRowsAtIndexPaths:weakSelf.indexPathArray withRowAnimation:UITableViewRowAnimationFade];
+        
+        [btableview reloadData];
+        //newbiliy pang xiao
+        [btableview scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
         
     }];
 

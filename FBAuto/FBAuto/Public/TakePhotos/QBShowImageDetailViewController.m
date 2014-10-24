@@ -69,7 +69,7 @@
     BOOL isContains = [self.selectedAssets containsObject:[self.AllImagesArray objectAtIndex:_currentPage]];
     
     if (isContains) {
-        [chooseButton setImage:[UIImage imageNamed:@"duihao-detail-up-46_46.png"] forState:UIControlStateNormal];
+        [chooseButton setImage:[UIImage imageNamed:@"duihao-up-46_46.png"] forState:UIControlStateNormal];
         
         [self.selectedAssets removeObject:[self.AllImagesArray objectAtIndex:_currentPage]];
     }else
@@ -150,7 +150,7 @@
         
     }else
     {
-        [chooseButton setImage:[UIImage imageNamed:@"duihao-detail-up-46_46.png"] forState:UIControlStateNormal];
+        [chooseButton setImage:[UIImage imageNamed:@"duihao-up-46_46.png"] forState:UIControlStateNormal];
         
     }
     
@@ -402,7 +402,7 @@
         [chooseButton setImage:[UIImage imageNamed:@"duihao-doun-46_46.png"] forState:UIControlStateNormal];
     }else
     {
-        [chooseButton setImage:[UIImage imageNamed:@"duihao-detail-up-46_46.png"] forState:UIControlStateNormal];
+        [chooseButton setImage:[UIImage imageNamed:@"duihao-up-46_46.png"] forState:UIControlStateNormal];
     }
 }
 

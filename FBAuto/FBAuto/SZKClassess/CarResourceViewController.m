@@ -80,6 +80,8 @@
     UIView *maskView;//遮罩
     
     BOOL _needRefreshCarBrand;//是否需要更新车型数据
+    
+    MBProgressHUD *loading;//车型数据更新
 }
 
 @end
@@ -109,7 +111,7 @@
         }];
         
     }else{
-        NSLog(@"xxname===%@ id:%@",[GMAPI getUsername],[GMAPI getUid]);
+        NSLog(@"xxname===%@ id:%@ %@",[GMAPI getUsername],[GMAPI getUid],[GMAPI getAuthkey]);
     }
     
 }
@@ -178,8 +180,8 @@
 //更新筛选条件及列表内容
 - (void)updateAllParams:(NSNotification *)notification
 {
-    if ((![_car isEqualToString:@"000000000"])|| _spot_future || _color_in || _color_out || _carfrom || _usertype || _province || _city || (_searchKeyword.length > 0)) {
-        
+//    if ((![_car isEqualToString:@"000000000"])|| _spot_future || _color_in || _color_out || _carfrom || _usertype || _province || _city || (_searchKeyword.length > 0)) {
+    
         NSLog(@"更新");
         
         _searchKeyword = nil;
@@ -189,10 +191,10 @@
         [self clearSearchCondition];
         
         [_table showRefreshHeader:NO];
-    }else
-    {
-        NSLog(@"不更新");
-    }
+//    }else
+//    {
+//        NSLog(@"不更新");
+//    }
     
 //    _searchKeyword = nil;
 //    
@@ -635,10 +637,8 @@
             
         }
     }
-    //
-    //    [[[LCWTools alloc]init]insertDataClassType:CARSOURCE_BRAND_INSERT dataArray:brand_Arr unique:nil];
-    //    [[[LCWTools alloc]init]insertDataClassType:CARSOURCE_TYPE_INSETT dataArray:type_arr unique:nil];
-    //    [[[LCWTools alloc]init]insertDataClassType:CARSOURCE_STYLE_INSETT dataArray:style_arr unique:nil];
+    
+    
     
     NSLog(@"车型数据保存完成");
     

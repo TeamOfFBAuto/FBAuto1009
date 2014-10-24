@@ -62,20 +62,23 @@
     self.tLabel = tLabel;
     
     //车源信息
-    UILabel *cLabel = [[UILabel alloc]initWithFrame:CGRectMake(65, 23, 240, 14)];
+    UILabel *cLabel = [[UILabel alloc]initWithFrame:CGRectMake(65, 12, 240, 14)];
     cLabel.font = [UIFont systemFontOfSize:13];
     self.cLabel = cLabel;
     
     
+    //时间
     
-    
-    
+    UILabel *dLable = [[UILabel alloc]initWithFrame:CGRectMake(cLabel.left, cLabel.bottom + 10, 240, 14)];
+    dLable.font = [UIFont systemFontOfSize:13];
+    self.datelineLabel = dLable;
     
     //添加视图
     [self.contentView addSubview:_DelWhView];
     [self.contentView addSubview:_noDelWhView];
     [self.contentView addSubview:tLabel];
     [self.contentView addSubview:cLabel];
+    [self.contentView addSubview:dLable];
     
     NSLog(@" delegate  ----- %d",self.delegate.delType);
     
@@ -88,8 +91,8 @@
         _noDelWhView.hidden = YES;
         _DelWhView.hidden = NO;
         tLabel.frame = CGRectMake(52, 24, 25, 13);
-        cLabel.frame = CGRectMake(105, 23, 200, 14);
-        
+        cLabel.frame = CGRectMake(105, 12, 200, 14);
+        dLable.frame = CGRectMake(cLabel.left, cLabel.bottom + 10, 200, 14);
         
         //添加选择图标
         self.clickImv = [[UIImageView alloc]initWithFrame:CGRectMake(18, 20, 20, 20)];
@@ -131,6 +134,7 @@
     CarSourceClass *aCar = array[theIndexPath.row];
     self.tLabel.text = aCar.stype_name;
     self.cLabel.text = aCar.car_name;
+    self.datelineLabel.text = [LCWTools timechange3:aCar.dateline];
     
 }
 

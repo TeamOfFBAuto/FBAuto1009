@@ -15,7 +15,7 @@
 
 #import "FindCarViewController.h"//寻车
 
-#import "PersonalViewController.h"//个人中心
+//#import "PersonalViewController.h"//个人中心
 
 #import "GloginViewController.h"//登录页面
 
@@ -80,8 +80,6 @@
 @implementation AppDelegate
 {
     NSString *_fromPhone;//消息来源号码
-    
-    PersonalViewController * _perSonalVC;
 }
 
 @synthesize managedObjectContext = _managedObjectContext;
@@ -164,6 +162,30 @@
     return YES;
 }
 
+
+- (void)test
+{
+    NSString *newStr = @"http://61.4.185.48:81/g/";
+    
+    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:newStr]];
+
+    [request setResponseEncoding:NSUTF8StringEncoding];
+    __weak typeof(ASIHTTPRequest *)weakRequest = request;
+    [request startAsynchronous];
+    [request setCompletionBlock:^{
+        
+        NSLog(@"----->hahha %@",weakRequest.responseString);
+        
+    }];
+    
+    [request setFailedBlock:^{
+        
+        NSLog(@"----->hahha %@  %@",weakRequest.responseString,weakRequest.error);
+        
+    }];
+    
+}
+
 #pragma mark - 创建视图
 
 - (UITabBarController *)preprareViewControllers
@@ -175,9 +197,7 @@
     
     FindCarViewController * searchCarVC = [[FindCarViewController alloc] init];
     
-    PersonalViewController * perSonalVC = [[PersonalViewController alloc] init];
-    
-    _perSonalVC = perSonalVC;
+    self.perSonalVC = [[PersonalViewController alloc] init];
     
     
     UINavigationController * navc1 = [[UINavigationController alloc] initWithRootViewController:rootVC];
@@ -186,7 +206,7 @@
     
     UINavigationController * navc3 = [[UINavigationController alloc] initWithRootViewController:searchCarVC];
     
-    UINavigationController * navc4 = [[UINavigationController alloc] initWithRootViewController:perSonalVC];
+    UINavigationController * navc4 = [[UINavigationController alloc] initWithRootViewController:_perSonalVC];
     
     
     rootVC.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"车源" image:[UIImage imageNamed:@"cheyuan_down46_46"] tag:0];
@@ -195,7 +215,7 @@
     
     searchCarVC.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"求购" image:[UIImage imageNamed:@"xunche_down46_46"] tag:2];
     
-    perSonalVC.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"个人中心" image:[UIImage imageNamed:@"geren_down46_46"] tag:3];
+    _perSonalVC.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"个人中心" image:[UIImage imageNamed:@"geren_down46_46"] tag:3];
     
     UITabBarController * tabbar = [[UITabBarController alloc] init];
     tabbar.delegate = self;
@@ -329,7 +349,7 @@
 {
     //开启网络状况的监听
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityChanged:) name:kReachabilityChangedNotification object:nil];
-    self.hostReach = [Reachability reachabilityWithHostname:@"http://fbautoapp.fblife.com"];
+    self.hostReach = [Reachability reachabilityWithHostname:FBAUTO_HOST];
     
     //开始监听，会启动一个run loop
     [self.hostReach startNotifier];

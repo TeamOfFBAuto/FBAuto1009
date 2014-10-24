@@ -14,6 +14,8 @@
 
 #import "GlocalUserImage.h"
 
+#import "AppDelegate.h"
+
 @interface GChangePwViewController ()
 
 @end
@@ -54,18 +56,18 @@
     }
     
     //titile
-    NSArray *titleArray = @[@"新密码",@"重复新密码"];
+    NSArray *titleArray = @[@"新    密   码",@"重复新密码"];
     for (int i = 0; i<2; i++) {
         UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(15, 38+i*52, 50, 18)];
         UITextField *tf = [[UITextField alloc]initWithFrame:CGRectMake(CGRectGetMaxX(titleLabel.frame), 38+i*52, 200, 18)];
         tf.secureTextEntry = YES;
         
-        if (i ==1) {
+//        if (i ==1) {
             titleLabel.frame = CGRectMake(15, 38+i*52, 80, 18);
             
             tf.frame = CGRectMake(CGRectGetMaxX(titleLabel.frame), 38+i*52, 200, 18);
             
-        }
+//        }
         titleLabel.font = [UIFont systemFontOfSize:14];
         titleLabel.text = titleArray[i];
         
@@ -104,6 +106,14 @@
     UITextField *nTf = self.tfArray[0];//新密码tf
     UITextField *nTf1 = self.tfArray[1];//新密码tf1
     //NSString *oldPs = [GMAPI getUserPassWord];//老密码
+    
+    if (nTf.text.length == 0) {
+        
+        UIAlertView *al = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请输入新的密码" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [al show];
+        return;
+    }
+    
     if ([nTf.text isEqualToString:nTf1.text]) {
         [self testWithNewPsw:nTf.text];
     }else{
@@ -133,6 +143,12 @@
             UIAlertView *al = [[UIAlertView alloc]initWithTitle:@"提示" message:@"修改密码成功" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
             al.tag = 1000;
             [al show];
+            
+//            [LCWTools cache:@"" ForKey:LOGIN_PASS];
+            
+//            PersonalViewController *personal = (PersonalViewController *)((AppDelegate *)[UIApplication sharedApplication].delegate).perSonalVC;
+//            [personal tuichuDenglu];
+            
         }else{
             
             NSLog(@"修改密码失败 == %@",errorinfo);
@@ -160,18 +176,18 @@
         [standUDef setObject:@""  forKey:USERNAME];
         [standUDef setObject:NO forKey:@"switchOnorOff"];
         
+        [standUDef setBool:NO forKey:LOGIN_SUCCESS];
+        
+        [LCWTools cache:@"" ForKey:LOGIN_PASS];
+        
         [standUDef synchronize];
         
         NSLog(@"authkey===%@",[GMAPI getAuthkey]);
-        
-        
         
         //清除沙盒里的数据
         
         //上传标志位
         [[NSUserDefaults standardUserDefaults]removeObjectForKey:@"gIsUpFace"];
-        
-        
         
         //document路径
         NSString *documentPathStr = [GlocalUserImage documentFolder];
@@ -184,10 +200,6 @@
         [fileM removeItemAtPath:[documentPathStr stringByAppendingString:userFace] error:nil];
         
         
-        
-        
-        
-        
         [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
             if (connectionError==0) {
                 NSLog(@"成功");
@@ -197,8 +209,11 @@
             }
         }];
         
+        [[RCIM sharedRCIM] disconnect:NO];
         
         self.tabBarController.selectedIndex = 0;
+        
+        [self.navigationController popToRootViewControllerAnimated:YES];
     }
 }
 

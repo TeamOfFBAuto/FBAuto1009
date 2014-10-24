@@ -2969,7 +2969,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "f2794893-6f40-4d34-b2ae-54d0f5e6cf98";
+				PROVISIONING_PROFILE = "28b23bd8-a16c-4a4b-b1d8-9c2ffabe0318";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/**";
 				VALID_ARCHS = "armv7 arm64 armv7s";
@@ -3029,7 +3029,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "f2794893-6f40-4d34-b2ae-54d0f5e6cf98";
+				PROVISIONING_PROFILE = "28b23bd8-a16c-4a4b-b1d8-9c2ffabe0318";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/**";
 				VALID_ARCHS = "armv7 arm64 armv7s";

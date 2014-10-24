@@ -65,8 +65,17 @@ typedef void(^ urlRequestBlock)(NSDictionary *result,NSError *erro);
 
 + (void)shareText:(NSString *)text  title:(NSString *)title image:(UIImage *)aImage linkUrl:(NSString *)linkUrl ShareType:(ShareType)aShareType;
 
+/**
+ *  NSUserDefault 缓存
+ */
+//存
++ (void)cache:(id)dataInfo ForKey:(NSString *)key;
+//取
++ (id)cacheForKey:(NSString *)key;
 
 #pragma - mark 小工具
+
++ (NSAttributedString *)attributedString:(NSString *)content keyword:(NSString *)aKeyword color:(UIColor *)textColor;
 
 + (NSString *) md5:(NSString *) text;
 + (void)alertText:(NSString *)text;
