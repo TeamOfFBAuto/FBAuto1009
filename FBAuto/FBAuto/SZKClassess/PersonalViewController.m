@@ -107,7 +107,7 @@
     
     
     
-    NSArray *titileArray = @[@"商圈",@"消息",@"通知"];
+    NSArray *titileArray = @[@"车友",@"消息",@"通知"];
     NSArray *imageArray = @[[UIImage imageNamed:@"shangquam182_58.png"],[UIImage imageNamed:@"xiaoxi182_58.png"],[UIImage imageNamed:@"tongzhi182_58.png"]];
     
     
@@ -409,7 +409,7 @@
 
 - (void)clickToDetail:(UIButton *)sender
 {
-    if (sender.tag == 50) {//商圈
+    if (sender.tag == 50) {//车友
         FBFriendsController *friends = [[FBFriendsController alloc]init];
         friends.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:friends animated:YES];

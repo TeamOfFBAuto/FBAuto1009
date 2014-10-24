@@ -15,6 +15,8 @@
 #import <ShareSDK/ShareSDK.h>
 #import "FBChatViewController.h"
 
+#import "DXAlertView.h"
+
 @interface FBFindCarDetailController ()
 {
     NSString *userId;
@@ -144,11 +146,30 @@
         
         //商家信息
         
+        //调整商家名字显示长度
+        NSString *saleName = [dic objectForKey:@"username"];
+        
+        CGFloat nameWidth = [LCWTools widthForText:saleName font:12];
+        
+        nameWidth = (nameWidth <= 110) ? nameWidth : 110;
+        self.nameLabel.width = nameWidth;
+        
+        self.saleTypeBtn.left = self.nameLabel.right + 5;
+        
         self.nameLabel.text = [dic objectForKey:@"username"];
         self.saleTypeBtn.titleLabel.text = [dic objectForKey:@"usertype"];//商家类型
         self.phoneNumLabel.text = [dic objectForKey:@"phone"];
         
+        
+        //调整地址显示长度
+        
+        CGFloat aWidth = [LCWTools widthForText:area font:10];
+        
+        aWidth = (aWidth <= 140)?aWidth : 140;
+        
+        self.addressLabel.width = aWidth;
         self.addressLabel.text = area;
+        
         
         [self.headImage sd_setImageWithURL:[NSURL URLWithString:[dic objectForKey:@"headimage"]] placeholderImage:[UIImage imageNamed:@"defaultFace"]];
         
@@ -234,14 +255,27 @@
 
 - (IBAction)clickToDial:(id)sender {
     
-    NSString *num = [[NSString alloc] initWithFormat:@"tel://%@",self.phoneNumLabel.text];
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:num]];
+    DXAlertView *alert = [[DXAlertView alloc]initWithTitle:@"是否立即拨打电话" contentText:nil leftButtonTitle:@"拨打" rightButtonTitle:@"取消" isInput:NO];
+    [alert show];
+    
+    alert.leftBlock = ^(){
+        NSLog(@"确定");
+        
+        NSString *num = [[NSString alloc] initWithFormat:@"tel://%@",self.phoneNumLabel.text];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:num]];
+    };
+    alert.rightBlock = ^(){
+        NSLog(@"取消");
+        
+    };
+    
 }
 - (IBAction)clickToChat:(id)sender {
     
-    if ([self.phoneNumLabel.text isEqualToString:[[NSUserDefaults standardUserDefaults]stringForKey:USERID]]) {
+    NSString *current = [[NSUserDefaults standardUserDefaults]stringForKey:USERID];
+    if ([userId isEqualToString:current]) {
         
-        [LCWTools alertText:@"本人发布信息"];
+        [LCWTools showDXAlertViewWithText:@"本人发布信息"];
         return;
     }
     [FBChatTool chatWithUserId:userId userName:self.nameLabel.text target:self];

@@ -71,7 +71,7 @@
     
     _page = 1;
     [self prepareUeserInfo];//获取用户信息
-    [self prepareUserCar];//获取用户车源信息
+//    [self prepareUserCar];//获取用户车源信息
     
     [_tableView showRefreshHeader:YES];
     
@@ -85,7 +85,23 @@
 
 - (void)clickToAdd:(id)sender
 {
-    [self addFriend:self.userId];
+    
+    NSString *name = self.guserModel.name ? self.guserModel.name : self.guserModel.fullname;
+    NSString *message = [NSString stringWithFormat:@"是否添加%@为好友",name];
+    
+    DXAlertView *alert = [[DXAlertView alloc]initWithTitle:message contentText:nil leftButtonTitle:@"添加" rightButtonTitle:@"取消" isInput:NO];
+    [alert show];
+    
+    __weak typeof(self)weakSelf = self;
+    alert.leftBlock = ^(){
+        NSLog(@"确定");
+        [weakSelf addFriend:self.guserModel.uid];
+    };
+    alert.rightBlock = ^(){
+        NSLog(@"取消");
+        
+    };
+    
 }
 
 #pragma mark - 请求网络数据
@@ -106,6 +122,15 @@
 
         //商家信息
         self.nameLabel.text = guserModel.name;
+        
+        //调整商家名字显示长度
+        NSString *saleName = guserModel.name;
+        CGFloat nameWidth = [LCWTools widthForText:saleName font:12];
+        nameWidth = (nameWidth <= 110) ? nameWidth : 110;
+        self.nameLabel.width = nameWidth;
+        self.saleTypeBtn.left = self.nameLabel.right + 5;
+        
+        
         self.saleTypeBtn.titleLabel.text = guserModel.usertype;//商家类型
         if ([guserModel.usertype intValue] == 1) {
             self.saleTypeBtn.titleLabel.text = @"个人";
@@ -117,7 +142,19 @@
         NSString *sheng = [FBCityData cityNameForId:[guserModel.province intValue]];
         NSString *shi = [FBCityData cityNameForId:[guserModel.city intValue]];
 
-        self.addressLabel.text = [NSString stringWithFormat:@"%@%@",sheng,shi];
+        
+        //调整地址显示长度
+        
+        NSString *area = [NSString stringWithFormat:@"%@%@",sheng,shi];
+        
+        CGFloat aWidth = [LCWTools widthForText:area font:10];
+        
+        aWidth = (aWidth <= 140)?aWidth : 140;
+        
+        self.addressLabel.width = aWidth;
+        self.addressLabel.text = area;
+        
+        
         [self.headImage sd_setImageWithURL:[NSURL URLWithString:guserModel.headimage] placeholderImage:[UIImage imageNamed:@"detail_test.jpg"]];
     } failBlock:^(NSDictionary *failDic, NSError *erro) {
         NSString *str = [failDic objectForKey:ERROR_INFO];
@@ -378,22 +415,31 @@
 
 #pragma mark - 最下面的view的点击事件
 - (IBAction)clickToDial:(UIButton *)sender {
-    NSString *num = [[NSString alloc] initWithFormat:@"tel://%@",self.phoneNumLabel.text];
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:num]];
+    
+    DXAlertView *alert = [[DXAlertView alloc]initWithTitle:@"是否立即拨打电话" contentText:nil leftButtonTitle:@"拨打" rightButtonTitle:@"取消" isInput:NO];
+    [alert show];
+    
+    alert.leftBlock = ^(){
+        NSLog(@"确定");
+        
+        NSString *num = [[NSString alloc] initWithFormat:@"tel://%@",self.phoneNumLabel.text];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:num]];
+    };
+    alert.rightBlock = ^(){
+        NSLog(@"取消");
+        
+    };
 }
 
-- (IBAction)clickToChat:(UIButton *)sender {
-//    if ([self.phoneNumLabel.text isEqualToString:[[NSUserDefaults standardUserDefaults]stringForKey:XMPP_USERID]]) {
-//        
-//        [LCWTools alertText:@"本人发布信息"];
-//        return;
-//    }
+- (IBAction)clickToChat:(id)sender {
     
-//    FBChatViewController *chat = [[FBChatViewController alloc]init];
-//    chat.chatWithUser = self.phoneNumLabel.text;
-//    chat.chatWithUserName = self.nameLabel.text;
-//    chat.chatUserId = _userId;
-//    [self.navigationController pushViewController:chat animated:YES];
+    NSString *current = [[NSUserDefaults standardUserDefaults]stringForKey:USERID];
+    if ([self.guserModel.uid isEqualToString:current]) {
+        
+        [LCWTools showDXAlertViewWithText:@"本人发布信息"];
+        return;
+    }
+    [FBChatTool chatWithUserId:self.guserModel.uid userName:self.nameLabel.text target:self];
     
 }
 

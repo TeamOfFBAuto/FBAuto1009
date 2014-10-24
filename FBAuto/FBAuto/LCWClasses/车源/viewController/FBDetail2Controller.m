@@ -48,11 +48,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    self.bigBgScroll.contentSize = CGSizeMake(320, self.bigBgScroll.height + 100);
+    self.bigBgScroll.height = iPhone5 ? 568 : 480 - 75;
     
     [self getSingleCarInfoWithId:self.infoId];
-    
-    
     
     if (self.isHiddenUeserInfo) {
         thirdBgView.hidden = YES;
@@ -165,7 +163,7 @@
         
         NSString *detail = [dic objectForKey:@"cardiscrib"];
         
-        detail = [NSString stringWithFormat:@"%@   联系请说是在e车看到的信息，谢谢!",detail];
+        detail = [NSString stringWithFormat:@"%@  联系请说是在e车看到的信息，谢谢!",detail];
         
         weakSelf.car_detail_label.text = detail;
         
@@ -174,10 +172,34 @@
         weakSelf.build_time_label.text = [LCWTools NSStringNotNull:[dic objectForKey:@"build_time"]];
         //商家信息
 
-        weakSelf.nameLabel.text = [dic objectForKey:@"username"];
+        //调整商家名字显示长度
+        
+        NSString *saleName = [dic objectForKey:@"username"];
+        
+        CGFloat nameWidth = [LCWTools widthForText:saleName font:12];
+        
+        nameWidth = (nameWidth <= 110) ? nameWidth : 110;
+        weakSelf.nameLabel.width = nameWidth;
+        
+        weakSelf.nameLabel.text = saleName;
+        weakSelf.saleTypeBtn.left = weakSelf.nameLabel.right + 5;
+
+        
         weakSelf.saleTypeBtn.titleLabel.text = [dic objectForKey:@"usertype"];//商家类型
         weakSelf.phoneNumLabel.text = [LCWTools NSStringNotNull:[dic objectForKey:@"phone"]];
+        
+        //调整地址显示长度
+        
+        NSString *address = [NSString stringWithFormat:@"%@%@",[dic objectForKey:@"province"],[dic objectForKey:@"city"]];
+        CGFloat aWidth = [LCWTools widthForText:address font:10];
+        
+        aWidth = (aWidth <= 140)?aWidth : 140;
+        
+        weakSelf.addressLabel.width = aWidth;
+        
         weakSelf.addressLabel.text = [NSString stringWithFormat:@"%@%@",[dic objectForKey:@"province"],[dic objectForKey:@"city"]];
+        
+        
         NSString *headImage1 = [LCWTools NSStringNotNull:[dic objectForKey:@"headimage"]];
         
         [weakSelf.headImage sd_setImageWithURL:[NSURL URLWithString:headImage1] placeholderImage:[UIImage imageNamed:@"defaultFace"]];
@@ -250,6 +272,9 @@
         
         photosScroll.center = CGPointMake(150, photosScroll.center.y);
     }
+    
+    self.bigBgScroll.contentSize = CGSizeMake(self.view.width,photosScroll.bottom + self.car_detail_label.bottom + 10);
+
 }
 
 
@@ -344,14 +369,26 @@
 
 - (IBAction)clickToDial:(id)sender {
     
-    NSString *num = [[NSString alloc] initWithFormat:@"tel://%@",self.phoneNumLabel.text];
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:num]];
+    DXAlertView *alert = [[DXAlertView alloc]initWithTitle:@"是否立即拨打电话" contentText:nil leftButtonTitle:@"拨打" rightButtonTitle:@"取消" isInput:NO];
+    [alert show];
+    
+    alert.leftBlock = ^(){
+        NSLog(@"确定");
+        
+        NSString *num = [[NSString alloc] initWithFormat:@"tel://%@",self.phoneNumLabel.text];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:num]];
+    };
+    alert.rightBlock = ^(){
+        NSLog(@"取消");
+        
+    };
 }
 - (IBAction)clickToChat:(id)sender {
     
-    if ([self.phoneNumLabel.text isEqualToString:[[NSUserDefaults standardUserDefaults]stringForKey:USERID]]) {
+    NSString *current = [[NSUserDefaults standardUserDefaults]stringForKey:USERID];
+    if ([userId isEqualToString:current]) {
         
-        [LCWTools alertText:@"本人发布信息"];
+        [LCWTools showDXAlertViewWithText:@"本人发布信息"];
         return;
     }
     [FBChatTool chatWithUserId:userId userName:self.nameLabel.text target:self];

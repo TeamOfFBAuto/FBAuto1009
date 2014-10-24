@@ -39,7 +39,7 @@
         
         frontV = frontView;
         
-        sumHeight = self.height - 49 - frontView.bottom - KTOP;
+        sumHeight = self.height - 49 - KTOP - 44 - 20 - 40;
         
         table = [[UITableView alloc]initWithFrame:CGRectMake(KLEFT, arrowImage.bottom, self.width - 2 * KLEFT, sumHeight) style:UITableViewStylePlain];
         
@@ -75,7 +75,7 @@
         CGRect aFrame = table.frame;
         
         if (style == Menu_Color_Out) {
-           aFrame.size.height = 40 * dataArray.count - 49 - 20;
+           aFrame.size.height = 40 * dataArray.count - 49 - 20 - 64 - 20;
         }else
         {
            aFrame.size.height = 40 * dataArray.count;

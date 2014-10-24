@@ -92,7 +92,7 @@
         }
     }
     sqlite3_finalize(stmt);
-    return @"未知地区";
+    return @"";
 }
 
 + (int)cityIdForName:(NSString *)cityName//根据城市名获取id

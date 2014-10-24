@@ -15,7 +15,7 @@
 {
     UITableView *_tableView;//主tableview
     
-    UIButton *_shangquanBtn;//商圈btn
+    UIButton *_shangquanBtn;//车友btn
     UIButton *_xiaoxiBtn;//消息btn
     UIButton *_tongzhiBtn;//通知btn
     

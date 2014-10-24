@@ -48,7 +48,7 @@
     if (theIndexPath.row == 0){//公司名 省份
         //图片
         UIImageView *imaV = [[UIImageView alloc]initWithFrame:CGRectMake(10, 10, 45, 45)];
-        imaV.backgroundColor = [UIColor grayColor];
+        imaV.backgroundColor = [UIColor whiteColor];
         self.touxiangImageView = imaV;
         [self.contentView addSubview:imaV];
         
@@ -147,14 +147,14 @@
         //车名
         UILabel *tLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, 13, 216, 16)];
         
-        //tLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:16];
+        tLabel.font = [UIFont systemFontOfSize:14];
         
         self.carNameLabel = tLabel;
         [self.contentView addSubview:tLabel];
         
         //价钱
         UILabel *pLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(tLabel.frame)+5, 13, 80, 16)];
-        pLabel.font = [UIFont systemFontOfSize:15];
+        pLabel.font = [UIFont systemFontOfSize:14];
         pLabel.textAlignment = NSTextAlignmentRight;
         pLabel.textColor = [UIColor redColor];
         self.carPriceLabel = pLabel;
@@ -220,7 +220,7 @@
     
     self.jianjieLabel.text = userModel.intro;
     [self.jianjieLabel setMatchedFrame4LabelWithOrigin:CGPointMake(45, 10) width:266];
-    [self.touxiangImageView sd_setImageWithURL:[NSURL URLWithString:userModel.headimage]];
+    [self.touxiangImageView sd_setImageWithURL:[NSURL URLWithString:userModel.headimage] placeholderImage:[UIImage imageNamed:@"defaultFace"]];
     
 }
 

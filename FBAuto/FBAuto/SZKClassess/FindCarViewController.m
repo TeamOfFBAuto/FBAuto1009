@@ -37,7 +37,7 @@
     Menu_Advanced *menu_Advanced;//高级
     Menu_Normal *menu_Standard;//版本
     Menu_Advanced *menu_Area;//地区
-    Menu_Normal *menu_Timelimit;//定金
+    Menu_Normal *menu_Timelimit;//外观
     Menu_Car *menu_Car;//车型选择
     
     UIView *menuBgView;
