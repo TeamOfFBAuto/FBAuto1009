@@ -62,6 +62,8 @@
 #define SinaAppSecret @"7379cf0aa245ba45a66cc7c9ae9b1dba"
 
 #define QQAPPID @"1101950003" //十六进制:41AE6C33; 生成方法:echo 'ibase=10;obase=16;1101950003'|bc
+#define QQAPPSECRECT @"JAtVGEGeQWk9icsK"
+
 #define WXAPPID @"wx0ad0d507a8933b9d"
 
 #define RedirectUrl @"http://www.sina.com"
@@ -340,6 +342,12 @@
     //添加微信应用 注册网址 http://open.weixin.qq.com
     [ShareSDK connectWeChatWithAppId:WXAPPID
                            wechatCls:[WXApi class]];
+    
+    //添加QQ空间应用  注册网址  http://connect.qq.com/intro/login/
+    [ShareSDK connectQZoneWithAppKey:QQAPPID
+                           appSecret:QQAPPSECRECT
+                   qqApiInterfaceCls:[QQApiInterface class]
+                     tencentOAuthCls:[TencentOAuth class]];
 }
 
 

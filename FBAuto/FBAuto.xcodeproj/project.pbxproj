@@ -21,6 +21,7 @@
 		1336BC24196B91F70011B4D9 /* NSString+Emoji.m in Sources */ = {isa = PBXBuildFile; fileRef = 1336BC1F196B91F70011B4D9 /* NSString+Emoji.m */; };
 		1336BC25196B91F70011B4D9 /* SJAvatarBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = 1336BC22196B91F70011B4D9 /* SJAvatarBrowser.m */; };
 		1336BC2B196B93CC0011B4D9 /* FBChatImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1336BC2A196B93CC0011B4D9 /* FBChatImage.m */; };
+		133CFF0219FA630800CF9557 /* QZoneConnection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 133CFF0119FA630800CF9557 /* QZoneConnection.framework */; };
 		133DF6A2197CE7F9006BF9ED /* FBFindCarDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 133DF6A0197CE7F9006BF9ED /* FBFindCarDetailController.m */; };
 		133DF6A3197CE7F9006BF9ED /* FBFindCarDetailController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 133DF6A1197CE7F9006BF9ED /* FBFindCarDetailController.xib */; };
 		1351C5C9197A4F8E000F7391 /* FBSearchResultController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1351C5C8197A4F8E000F7391 /* FBSearchResultController.m */; };
@@ -67,6 +68,7 @@
 		13896C1419E53B75008BB77C /* FBChatTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 13896C1319E53B75008BB77C /* FBChatTool.m */; };
 		13896C1619E54B55008BB77C /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13896C1519E54B55008BB77C /* CoreVideo.framework */; };
 		13896C1819E54BC1008BB77C /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13896C1719E54BC1008BB77C /* CoreMedia.framework */; };
+		13896CCC19FA5ADD00482BBC /* qqzone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13896CCB19FA5ADD00482BBC /* qqzone@2x.png */; };
 		138B49F0196552F500B974A5 /* FBFriendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 138B49EE196552F500B974A5 /* FBFriendCell.m */; };
 		138B49F1196552F500B974A5 /* FBFriendCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 138B49EF196552F500B974A5 /* FBFriendCell.xib */; };
 		138B4A0619664E9800B974A5 /* FBFriend2Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 138B4A0419664E9800B974A5 /* FBFriend2Cell.m */; };
@@ -466,6 +468,7 @@
 		1336BC22196B91F70011B4D9 /* SJAvatarBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SJAvatarBrowser.m; sourceTree = "<group>"; };
 		1336BC29196B93CC0011B4D9 /* FBChatImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBChatImage.h; sourceTree = "<group>"; };
 		1336BC2A196B93CC0011B4D9 /* FBChatImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBChatImage.m; sourceTree = "<group>"; };
+		133CFF0119FA630800CF9557 /* QZoneConnection.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = QZoneConnection.framework; sourceTree = "<group>"; };
 		133DF69F197CE7F9006BF9ED /* FBFindCarDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBFindCarDetailController.h; sourceTree = "<group>"; };
 		133DF6A0197CE7F9006BF9ED /* FBFindCarDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBFindCarDetailController.m; sourceTree = "<group>"; };
 		133DF6A1197CE7F9006BF9ED /* FBFindCarDetailController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FBFindCarDetailController.xib; sourceTree = "<group>"; };
@@ -541,6 +544,7 @@
 		13896C1319E53B75008BB77C /* FBChatTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBChatTool.m; sourceTree = "<group>"; };
 		13896C1519E54B55008BB77C /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		13896C1719E54BC1008BB77C /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		13896CCB19FA5ADD00482BBC /* qqzone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "qqzone@2x.png"; sourceTree = "<group>"; };
 		138B49ED196552F500B974A5 /* FBFriendCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBFriendCell.h; sourceTree = "<group>"; };
 		138B49EE196552F500B974A5 /* FBFriendCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBFriendCell.m; sourceTree = "<group>"; };
 		138B49EF196552F500B974A5 /* FBFriendCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FBFriendCell.xib; sourceTree = "<group>"; };
@@ -1020,6 +1024,7 @@
 				138074F8196D47FD00AD3D03 /* libsqlite3.0.dylib in Frameworks */,
 				13C7172719824B5A008F7B42 /* SinaWeiboConnection.framework in Frameworks */,
 				13C7172C19824B5A008F7B42 /* ShareSDKCoreService.framework in Frameworks */,
+				133CFF0219FA630800CF9557 /* QZoneConnection.framework in Frameworks */,
 				190BFD41195AA0FB0098E0F4 /* CoreGraphics.framework in Frameworks */,
 				190BFD45195AA0FB0098E0F4 /* CoreData.framework in Frameworks */,
 				13C7173219824B5A008F7B42 /* ShareSDK.framework in Frameworks */,
@@ -1443,6 +1448,7 @@
 		13C7170B19824B5A008F7B42 /* Connection */ = {
 			isa = PBXGroup;
 			children = (
+				133CFF0119FA630800CF9557 /* QZoneConnection.framework */,
 				13C7170C19824B5A008F7B42 /* QQConnection.framework */,
 				13C7170D19824B5A008F7B42 /* SinaWeiboConnection.framework */,
 				13C7170E19824B5A008F7B42 /* WeChatConnection.framework */,
@@ -1719,6 +1725,7 @@
 		13D5DFD21961758E00804835 /* FBAuto_share */ = {
 			isa = PBXGroup;
 			children = (
+				13896CCB19FA5ADD00482BBC /* qqzone@2x.png */,
 				13D5DFD31961758E00804835 /* haoyou90_70@2x.png */,
 				13D5DFD41961758E00804835 /* pengyouquan72_7222x.png */,
 				13D5DFD51961758E00804835 /* QQ72_72@2x.png */,
@@ -2435,6 +2442,7 @@
 				13C7172E19824B5A008F7B42 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				13D5E0091961758E00804835 /* haoyou_liaotian46_46@2x.png in Resources */,
 				138B4AAA1966A4BD00B974A5 /* face20.png in Resources */,
+				13896CCC19FA5ADD00482BBC /* qqzone@2x.png in Resources */,
 				13D5E0171961758E00804835 /* jaintou_right14_26@2x.png in Resources */,
 				138B4AD91966A4BD00B974A5 /* face63.gif in Resources */,
 				13D5DFDA1961758E00804835 /* haoyoukuang_bg600_120@2x.png in Resources */,

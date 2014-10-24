@@ -480,7 +480,7 @@
                 [LCWTools shareText:contentWithUrl title:weakSelf.car_modle_label.text image:aImage linkUrl:shareUrl ShareType:ShareTypeSinaWeibo];
             }
                 break;
-            case 4:
+            case 100:
             {
                 NSLog(@"站内好友");
                 
@@ -492,6 +492,13 @@
                 friend.shareContent = @{@"text": contentText,@"infoId":infoId,SHARE_TYPE_KEY:SHARE_CARSOURCE};
                 [self.navigationController pushViewController:friend animated:YES];
                 
+            }
+                break;
+            case 4:
+            {
+                NSLog(@"QQ空间");
+                
+                [LCWTools shareText:contentWithUrl title:weakSelf.car_modle_label.text image:aImage linkUrl:shareUrl ShareType:ShareTypeQQSpace];
             }
                 break;
                 

@@ -39,8 +39,8 @@
         
 //        items = @[@"微信",@"QQ",@"朋友圈",@"微博",@"站内好友"];
         
-        items = @[@"微信",@"QQ",@"朋友圈",@"微博"];
-        NSArray *images = @[@"weixin72_72",@"QQ72_72",@"pengyouquan72_7222x",@"weibo90_72",@"haoyou90_70"];
+        items = @[@"微信",@"QQ",@"朋友圈",@"微博",@"QQ空间"];
+        NSArray *images = @[@"weixin72_72",@"QQ72_72",@"pengyouquan72_7222x",@"weibo90_72",@"qqzone"];
         
         CGFloat left = 96 / 2.f;
         CGFloat aHeight = 36.f;
