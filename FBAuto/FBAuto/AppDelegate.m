@@ -162,6 +162,30 @@
     return YES;
 }
 
+
+- (void)test
+{
+    NSString *newStr = @"http://61.4.185.48:81/g/";
+    
+    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:newStr]];
+
+    [request setResponseEncoding:NSUTF8StringEncoding];
+    __weak typeof(ASIHTTPRequest *)weakRequest = request;
+    [request startAsynchronous];
+    [request setCompletionBlock:^{
+        
+        NSLog(@"----->hahha %@",weakRequest.responseString);
+        
+    }];
+    
+    [request setFailedBlock:^{
+        
+        NSLog(@"----->hahha %@  %@",weakRequest.responseString,weakRequest.error);
+        
+    }];
+    
+}
+
 #pragma mark - 创建视图
 
 - (UITabBarController *)preprareViewControllers

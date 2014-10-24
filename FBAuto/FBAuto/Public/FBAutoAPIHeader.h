@@ -30,6 +30,9 @@
 
 #define LOGIN_SUCCESS @"LOGIN_SUCCESS" //登录成功
 
+#define LOGIN_PHONE @"LOGIN_PHONE"//登录手机号
+#define LOGIN_PASS @"LOGIN_PASS"//登录密码
+
 
 //保存用户信息
 

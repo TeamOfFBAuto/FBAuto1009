@@ -135,8 +135,8 @@
 //更新筛选条件及列表内容
 - (void)updateAllParams:(NSNotification *)notification
 {
-    if ((![_car isEqualToString:@"000000000"])|| _spot_future || _color_in || _color_out || _carfrom || _usertype || _province || _city || (_searchKeyword.length > 0)) {
-        
+//    if ((![_car isEqualToString:@"000000000"])|| _spot_future || _color_in || _color_out || _carfrom || _usertype || _province || _city || (_searchKeyword.length > 0)) {
+    
         NSLog(@"更新");
         
         _searchKeyword = nil;
@@ -146,10 +146,10 @@
         [self clearSearchCondition];
         
         [_table showRefreshHeader:NO];
-    }else
-    {
-        NSLog(@"不更新");
-    }
+//    }else
+//    {
+//        NSLog(@"不更新");
+//    }
 }
 
 

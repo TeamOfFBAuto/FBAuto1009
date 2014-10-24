@@ -58,6 +58,9 @@
     self.gloginView = gloginView;
     [self.view addSubview:gloginView];
     
+    gloginView.userTf.text = [LCWTools cacheForKey:LOGIN_PHONE];
+    gloginView.passWordTf.text = [LCWTools cacheForKey:LOGIN_PASS];
+    
     
     __weak typeof (self)bself = self;
     __weak typeof (gloginView)bgloginView = gloginView;
@@ -112,6 +115,8 @@
     
     //保存用户手机号
     [[NSUserDefaults standardUserDefaults]setObject:name forKey:USERPHONENUMBER];
+    
+    [LCWTools cache:name ForKey:LOGIN_PHONE];
     
     NSLog(@"登录请求接口======%@",str);
     
@@ -190,6 +195,8 @@
             [defaults setObject:pass forKey:USERPASSWORD];
             
             [defaults setObject:loginToken forKey:RONGCLOUD_TOKEN];
+            
+            [LCWTools cache:pass ForKey:LOGIN_PASS];
             
             //mwnrOTV2cDrNDC3SoyiHZfLyOKy7yy366rmw6z+PnBjpWE9XUQNU2Ofso9zhZOEI5WvfXMGOZU/pD+IdsMsjqQ==
             //6YJbgRceE4dxU5fJGoRPP/LyOKy7yy366rmw6z+PnBjpWE9XUQNU2CFs8N6Ox5PsKlHh5ZwuAuLpD+IdsMsjqQ==
