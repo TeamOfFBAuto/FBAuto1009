@@ -26,7 +26,7 @@
         bgView = [[UIView alloc]init];
         [self addSubview:bgView];
         
-        datePicker = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, 44, 320.0 + 100, 216)];
+        datePicker = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, 44, 220.0, 216)];
         datePicker.backgroundColor = [UIColor whiteColor];
         datePicker.datePickerMode = UIDatePickerModeDate;
         datePicker.date = [NSDate date];
@@ -44,19 +44,34 @@
         [finishButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         finishButton.frame = CGRectMake(320 - 50 - 10, 0, 50, 44);
         [finishButton addTarget:self action:@selector(clickDoneButton:) forControlEvents:UIControlEventTouchUpInside];
+        finishButton.tag = 100;
         [toolsBarView addSubview:finishButton];
         
         
         UIButton *cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [cancelButton setTitle:@"不填写" forState:UIControlStateNormal];
         [cancelButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        cancelButton.frame = CGRectMake(10, 0, 50, 44);
+        cancelButton.frame = CGRectMake(10, 0, 60, 44);
         [cancelButton addTarget:self action:@selector(clickDoneButton:) forControlEvents:UIControlEventTouchUpInside];
+        cancelButton.tag = 101;
         [toolsBarView addSubview:cancelButton];
         
         UIImageView *aImage = [[UIImageView alloc]initWithFrame:CGRectMake(finishButton.right, 0, 1, 44)];
         [aImage setImage:[UIImage imageNamed:@"topSeg.png"]];
         [toolsBarView addSubview:aImage];
+        
+        
+        UIView *mask = [[UIView alloc]initWithFrame:CGRectMake((self.width - 50) / 2.f, 0, 50.f, datePicker.height)];
+        mask.backgroundColor = [UIColor whiteColor];
+        [datePicker addSubview:mask];
+        
+        UIView *line1 = [[UIView alloc]initWithFrame:CGRectMake(0, datePicker.height / 2.f - 22 + 4 + 0.5, self.width, 0.5)];
+        line1.backgroundColor = [UIColor colorWithHexString:@"cdcdcd"];
+        [mask addSubview:line1];
+        
+        UIView *line2 = [[UIView alloc]initWithFrame:CGRectMake(0, datePicker.height / 2.f - 22 + 4 + 35, self.width, 0.5)];
+        line2.backgroundColor = [UIColor colorWithHexString:@"cdcdcd"];
+        [mask addSubview:line2];
         
         
         bgView.frame = CGRectMake(0, self.height, 320, datePicker.height + toolsBarView.height);
@@ -93,7 +108,7 @@
     
     [outputFormatter setLocale:[NSLocale currentLocale]];
     
-    [outputFormatter setDateFormat:@"yyyy.MM.dd"];
+    [outputFormatter setDateFormat:@"yyyy.MM"];
     
     NSString *dateStr = [outputFormatter stringFromDate:date];
 
@@ -102,8 +117,16 @@
 
 - (void)clickDoneButton:(UIButton *)sender
 {
-    if (dateBlock) {
-        dateBlock([self selectTime:datePicker.date]);
+    if (sender.tag == 100) {
+        
+        if (dateBlock) {
+            dateBlock([self selectTime:datePicker.date]);
+        }
+    }else if (sender.tag == 101){
+        
+        if (dateBlock) {
+            dateBlock(@"不填写");
+        }
     }
     
     [self hidden];

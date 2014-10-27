@@ -380,9 +380,9 @@
     
     if(status == NotReachable)
     {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"网络连接异常" message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
-        
-        [alert show];
+//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"网络连接异常" message:nil delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil];
+//        
+//        [alert show];
         
         self.isReachable = NO;
         
@@ -469,7 +469,7 @@
     
     [self loginRongCloud];
     
-    int number = [[RCIM sharedRCIM] getTotalUnreadCount];;
+    int number = [[RCIM sharedRCIM] getTotalUnreadCount];
     [self updateTabbarNumber:number];
     
 }

@@ -20,6 +20,8 @@
     NSArray *firstLetterArray;//分组首字母数据brand
     
     NSDictionary *provinceDic;//存放省份
+    
+    NSString *selectColor_row;//颜色选择id
 
 }
 
@@ -70,13 +72,13 @@
         case Data_Color_Out:
         {
             title = @"外观颜色";
-            self.dataArray = self.haveLimit ? MENU_HIGHT_OUTSIDE_CORLOR : MENU_HIGHT_OUTSIDE_CORLOR_2;
+            self.dataArray = self.haveLimit ? MENU_HIGHT_OUTSIDE_CORLOR_CUSTOM : MENU_HIGHT_OUTSIDE_CORLOR_2;
         }
             break;
         case Data_Color_In:
         {
             title = @"内饰颜色";
-            self.dataArray = self.haveLimit ? MENU_HIGHT_INSIDE_CORLOR : MENU_HIGHT_INSIDE_CORLOR_2;
+            self.dataArray = self.haveLimit ? MENU_HIGHT_INSIDE_CORLOR_CUSTOM : MENU_HIGHT_INSIDE_CORLOR_2;
         }
             break;
         case Data_Car_Type:
@@ -155,42 +157,59 @@
 {
     UIAlertView *alert = [[UIAlertView alloc]initWithTitle:aTitle message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
     alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+    alert.tag = 100;
     [alert show];
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    
-    if (buttonIndex == 1) {
-        
-        UITextField *TF = [alertView textFieldAtIndex:0];
-        
-        if (TF.text.length == 0) {
+    if (alertView.tag == 100) {
+        if (buttonIndex == 1) {
             
-            [self createNewConditionStyle:self.dataStyle title:@"内容不能为空"];
+            UITextField *TF = [alertView textFieldAtIndex:0];
             
-            return;
+            if (TF.text.length == 0) {
+                
+                [self createNewConditionStyle:self.dataStyle title:@"内容不能为空"];
+                
+                return;
+            }
+            
+            
+            if (self.dataStyle == Data_Car_Type) {
+                
+                NSString *car = [NSString stringWithFormat:@"%@%@%@",self.brandId,@"000",@"000"];
+                selectBlock(Data_Car_Type_Custom,TF.text,car);
+                
+            }else if (self.dataStyle == Data_Car_Style){
+                
+                NSString *car = [NSString stringWithFormat:@"%@%@%@",self.brandId,self.typeId,@"000"];
+                selectBlock(Data_Car_Style_Custom,TF.text,car);
+                
+            }else if (self.dataStyle == Data_Color_In || self.dataStyle == Data_Color_Out){
+                
+                
+                selectBlock(self.dataStyle,TF.text,selectColor_row);
+            }
+            
+            if (self.rootVC) {
+                [self.navigationController popToViewController:self.rootVC animated:YES];
+            }else
+            {
+                [self.navigationController popToRootViewControllerAnimated:YES];
+            }
         }
 
+    }else
+    {
         
-        if (self.dataStyle == Data_Car_Type) {
-            
-            NSString *car = [NSString stringWithFormat:@"%@%@%@",self.brandId,@"000",@"000"];
-            selectBlock(Data_Car_Type_Custom,TF.text,car);
-            
-        }else if (self.dataStyle == Data_Car_Style){
-            
-            NSString *car = [NSString stringWithFormat:@"%@%@%@",self.brandId,self.typeId,@"000"];
-            selectBlock(Data_Car_Style_Custom,TF.text,car);
-        }
-        
-        if (self.rootVC) {
-            [self.navigationController popToViewController:self.rootVC animated:YES];
-        }else
-        {
-            [self.navigationController popToRootViewControllerAnimated:YES];
-        }
     }
+    
+}
+
+- (void)createNewCustomColor
+{
+    
 }
 
 
@@ -626,8 +645,44 @@
     
     NSString *select = [_dataArray objectAtIndex:indexPath.row];
     
+    int row;
     
-    int row = self.haveLimit ? (int)indexPath.row : (int)indexPath.row + 1;
+    if (!self.haveLimit) { //有不限
+        
+        if (indexPath.row == 0) {
+            
+            row = 11;//代表自定义
+            
+            selectColor_row = [NSString stringWithFormat:@"%d",11];
+            
+            [self createNewConditionStyle:self.dataStyle title:@"自定义颜色"];
+            
+            return;
+            
+        }else
+        {
+            row = (int)indexPath.row;
+        }
+        
+    }else //有不限选项
+    {
+        if (indexPath.row == 1) {
+            
+            row = 11;//自定义
+            selectColor_row = [NSString stringWithFormat:@"%d",11];
+            
+            [self createNewConditionStyle:self.dataStyle title:@"自定义颜色"];
+            
+            return;
+            
+        }else if(indexPath.row > 1)
+        {
+            row = (int)indexPath.row - 1;
+        }else
+        {
+            row = (int)indexPath.row;
+        }
+    }
     
     selectBlock(self.dataStyle,select,[NSString stringWithFormat:@"%d",row]);
     

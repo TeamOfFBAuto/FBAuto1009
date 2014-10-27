@@ -70,6 +70,10 @@
     int _car_custom;//（1自定义车型 0非自定义车型）
     
     NSString *_carname_custom;//自定义车型名称部分
+    
+    NSString *_color_in_custom;//自定义内饰颜色
+    
+    NSString *_color_out_custom;//自定义外观颜色
 
     
     MBProgressHUD *loadingHub;
@@ -178,13 +182,18 @@
     
     if (self.actionStyle == Action_Add) {
         
-        url = [NSString stringWithFormat:@"%@&authkey=%@&car=%@&spot_future=%d&color_out=%d&color_in=%d&carfrom=%d&cardiscrib=%@&price=%@&build_time=%@&car_custom=%d&carname_custom=%@&photo=%@",FBAUTO_CARSOURCE_ADD_SOURCE,[GMAPI getAuthkey],_car,_spot_future,_color_out,_color_in,_carfrom,descrip,priceTF.text,build_time,_car_custom,_carname_custom,_photo];
+//        url = [NSString stringWithFormat:@"%@&authkey=%@&car=%@&spot_future=%d&color_out=%d&color_in=%d&carfrom=%d&cardiscrib=%@&price=%@&build_time=%@&car_custom=%d&carname_custom=%@&photo=%@",FBAUTO_CARSOURCE_ADD_SOURCE,[GMAPI getAuthkey],_car,_spot_future,_color_out,_color_in,_carfrom,descrip,priceTF.text,build_time,_car_custom,_carname_custom,_photo];
+       
+        //添加自定义颜色
+        url = [NSString stringWithFormat:@"%@&authkey=%@&car=%@&spot_future=%d&color_out=%d&color_in=%d&carfrom=%d&cardiscrib=%@&price=%@&build_time=%@&car_custom=%d&carname_custom=%@&photo=%@&color_out_z=%@&color_in_z=%@",FBAUTO_CARSOURCE_ADD_SOURCE,[GMAPI getAuthkey],_car,_spot_future,_color_out,_color_in,_carfrom,descrip,priceTF.text,build_time,_car_custom,_carname_custom,_photo,_color_out_custom,_color_in_custom];
         
         NSLog(@"发布车源 %@",url);
         
     }else if (self.actionStyle == Action_Edit)
     {
-        url = [NSString stringWithFormat:@"%@&authkey=%@&cid=%@&car=%@&spot_future=%d&color_out=%d&color_in=%d&carfrom=%d&cardiscrib=%@&price=%@&build_time=%@&car_custom=%d&carname_custom=%@&photo=%@",FBAUTO_CARSOURCE_EDIT,[GMAPI getAuthkey],self.infoId,_car,_spot_future,_color_out,_color_in,_carfrom,descrip,priceTF.text,build_time,_car_custom,_carname_custom,_photo];
+//        url = [NSString stringWithFormat:@"%@&authkey=%@&cid=%@&car=%@&spot_future=%d&color_out=%d&color_in=%d&carfrom=%d&cardiscrib=%@&price=%@&build_time=%@&car_custom=%d&carname_custom=%@&photo=%@",FBAUTO_CARSOURCE_EDIT,[GMAPI getAuthkey],self.infoId,_car,_spot_future,_color_out,_color_in,_carfrom,descrip,priceTF.text,build_time,_car_custom,_carname_custom,_photo];
+        
+        url = [NSString stringWithFormat:@"%@&authkey=%@&cid=%@&car=%@&spot_future=%d&color_out=%d&color_in=%d&carfrom=%d&cardiscrib=%@&price=%@&build_time=%@&car_custom=%d&carname_custom=%@&photo=%@&color_out_z=%@&color_in_z=%@",FBAUTO_CARSOURCE_EDIT,[GMAPI getAuthkey],self.infoId,_car,_spot_future,_color_out,_color_in,_carfrom,descrip,priceTF.text,build_time,_car_custom,_carname_custom,_photo,_color_out_custom,_color_in_custom];
         
         NSLog(@"修改车源 %@",url);
     }
@@ -483,7 +492,7 @@
         Section_Button *btn = (Section_Button *)[secondBgView viewWithTag:105];
         btn.contentLabel.text = dateString;
         
-        build_time = dateString;
+        build_time = [dateString isEqualToString:@"不填写"] ? @"" : dateString;
     }];
 }
 
@@ -828,11 +837,15 @@
             case Data_Color_Out:
             {
                 _color_out = [paramId intValue];
+                
+                _color_out_custom = paramName;
             }
                 break;
             case Data_Color_In:
             {
                 _color_in = [paramId intValue];
+                
+                _color_in_custom = paramName;
             }
                 break;
                 

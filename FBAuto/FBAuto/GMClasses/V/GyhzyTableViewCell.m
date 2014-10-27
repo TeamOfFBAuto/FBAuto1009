@@ -238,10 +238,17 @@
     
     //判断 其他 后台返回空得的情况
     if (car.color_in.length>0) {
-        color_in = [car.color_in substringWithRange:NSMakeRange(0, 1)];//内饰颜色
+        
+        if ([car.color_in hasSuffix:@"色"]) {
+            color_in = [car.color_in substringWithRange:NSMakeRange(0, 1)];//内饰颜色
+        }
+        
     }
     if (car.color_out.length>0) {
-         color_out = [car.color_out substringWithRange:NSMakeRange(0, 1)];//外观颜色
+        
+        if ([car.color_out hasSuffix:@"色"]) {
+            color_out = [car.color_out substringWithRange:NSMakeRange(0, 1)];//外观颜色
+        }
     }
     
     self.carClabel1.text = [NSString stringWithFormat:@"%@%@",carfrom,spot_future];

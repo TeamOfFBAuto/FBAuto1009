@@ -348,7 +348,7 @@
     [self.view addSubview:menuBgView];
     
 //    NSArray *items = @[@"车型",@"版本",@"地区",@"定金",@"更多"];
-    NSArray *items = @[@"车型",@"版本",@"地区",@"外观",@"更多"];
+    NSArray *items = @[@"车型",@"版本",@"地区",@"外观",@"高级"];
     
     CGFloat everyWidth = (320 - 4) / items.count;//每个需要的宽度
     CGFloat needWidth = 0.0;
@@ -366,14 +366,14 @@
         [menuBgView addSubview:menuBtn];
         
         if (i == items.count - 1) {
-            menuBtn.arrowImageView.image = [UIImage imageNamed:@"jiantou_bai10_18"];
-            menuBtn.arrowImageView.height = 8;
-            menuBtn.arrowImageView.top -= 2;
-            menuBtn.backgroundColor = [UIColor colorWithHexString:@"a0a0a0"];
-            menuBtn.normalColor = @"a0a0a0";
+//            menuBtn.arrowImageView.image = [UIImage imageNamed:@"jiantou_bai10_18"];
+//            menuBtn.arrowImageView.height = 8;
+//            menuBtn.arrowImageView.top -= 2;
+//            menuBtn.backgroundColor = [UIColor colorWithHexString:@"a0a0a0"];
+//            menuBtn.normalColor = @"a0a0a0";
         }else
         {
-            menuBtn.arrowImageView.hidden = YES;
+//            menuBtn.arrowImageView.hidden = YES;
         }
         
         

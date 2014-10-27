@@ -105,6 +105,8 @@
     
     BOOL loginSuccess = [[NSUserDefaults standardUserDefaults]boolForKey:LOGIN_SUCCESS];
     
+//    loginSuccess = YES;
+    
     if (!loginSuccess) {
         
         [self presentViewController:[[UINavigationController alloc]initWithRootViewController:[[GloginViewController alloc]init]] animated:NO completion:^{

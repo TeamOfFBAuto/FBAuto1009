@@ -41,7 +41,23 @@
     // Configure the view for the selected state
 }
 
-
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    NSLog(@"textField %d",textField.tag);
+    
+    NSInteger aTag = textField.tag;
+    
+    [textField resignFirstResponder];
+    
+    UITextField *next = (UITextField *)[self viewWithTag:aTag + 1];
+    [next becomeFirstResponder];
+    
+    if (aTag == 15 || aTag == 8 + 20) {
+        [textField resignFirstResponder];
+    }
+    
+    return YES;
+}
 
 //根据type加载控件
 -(void)configViewWithType:(NSString *)theType{
@@ -97,7 +113,7 @@
             UITextField *contentTf = [[UITextField alloc]initWithFrame:CGRectMake(55, 20+i*55, 230, 15)];
             contentTf.autocapitalizationType = UITextAutocapitalizationTypeNone;
             contentTf.font = [UIFont systemFontOfSize:15];
-            contentTf.tag = 10+i;//根据tag判读是哪个tf
+            contentTf.tag = 10 + i;//根据tag判读是哪个tf
             contentTf.delegate = self;
             NSLog(@"%@",NSStringFromCGRect(contentTf.frame));
             if (i == 3) {//重复密码
@@ -213,7 +229,7 @@
             contentTf.autocapitalizationType = UITextAutocapitalizationTypeNone;
             contentTf.font = [UIFont systemFontOfSize:15];
             contentTf.delegate = self;
-            contentTf.tag = 20+i;//根据tag判读是哪个tf
+            contentTf.tag = 20 + i;//根据tag判读是哪个tf
             NSLog(@"%@",NSStringFromCGRect(contentTf.frame));
             if (i == 5 || i ==0 || i==1 || i == 3) {//重复密码 公司全称 公司简介
                 contentTf.frame = CGRectMake(85, 20+i*55, 200, 15);

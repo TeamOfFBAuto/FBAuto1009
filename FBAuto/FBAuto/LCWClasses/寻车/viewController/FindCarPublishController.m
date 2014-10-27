@@ -36,6 +36,10 @@
     int _car_custom;//（1自定义车型 0非自定义车型）
     
     NSString *_carname_custom;//自定义车型名称部分
+    
+    NSString *_color_in_custom;//自定义内饰颜色
+    
+    NSString *_color_out_custom;//自定义外观颜色
 }
 
 @end
@@ -338,11 +342,15 @@
             case Data_Color_Out:
             {
                 _color_out = [paramId intValue];
+                
+                _color_out_custom = paramName;
             }
                 break;
             case Data_Color_In:
             {
                 _color_in = [paramId intValue];
+                
+                _color_in_custom = paramName;
             }
                 break;
             case Data_Area:
@@ -431,13 +439,23 @@
     
     if (self.actionStyle == Find_Action_Add) {
         
+//        url = [NSString stringWithFormat:
+//               @"%@&authkey=%@&province=%d&city=%d&car=%@&spot_future=%d&color_out=%d&color_in=%d&deposit=%d&carfrom=%d&cardiscrib=%@&car_custom=%d&carname_custom=%@",FBAUTO_FINDCAR_PUBLISH,[GMAPI getAuthkey],_province,_city,_car,_spot_future,_color_out,_color_in,_deposit,_carfrom,descrip,_car_custom,_carname_custom];
+       
+        
+        //添加颜色自定义
         url = [NSString stringWithFormat:
-               @"%@&authkey=%@&province=%d&city=%d&car=%@&spot_future=%d&color_out=%d&color_in=%d&deposit=%d&carfrom=%d&cardiscrib=%@&car_custom=%d&carname_custom=%@",FBAUTO_FINDCAR_PUBLISH,[GMAPI getAuthkey],_province,_city,_car,_spot_future,_color_out,_color_in,_deposit,_carfrom,descrip,_car_custom,_carname_custom];
+               @"%@&authkey=%@&province=%d&city=%d&car=%@&spot_future=%d&color_out=%d&color_in=%d&deposit=%d&carfrom=%d&cardiscrib=%@&car_custom=%d&carname_custom=%@&color_out_z=%@&color_in_z=%@",FBAUTO_FINDCAR_PUBLISH,[GMAPI getAuthkey],_province,_city,_car,_spot_future,_color_out,_color_in,_deposit,_carfrom,descrip,_car_custom,_carname_custom,_color_out_custom,_color_in_custom];
         
     }else if (self.actionStyle == Find_Action_Edit) {
         
+//        url = [NSString stringWithFormat:
+//               @"%@&authkey=%@&xid=%@&province=%d&city=%d&car=%@&spot_future=%d&color_out=%d&color_in=%d&deposit=%d&carfrom=%d&cardiscrib=%@&car_custom=%d&carname_custom=%@",FBAUTO_FINDCAR_EDIT,[GMAPI getAuthkey],self.infoId,_province,_city,_car,_spot_future,_color_out,_color_in,_deposit,_carfrom,descrip,_car_custom,_carname_custom];
+        
+        
+        //添加颜色自定义
         url = [NSString stringWithFormat:
-               @"%@&authkey=%@&xid=%@&province=%d&city=%d&car=%@&spot_future=%d&color_out=%d&color_in=%d&deposit=%d&carfrom=%d&cardiscrib=%@&car_custom=%d&carname_custom=%@",FBAUTO_FINDCAR_EDIT,[GMAPI getAuthkey],self.infoId,_province,_city,_car,_spot_future,_color_out,_color_in,_deposit,_carfrom,descrip,_car_custom,_carname_custom];
+               @"%@&authkey=%@&xid=%@&province=%d&city=%d&car=%@&spot_future=%d&color_out=%d&color_in=%d&deposit=%d&carfrom=%d&cardiscrib=%@&car_custom=%d&carname_custom=%@&color_out_z=%@&color_in_z=%@",FBAUTO_FINDCAR_EDIT,[GMAPI getAuthkey],self.infoId,_province,_city,_car,_spot_future,_color_out,_color_in,_deposit,_carfrom,descrip,_car_custom,_carname_custom,_color_out_custom,_color_in_custom];
     }
     
     __weak typeof(self)weakSelf = self;
