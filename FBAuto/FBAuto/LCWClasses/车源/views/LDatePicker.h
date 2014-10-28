@@ -8,11 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+#import "SRMonthPicker.h"
+
 typedef void(^DateBlock)(NSString *dateString);
 
-@interface LDatePicker : UIView
+@interface LDatePicker : UIView<SRMonthPickerDelegate>
 {
-    UIDatePicker *datePicker;
+    SRMonthPicker *datePicker;
     UIView *bgView;
     DateBlock dateBlock;
 }
