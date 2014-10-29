@@ -435,68 +435,68 @@
 
 #pragma - mark 搜索车源数据
 
-- (void)searchCarSourceWithKeyword:(NSString *)keyword page:(int)page
-{
-    _searchPage = page;
-    
-    //比较两次请求关键词是否一致,如果不一致，则刷新数据
-    
-    _searchKeyword = keyword;
-    
-    NSString *url = [NSString stringWithFormat:FBAUTO_CARSOURCE_SEARCH,keyword,_table.pageNum,KPageSize];
-    
-    NSLog(@"搜索车源列表 %@",url);
-    
-//    __weak typeof(CarResourceViewController *)weakSelf = self;
-    
-    LCWTools *tool = [[LCWTools alloc]initWithUrl:url isPost:NO postData:nil];
-    [tool requestCompletion:^(NSDictionary *result, NSError *erro) {
-        
-        NSLog(@"搜索车源列表 result %@, erro%@",result,[result objectForKey:@"errinfo"]);
-        
-        NSDictionary *dataInfo = [result objectForKey:@"datainfo"];
-        int total = [[dataInfo objectForKey:@"total"]intValue];
-        
-        NSArray *data = [dataInfo objectForKey:@"data"];
-        
-        NSMutableArray *arr = [NSMutableArray arrayWithCapacity:data.count];
-        
-        for (NSDictionary *aDic in data) {
-            
-            CarSourceClass *aCar = [[CarSourceClass alloc]initWithDictionary:aDic];
-            
-            [arr addObject:aCar];
-        }
-        
-        [_table reloadData:arr total:total];
-        
-    } failBlock:^(NSDictionary *failDic, NSError *erro) {
-        
-        NSLog(@"failDic %@",failDic);
-        
-//        [_table loadFail];
+//- (void)searchCarSourceWithKeyword:(NSString *)keyword page:(int)page
+//{
+//    _searchPage = page;
+//    
+//    //比较两次请求关键词是否一致,如果不一致，则刷新数据
+//    
+//    _searchKeyword = keyword;
+//    
+//    NSString *url = [NSString stringWithFormat:FBAUTO_CARSOURCE_SEARCH,keyword,_table.pageNum,KPageSize];
+//    
+//    NSLog(@"搜索车源列表 %@",url);
+//    
+////    __weak typeof(CarResourceViewController *)weakSelf = self;
+//    
+//    LCWTools *tool = [[LCWTools alloc]initWithUrl:url isPost:NO postData:nil];
+//    [tool requestCompletion:^(NSDictionary *result, NSError *erro) {
 //        
-//        if (_table.isReloadData) {
+//        NSLog(@"搜索车源列表 result %@, erro%@",result,[result objectForKey:@"errinfo"]);
+//        
+//        NSDictionary *dataInfo = [result objectForKey:@"datainfo"];
+//        int total = [[dataInfo objectForKey:@"total"]intValue];
+//        
+//        NSArray *data = [dataInfo objectForKey:@"data"];
+//        
+//        NSMutableArray *arr = [NSMutableArray arrayWithCapacity:data.count];
+//        
+//        for (NSDictionary *aDic in data) {
 //            
-//            [_table loadFail];
-//        }else
-//        {
+//            CarSourceClass *aCar = [[CarSourceClass alloc]initWithDictionary:aDic];
+//            
+//            [arr addObject:aCar];
+//        }
+//        
+//        [_table reloadData:arr total:total];
+//        
+//    } failBlock:^(NSDictionary *failDic, NSError *erro) {
+//        
+//        NSLog(@"failDic %@",failDic);
+//        
+////        [_table loadFail];
+////        
+////        if (_table.isReloadData) {
+////            
+////            [_table loadFail];
+////        }else
+////        {
+////            
+////            [LCWTools showDXAlertViewWithText:[failDic objectForKey:ERROR_INFO]];
+////        }
+//        
+//        
+//        
+//        int errocode = [[failDic objectForKey:@"errocode"]integerValue];
+//        if (errocode == 1) {
+//            NSLog(@"结果为空");
 //            
 //            [LCWTools showDXAlertViewWithText:[failDic objectForKey:ERROR_INFO]];
+//            [_table reloadData:nil total:0];
 //        }
-        
-        
-        
-        int errocode = [[failDic objectForKey:@"errocode"]integerValue];
-        if (errocode == 1) {
-            NSLog(@"结果为空");
-            
-            [LCWTools showDXAlertViewWithText:[failDic objectForKey:ERROR_INFO]];
-            [_table reloadData:nil total:0];
-        }
-    }];
-    
-}
+//    }];
+//    
+//}
 
 #pragma - mark 判读是否获取车型数据
 
@@ -686,8 +686,10 @@
 
 - (void)getCarSourceList
 {
+    NSString *keyword = searchView.searchField.text;
+    
     _car = (_car == nil) ? @"000000000" : _car;
-    NSString *url = [NSString stringWithFormat:@"%@&car=%@&spot_future=%d&color_out=%d&color_in=%d&carfrom=%d&usertype=%d&province=%d&city=%d&page=%d&ps=%d",FBAUTO_CARSOURCE_LIST,_car,_spot_future,_color_out,_color_in,_carfrom,_usertype,_province,_city,_table.pageNum,KPageSize];
+    NSString *url = [NSString stringWithFormat:@"%@&car=%@&spot_future=%d&color_out=%d&color_in=%d&carfrom=%d&usertype=%d&province=%d&city=%d&page=%d&ps=%d&keyword=%@",FBAUTO_CARSOURCE_LIST,_car,_spot_future,_color_out,_color_in,_carfrom,_usertype,_province,_city,_table.pageNum,KPageSize,keyword];
     
     NSLog(@"车源列表 %@",url);
     
@@ -778,7 +780,7 @@
     
     //搜索框恢复
     
-    [searchView cancelSearch];
+//    [searchView cancelSearch];
     
     NSInteger aTag = selectButton.tag - 1000;
     
@@ -930,14 +932,14 @@
 {
     NSLog(@"loadNewData");
     
-    if (searchView.searchField.text.length > 0) {
-        
-        [self searchCarSourceWithKeyword:_searchKeyword page:_table.pageNum];
-        
-    }else
-    {
+//    if (searchView.searchField.text.length > 0) {
+//        
+//        [self searchCarSourceWithKeyword:_searchKeyword page:_table.pageNum];
+//        
+//    }else
+//    {
          [self getCarSourceList];
-    }
+//    }
     
 }
 
@@ -945,14 +947,14 @@
 {
     NSLog(@"loadMoreData");
     
-    if (_searchKeyword.length > 0) {
-        
-        [self searchCarSourceWithKeyword:_searchKeyword page:_table.pageNum];
-        
-    }else
-    {
+//    if (_searchKeyword.length > 0) {
+//        
+//        [self searchCarSourceWithKeyword:_searchKeyword page:_table.pageNum];
+//        
+//    }else
+//    {
         [self getCarSourceList];
-    }
+//    }
 
 }
 
