@@ -153,6 +153,8 @@ alpha:(a)]
 
 #define FBAUTO_CARSOURCE_CARTYPE @"http://fbautotest.fblife.com/index.php?c=interface&a=getcardata"//车型数据
 
+#define FBAUTO_CARSOURCE_GETUPDATEDATE @"http://fbautotest.fblife.com/index.php?c=interface&a=getupcardata&fromtime=%@&endtime=%@"//根据时间获取更新车型数据
+
 #define FBAUTO_CARSOURCE_LIST @"http://fbautotest.fblife.com/index.php?c=interface&a=getcheyuan"//车源列表
 
 #define FBAUTO_CARSOURCE_ADD_PIC @"http://fbautotest.fblife.com/index.php?c=interface&a=addpic"//添加图片

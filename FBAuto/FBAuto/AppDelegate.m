@@ -43,6 +43,8 @@
 #import "CarType.h"
 #import "CarClass.h"
 
+#import "CarUpdateClass.h"
+
 //shareSDK fbauto2014@qq.com 123abc
 //新浪 fbauto2014@qq.com  123abc 或者 fbauto2014
 // 邮箱 fbauto2014@qq.com
@@ -154,12 +156,10 @@
        
         NSLog(@"updateContent %@ %@",updateUrl,updateContent);
         
-        if (!isNewVersion) {
-           
-            [self getCarUpdateState];//车型数据更新
-        }
-        
     }];
+    
+    //车型数据更新
+    [self getCarUpdateState];
 
     self.window.rootViewController = [self preprareViewControllers];
     self.window.backgroundColor = [UIColor whiteColor];
@@ -168,29 +168,6 @@
     return YES;
 }
 
-
-- (void)test
-{
-    NSString *newStr = @"http://61.4.185.48:81/g/";
-    
-    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:newStr]];
-
-    [request setResponseEncoding:NSUTF8StringEncoding];
-    __weak typeof(ASIHTTPRequest *)weakRequest = request;
-    [request startAsynchronous];
-    [request setCompletionBlock:^{
-        
-        NSLog(@"----->hahha %@",weakRequest.responseString);
-        
-    }];
-    
-    [request setFailedBlock:^{
-        
-        NSLog(@"----->hahha %@  %@",weakRequest.responseString,weakRequest.error);
-        
-    }];
-    
-}
 
 #pragma mark - 网络请求判断是否需要更新车型数据
 
@@ -218,9 +195,11 @@
                 
                 NSString *localTimeline = [LCWTools cacheForKey:CAR_UPDATE_DATE_LOCAL];
                 
-                if (localTimeline.length == 0 || ![localTimeline isEqualToString:time]) {
+                localTimeline = localTimeline.length ? localTimeline : @"0";
+                
+                if (![localTimeline isEqualToString:time]) {
                     
-                    //需要更新,先移除本地数据,成功之后更新本地时间与服务器一致
+                    //需要更新
                     
                     NSLog(@"需要更新");
                     
@@ -228,11 +207,7 @@
                     
                     loading = [LCWTools MBProgressWithText:@"车型数据更新中..." addToView:window];
                     
-//                    if ([FBCityData deleteAllCarData]) {
-                    
-                        [self getCarData];
-                        
-//                    }
+                    [self getCarDataFromDateline:localTimeline endTimeline:time];
                 }
             }
         }
@@ -245,29 +220,29 @@
 }
 
 
-#pragma - mark 网络获取车型数据
+#pragma - mark 网络获取车型数据(根据时间间隔获取更新部分数据)
 
-- (void)getCarData
+- (void)getCarDataFromDateline:(NSString *)startTimeLine
+                   endTimeline:(NSString *)endTimeline
 {
     [loading show:YES];
     
-    LCWTools *tools = [[LCWTools alloc]initWithUrl:FBAUTO_CARSOURCE_CARTYPE isPost:NO postData:nil];
+    NSString *url = [NSString stringWithFormat:FBAUTO_CARSOURCE_GETUPDATEDATE,startTimeLine,endTimeline];
+    LCWTools *tools = [[LCWTools alloc]initWithUrl:url isPost:NO postData:nil];
     [tools requestCompletion:^(NSDictionary *result, NSError *erro) {
         NSLog(@"result %@",result);
         
         if ([result isKindOfClass:[NSDictionary class]]) {
             
             int erroCode = [[result objectForKey:@"errcode"]intValue];
-            NSString *erroInfo = [result objectForKey:@"errinfo"];
             
-            if (erroCode != 0) {
-                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:nil message:erroInfo delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-                [alert show];
+            if (erroCode == 0) {
                 
-                return ;
-            }else
-            {
-                [self localCardata:result];
+                NSDictionary *dataInfo = [result objectForKey:@"datainfo"];
+                if ([dataInfo isKindOfClass:[NSDictionary class]]) {
+                    
+                    [self updateLocalCarData:dataInfo endTime:endTimeline];
+                }
             }
             
         }
@@ -279,74 +254,85 @@
     }];
 }
 
-//存储本地
-- (void)localCardata:(NSDictionary *)result
+//更新本地车型数据(需要更改或添加)
+
+- (void)updateLocalCarData:(NSDictionary *)result endTime:(NSString *)endTime
 {
-    NSArray *dataInfo = [result objectForKey:@"datainfo"];
-    
-    //品牌、车型、车款
-    
-    NSMutableArray *brand_Arr = [NSMutableArray arrayWithCapacity:dataInfo.count];//品牌
-    NSMutableArray *type_arr = [NSMutableArray array];//车型
-    NSMutableArray *style_arr = [NSMutableArray array];//车款
-    
-    //dataInfo为数组,有效数据从下标为1开始
-    for (int i = 1; i < dataInfo.count; i ++) {
+    NSArray *brand = [result objectForKey:@"brand"];
+    if (brand.count > 0) {
         
-        NSArray *carTypeArray = [dataInfo objectAtIndex:i];
+        //更新或者添加
         
-        //carType下标为 0时代表上级名称，下标从 1 开始代表车型数据
-        
-        NSString *brand = [carTypeArray objectAtIndex:0];//品牌名称
-        
-        NSArray *brandArr = [brand componentsSeparatedByString:@"|"];
-        NSString *firstLetter = [brandArr objectAtIndex:0];
-        NSString *brandName = [brandArr objectAtIndex:1];
-        
-        CarClass *aCarBrand = [[CarClass alloc]initWithBrandId:[self carCodeForIndex:i] brandName:brandName brandFirstName:firstLetter];
-        [brand_Arr addObject:aCarBrand];
-        
-        [FBCityData insertCarBrandId:[self carCodeForIndex:i] brandName:brandName firstLetter:firstLetter];
-        
-        
-        for (int j = 1; j < carTypeArray.count; j ++) {
+        for (NSDictionary *aDic in brand) {
             
-            NSArray *carStyleArray = [carTypeArray objectAtIndex:j];
+            CarUpdateClass *update = [[CarUpdateClass alloc]initWithDictionary:aDic];
             
-            NSString *type = [carStyleArray objectAtIndex:0];//车型名称
+            NSString *brandId = [self carCodeForIndex:[update.list_index intValue]];
             
-            NSArray *typeArr = [type componentsSeparatedByString:@"|"];
-            NSString *typeFirstLetter = [typeArr objectAtIndex:0];
-            NSString *typeName = [typeArr objectAtIndex:1];
-            
-            CarClass *aClassType = [[CarClass alloc]initWithParentId:[self carCodeForIndex:i] typeId:[self carCodeForIndex:j] typeName:typeName firstLetter:typeFirstLetter];
-            [type_arr addObject:aClassType];
-            
-            [FBCityData insertCarTypeId:[self carCodeForIndex:j] parentId:[self carCodeForIndex:i] typeName:typeName firstLetter:typeFirstLetter];
-            
-            for (int k = 1; k < carStyleArray.count; k ++) {
+            if ([FBCityData existCarBrandId:brandId]) {
                 
-                NSString *carStyle = [carStyleArray objectAtIndex:k];
-                
-                NSString *style_parentId = [NSString stringWithFormat:@"%@%@",[self carCodeForIndex:i],[self carCodeForIndex:j]];
-                
-                CarClass *aCarStyle = [[CarClass alloc]initWithParentId:[self carCodeForIndex:j] styleId:[self carCodeForIndex:k] styleName:carStyle];
-                [style_arr addObject:aCarStyle];
-                
-                [FBCityData insertCarStyleId:[self carCodeForIndex:k] parentId:style_parentId StyleName:carStyle];
+                [FBCityData updateCarBrandId:brandId brandName:update.name firstLetter:update.eindex];
+            }else
+            {
+                [FBCityData insertCarBrandId:brandId brandName:update.name firstLetter:update.eindex];
             }
             
+            NSLog(@"brand--->");
+        }
+        
+    }
+    
+    NSArray *series = [result objectForKey:@"series"];
+    if (series.count > 0) {
+        
+        for (NSDictionary *aDic in series) {
+            
+            CarUpdateClass *update = [[CarUpdateClass alloc]initWithDictionary:aDic];
+            NSString *parentId = [self carCodeForIndex:[update.pid intValue]];
+            NSString *typeId = [self carCodeForIndex:[update.list_index intValue]];
+            NSString *codeId = [NSString stringWithFormat:@"%@%@",parentId,typeId];
+            
+            if ([FBCityData existCarTypeId:codeId]) {
+                
+                [FBCityData updateCarTypeId:codeId typeName:update.name firstLetter:update.eindex];
+            }else
+            {
+                [FBCityData insertCarTypeId:typeId parentId:parentId typeName:update.name firstLetter:update.eindex];
+            }
+            NSLog(@"type--->");
         }
     }
     
-    NSLog(@"车型数据保存完成");
+    NSArray *models = [result objectForKey:@"models"];
     
-    NSString *serverTime = [LCWTools cacheForKey:CAR_UPDATE_DATE_SERVER];
+    if (models.count > 0) {
+        
+        for (NSDictionary *aDic in models) {
+            
+            CarUpdateClass *update = [[CarUpdateClass alloc]initWithDictionary:aDic];
+            NSString *parentId_p = [self carCodeForIndex:[update.ppid intValue]];
+            NSString *parentId = [self carCodeForIndex:[update.pid intValue]];
+            NSString *styleId = [self carCodeForIndex:[update.list_index intValue]];
+            NSString *codeId = [NSString stringWithFormat:@"%@%@%@",parentId_p,parentId,styleId];
+            
+            if ([FBCityData existCarStyleId:codeId]) {
+                
+                [FBCityData updateCarStyleId:codeId StyleName:update.name];
+            }else
+            {
+                
+                NSString *p_id = [NSString stringWithFormat:@"%@%@",parentId_p,parentId];
+                [FBCityData insertCarStyleId:styleId parentId:p_id StyleName:update.name];
+            }
+            NSLog(@"style--->");
+        }
+    }
     
-    [LCWTools cache:serverTime ForKey:CAR_UPDATE_DATE_LOCAL];
+    [LCWTools cache:endTime ForKey:CAR_UPDATE_DATE_LOCAL];
+    
+    [[NSNotificationCenter defaultCenter]postNotificationName:UPDATE_CARSOURCE_PARAMS object:nil];//通知更新
     
     [loading hide:YES];
-    
 }
 
 /**

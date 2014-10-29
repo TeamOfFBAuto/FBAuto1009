@@ -26,6 +26,8 @@
 		133DF6A3197CE7F9006BF9ED /* FBFindCarDetailController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 133DF6A1197CE7F9006BF9ED /* FBFindCarDetailController.xib */; };
 		1351C5C9197A4F8E000F7391 /* FBSearchResultController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1351C5C8197A4F8E000F7391 /* FBSearchResultController.m */; };
 		1351C5CC197A704F000F7391 /* FindCarPublishController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1351C5CB197A704F000F7391 /* FindCarPublishController.m */; };
+		135EC58C1A009BAE00A040F1 /* garea.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 135EC58B1A009BAE00A040F1 /* garea.sqlite */; };
+		135EC58F1A009D2F00A040F1 /* CarUpdateClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 135EC58E1A009D2F00A040F1 /* CarUpdateClass.m */; };
 		136CAD5719C97C7C00E05A2F /* biankuang.png in Resources */ = {isa = PBXBuildFile; fileRef = 136CAD5619C97C7C00E05A2F /* biankuang.png */; };
 		13737C8E1965420000941746 /* PersonalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13737C8D1965420000941746 /* PersonalViewController.m */; };
 		137708C119B6C859007609E8 /* detail_test.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 137708C019B6C859007609E8 /* detail_test.jpg */; };
@@ -41,7 +43,6 @@
 		137927041987776900377ED5 /* GpersonTZViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 137926F41987776900377ED5 /* GpersonTZViewController.m */; };
 		137927051987776900377ED5 /* GxiaoxiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 137926F61987776900377ED5 /* GxiaoxiViewController.m */; };
 		137927071987776900377ED5 /* GzhuceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 137926FA1987776900377ED5 /* GzhuceViewController.m */; };
-		137927091987BC0700377ED5 /* garea.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 137927081987BC0700377ED5 /* garea.sqlite */; };
 		137FEB031974C9E700CDBD89 /* carData1.rtfd in Resources */ = {isa = PBXBuildFile; fileRef = 137FEB021974C9E700CDBD89 /* carData1.rtfd */; };
 		137FEB061974D48100CDBD89 /* CarStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 137FEB051974D48100CDBD89 /* CarStyle.m */; };
 		137FEB091974D48100CDBD89 /* CarBrand.m in Sources */ = {isa = PBXBuildFile; fileRef = 137FEB081974D48100CDBD89 /* CarBrand.m */; };
@@ -477,6 +478,9 @@
 		1351C5C8197A4F8E000F7391 /* FBSearchResultController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBSearchResultController.m; sourceTree = "<group>"; };
 		1351C5CA197A704F000F7391 /* FindCarPublishController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindCarPublishController.h; sourceTree = "<group>"; };
 		1351C5CB197A704F000F7391 /* FindCarPublishController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindCarPublishController.m; sourceTree = "<group>"; };
+		135EC58B1A009BAE00A040F1 /* garea.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = garea.sqlite; sourceTree = "<group>"; };
+		135EC58D1A009D2F00A040F1 /* CarUpdateClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CarUpdateClass.h; sourceTree = "<group>"; };
+		135EC58E1A009D2F00A040F1 /* CarUpdateClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CarUpdateClass.m; sourceTree = "<group>"; };
 		136CAD5619C97C7C00E05A2F /* biankuang.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = biankuang.png; sourceTree = "<group>"; };
 		13737C8C1965420000941746 /* PersonalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalViewController.h; sourceTree = "<group>"; };
 		13737C8D1965420000941746 /* PersonalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalViewController.m; sourceTree = "<group>"; };
@@ -505,7 +509,6 @@
 		137926F61987776900377ED5 /* GxiaoxiViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GxiaoxiViewController.m; sourceTree = "<group>"; };
 		137926F91987776900377ED5 /* GzhuceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GzhuceViewController.h; sourceTree = "<group>"; };
 		137926FA1987776900377ED5 /* GzhuceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GzhuceViewController.m; sourceTree = "<group>"; };
-		137927081987BC0700377ED5 /* garea.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = garea.sqlite; sourceTree = "<group>"; };
 		137FEB021974C9E700CDBD89 /* carData1.rtfd */ = {isa = PBXFileReference; lastKnownFileType = wrapper.rtfd; path = carData1.rtfd; sourceTree = "<group>"; };
 		137FEB041974D48100CDBD89 /* CarStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CarStyle.h; sourceTree = "<group>"; };
 		137FEB051974D48100CDBD89 /* CarStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CarStyle.m; sourceTree = "<group>"; };
@@ -1207,11 +1210,13 @@
 		138074ED196D3D9400AD3D03 /* DataBase */ = {
 			isa = PBXGroup;
 			children = (
-				137927081987BC0700377ED5 /* garea.sqlite */,
+				135EC58B1A009BAE00A040F1 /* garea.sqlite */,
 				138074EE196D3DA100AD3D03 /* DataBase.h */,
 				138074EF196D3DA100AD3D03 /* DataBase.m */,
 				138074F1196D3E1000AD3D03 /* FBCityData.h */,
 				138074F2196D3E1000AD3D03 /* FBCityData.m */,
+				135EC58D1A009D2F00A040F1 /* CarUpdateClass.h */,
+				135EC58E1A009D2F00A040F1 /* CarUpdateClass.m */,
 			);
 			path = DataBase;
 			sourceTree = "<group>";
@@ -2543,7 +2548,6 @@
 				13D5DFF01961758E00804835 /* dianhua40_48@2x.png in Resources */,
 				13D5DFE21961758E00804835 /* shoucang_46_44@2x.png in Resources */,
 				13D5DFF71961758E00804835 /* queding230_70@2x.png in Resources */,
-				137927091987BC0700377ED5 /* garea.sqlite in Resources */,
 				13D5DFFE1961758E00804835 /* lajitong44_44@2x.png in Resources */,
 				138B4AE91966A4BD00B974A5 /* face78.png in Resources */,
 				138B4AFF1966A4BD00B974A5 /* face98.gif in Resources */,
@@ -2572,6 +2576,7 @@
 				137FEB031974C9E700CDBD89 /* carData1.rtfd in Resources */,
 				133DF6A3197CE7F9006BF9ED /* FBFindCarDetailController.xib in Resources */,
 				138B4AB21966A4BD00B974A5 /* face28.png in Resources */,
+				135EC58C1A009BAE00A040F1 /* garea.sqlite in Resources */,
 				138B4AF01966A4BD00B974A5 /* face84.gif in Resources */,
 				13D5DFE11961758E00804835 /* liaotian46_46@2x.png in Resources */,
 				138B4A0719664E9800B974A5 /* FBFriend2Cell.xib in Resources */,
@@ -2804,6 +2809,7 @@
 				1336BC09196A8CE70011B4D9 /* FBAreaFriensController.m in Sources */,
 				13D5E0731962A7CA00804835 /* FBActionSheet.m in Sources */,
 				E34F3897197D12FE00CB9815 /* LoadingIndicatorView.m in Sources */,
+				135EC58F1A009D2F00A040F1 /* CarUpdateClass.m in Sources */,
 				13D5DF721961306000804835 /* UIView+Frame.m in Sources */,
 				138B4B0E1966A51700B974A5 /* NSAttributedString+Attributes.m in Sources */,
 				190BFD82195AAD6A0098E0F4 /* SendCarViewController.m in Sources */,

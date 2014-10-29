@@ -18,12 +18,36 @@
 
 #pragma - mark insert 车型数据
 
-//品牌
-+ (void)insertCarBrandId:(NSString *)brandId brandName:(NSString *)name firstLetter:(NSString *)firstLetter;
-//车型
-+ (void)insertCarTypeId:(NSString *)typeId parentId:(NSString *)parentId typeName:(NSString *)name firstLetter:(NSString *)firstLetter;
-//车款
-+ (void)insertCarStyleId:(NSString *)StyleId parentId:(NSString *)parentId StyleName:(NSString *)name;
+//数据插入
++ (void)insertCarBrandId:(NSString *)brandId
+               brandName:(NSString *)name
+             firstLetter:(NSString *)firstLetter;//品牌
+
++ (void)insertCarTypeId:(NSString *)typeId
+               parentId:(NSString *)parentId
+               typeName:(NSString *)name
+            firstLetter:(NSString *)firstLetter;//车型
+
++ (void)insertCarStyleId:(NSString *)StyleId
+                parentId:(NSString *)parentId
+               StyleName:(NSString *)name;//车款
+
+//是否存在
++ (BOOL)existCarBrandId:(NSString *)brandId;//品牌是否存在
++ (BOOL)existCarTypeId:(NSString *)typeId;//车型
++ (BOOL)existCarStyleId:(NSString *)styleId;//车款
+
+//数据更新
++ (void)updateCarBrandId:(NSString *)brandId
+               brandName:(NSString *)name
+             firstLetter:(NSString *)firstLetter;//品牌
+
++ (void)updateCarTypeId:(NSString *)codeId
+               typeName:(NSString *)name
+            firstLetter:(NSString *)firstLetter;//车型
+
++ (void)updateCarStyleId:(NSString *)codeId
+               StyleName:(NSString *)name;//车款
 
 #pragma - mark querty 车型数据
 

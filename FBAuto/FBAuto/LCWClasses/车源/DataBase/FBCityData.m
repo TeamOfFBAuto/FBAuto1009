@@ -188,6 +188,165 @@
     sqlite3_finalize(stmt);
 }
 
+#pragma mark - 车型数据判断是否存在
+
+//是否存在
++ (BOOL)existCarBrandId:(NSString *)brandId//品牌是否存在
+{
+    sqlite3 *db = [DataBase openDB];
+    sqlite3_stmt *stmt = nil;
+    int result = sqlite3_prepare_v2(db, "select count(*) from carBrand where id = ?", -1, &stmt, nil);
+    
+    NSLog(@"existCarBrandId %d %@",result,brandId);
+    
+    if (result == SQLITE_OK) {
+        
+        sqlite3_bind_text(stmt, 1, [brandId UTF8String], -1, nil);
+        
+        while (sqlite3_step(stmt) == SQLITE_ROW) {
+            
+            int count = sqlite3_column_int(stmt, 0);
+            
+            if (count > 0) {
+                return YES;
+            }
+        }
+    }
+    sqlite3_finalize(stmt);
+    return NO;
+}
+
+
++ (BOOL)existCarTypeId:(NSString *)codeId//车型
+{
+    sqlite3 *db = [DataBase openDB];
+    sqlite3_stmt *stmt = nil;
+    int result = sqlite3_prepare_v2(db, "select count(*) from carType where codeId = ?", -1, &stmt, nil);
+    
+    NSLog(@"existCarTypeId %d %@",result,codeId);
+    
+    if (result == SQLITE_OK) {
+        
+        sqlite3_bind_text(stmt, 1, [codeId UTF8String], -1, nil);
+        
+        while (sqlite3_step(stmt) == SQLITE_ROW) {
+            
+            int count = sqlite3_column_int(stmt, 0);
+            
+            if (count > 0) {
+                return YES;
+            }
+        }
+    }
+    sqlite3_finalize(stmt);
+    return NO;
+}
+
++ (BOOL)existCarStyleId:(NSString *)codeId//车款
+{
+    sqlite3 *db = [DataBase openDB];
+    sqlite3_stmt *stmt = nil;
+    int result = sqlite3_prepare_v2(db, "select count(*) from carStyle where codeId = ?", -1, &stmt, nil);
+    
+    NSLog(@"existCarStyleId %d %@",result,codeId);
+    
+    if (result == SQLITE_OK) {
+        
+        sqlite3_bind_text(stmt, 1, [codeId UTF8String], -1, nil);
+        
+        while (sqlite3_step(stmt) == SQLITE_ROW) {
+            
+            int count = sqlite3_column_int(stmt, 0);
+            
+            if (count > 0) {
+                return YES;
+            }
+        }
+    }
+    sqlite3_finalize(stmt);
+    return NO;
+}
+
+#pragma mark - 车型数据更新
+
++ (void)updateCarBrandId:(NSString *)brandId
+               brandName:(NSString *)name
+             firstLetter:(NSString *)firstLetter//品牌
+{
+    if (brandId == nil || name.length == 0 || firstLetter.length == 0) {
+        return;
+    }
+    sqlite3 *db = [DataBase openDB];
+    sqlite3_stmt *stmt = nil;
+    
+    int result = sqlite3_prepare(db, "update carBrand set name = ?,firstLetter = ? where id = ?", -1, &stmt, nil);
+    sqlite3_bind_text(stmt, 1, [name UTF8String], -1, nil);
+    sqlite3_bind_text(stmt, 2, [firstLetter UTF8String], -1, nil);
+    sqlite3_bind_text(stmt, 3, [brandId UTF8String], -1, nil);
+    
+    if (result == SQLITE_OK) {
+
+       result = sqlite3_step(stmt);
+        
+    }
+    
+    if (result == SQLITE_DONE) {
+        NSLog(@"updateCarBrandId %@ success",brandId);
+    }
+}
+
++ (void)updateCarTypeId:(NSString *)codeId
+               typeName:(NSString *)name
+            firstLetter:(NSString *)firstLetter//车型
+{
+    if (codeId == nil || firstLetter.length == 0 || name.length == 0) {
+        return;
+    }
+    sqlite3 *db = [DataBase openDB];
+    sqlite3_stmt *stmt = nil;
+    
+    int result = sqlite3_prepare(db, "update carType set name = ?,firstLetter = ? where codeId = ?", -1, &stmt, nil);
+    sqlite3_bind_text(stmt, 1, [name UTF8String], -1, nil);
+    sqlite3_bind_text(stmt, 2, [firstLetter UTF8String], -1, nil);
+    sqlite3_bind_text(stmt, 3, [codeId UTF8String], -1, nil);
+    
+    if (result == SQLITE_OK) {
+        
+        result = sqlite3_step(stmt);
+        
+    }
+    
+    if (result == SQLITE_DONE) {
+        NSLog(@"updateCarTypeId %@ success",codeId);
+    }
+
+}
+
++ (void)updateCarStyleId:(NSString *)codeId
+               StyleName:(NSString *)name//车款
+{
+    if (codeId == nil || name.length == 0) {
+        return;
+    }
+    sqlite3 *db = [DataBase openDB];
+    sqlite3_stmt *stmt = nil;
+    
+    int result = sqlite3_prepare(db, "update carStyle set name = ? where codeId = ?", -1, &stmt, nil);
+    sqlite3_bind_text(stmt, 1, [name UTF8String], -1, nil);
+    sqlite3_bind_text(stmt, 2, [codeId UTF8String], -1, nil);
+    
+    if (result == SQLITE_OK) {
+        
+        result = sqlite3_step(stmt);
+        
+    }
+    
+    if (result == SQLITE_DONE) {
+        NSLog(@"updateCarStyleId %@ success",codeId);
+    }
+}
+
+
 #pragma - mark 车型数据查询
 
 

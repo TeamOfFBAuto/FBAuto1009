@@ -130,12 +130,6 @@
     
     [self.navigationController.navigationBar addSubview:navigationView];
     
-    //定时更新
-    
-    if ([self needGetCarTypeData]) {
-        
-        //        [self getCarData];
-    }
 }
 
 - (void)viewDidLoad
