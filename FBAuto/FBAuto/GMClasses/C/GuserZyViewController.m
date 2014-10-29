@@ -63,9 +63,9 @@
     [self.view addSubview:_tableView];
     
     
-    UIButton *rightButton2 =[[UIButton alloc]initWithFrame:CGRectMake(0,8,30,21.5)];
+    UIButton *rightButton2 =[[UIButton alloc]initWithFrame:CGRectMake(0,8,46,29)];
     [rightButton2 addTarget:self action:@selector(clickToAdd:) forControlEvents:UIControlEventTouchUpInside];
-    [rightButton2 setImage:[UIImage imageNamed:@"tianjia44_44"] forState:UIControlStateNormal];
+    [rightButton2 setImage:[UIImage imageNamed:@"jiahaoyou 92_58"] forState:UIControlStateNormal];
     UIBarButtonItem *save_item2=[[UIBarButtonItem alloc]initWithCustomView:rightButton2];
     self.navigationItem.rightBarButtonItems = @[save_item2];
     

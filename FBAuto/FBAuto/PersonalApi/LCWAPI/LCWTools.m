@@ -370,6 +370,19 @@
 
 #pragma - mark 小工具
 
+
+#pragma mark - 特殊字符编码转换成特殊字符
++(NSString *)ddecodeSpecialCharactersStringWith:(NSString *)input
+{
+    input = [input stringByReplacingOccurrencesOfString:@"&amp;" withString:@"&"];
+    input = [input stringByReplacingOccurrencesOfString:@"quot;" withString:@"\""];
+    input = [input stringByReplacingOccurrencesOfString:@"&#039;" withString:@"'"];
+    input = [input stringByReplacingOccurrencesOfString:@"&lt;" withString:@"<"];
+    input = [input stringByReplacingOccurrencesOfString:@"&gt;" withString:@">"];
+    
+    return input;
+}
+
 /**
  *  关键词特殊显示
  *

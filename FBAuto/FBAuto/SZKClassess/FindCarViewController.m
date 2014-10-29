@@ -259,16 +259,16 @@
     navigationView.backgroundColor = [UIColor clearColor];
     
     //编辑按钮
-    editButton =[[UIButton alloc]initWithFrame:CGRectMake(320 - 40,0,40,44)];
+    editButton =[[UIButton alloc]initWithFrame:CGRectMake(320 - 46 - 5,5+3,46,29)];
     [editButton addTarget:self action:@selector(clickToPublish:) forControlEvents:UIControlEventTouchUpInside];
 //    editButton.backgroundColor = [UIColor orangeColor];
-    [editButton setImage:[UIImage imageNamed:@"xubxhe_fabu_44_44"] forState:UIControlStateNormal];
+    [editButton setImage:[UIImage imageNamed:@"fabu92_58"] forState:UIControlStateNormal];
     [navigationView addSubview:editButton];
     
     [self.navigationController.navigationBar addSubview:navigationView];
     
     //搜索
-    searchView = [[LSearchView alloc]initWithFrame:CGRectMake(10, (44 - 30)/2.0, 320 - 3 * 10 - 22, 30) placeholder:@"请输入车型" logoImage:[UIImage imageNamed:@"sousuo_icon26_26"] maskViewShowInView:self.view searchBlock:^(SearchStyle actionStyle, NSString *searchText) {
+    searchView = [[LSearchView alloc]initWithFrame:CGRectMake(10, (44 - 30)/2.0, 320 - 3 * 10 - 22 - 6 - 5 - 5, 30) placeholder:@"请输入车型" logoImage:[UIImage imageNamed:@"sousuo_icon26_26"] maskViewShowInView:self.view searchBlock:^(SearchStyle actionStyle, NSString *searchText) {
         
         [self searchStyle:actionStyle searchText:searchText];
         
@@ -277,7 +277,7 @@
     [navigationView addSubview:searchView];
     
     //取消按钮
-    cancelButton =[[UIButton alloc]initWithFrame:CGRectMake(searchView.right,0,44,44)];
+    cancelButton =[[UIButton alloc]initWithFrame:CGRectMake(searchView.right + 5,0,44,44)];
     cancelButton.backgroundColor = [UIColor clearColor];
     [cancelButton addTarget:self action:@selector(clickToCancel:) forControlEvents:UIControlEventTouchUpInside];
     [cancelButton setTitle:@"取消" forState:UIControlStateNormal];

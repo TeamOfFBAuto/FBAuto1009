@@ -77,6 +77,8 @@ typedef void(^ urlRequestBlock)(NSDictionary *result,NSError *erro);
 
 #pragma - mark 小工具
 
++(NSString *)ddecodeSpecialCharactersStringWith:(NSString *)input;
+
 + (NSAttributedString *)attributedString:(NSString *)content keyword:(NSString *)aKeyword color:(UIColor *)textColor;
 
 + (NSString *) md5:(NSString *) text;

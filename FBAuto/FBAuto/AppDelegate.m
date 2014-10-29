@@ -191,7 +191,6 @@
                 
                 NSLog(@"time %@",time);
                 
-                [LCWTools cache:time ForKey:CAR_UPDATE_DATE_SERVER];
                 
                 NSString *localTimeline = [LCWTools cacheForKey:CAR_UPDATE_DATE_LOCAL];
                 
@@ -359,6 +358,85 @@
 }
 
 
+#pragma mark - 获取通知
+
+- (void)getNotice
+{
+    NSString *url = [NSString stringWithFormat:FBAUTO_NOTICE_TIME];
+    LCWTools *tool = [[LCWTools alloc]initWithUrl:url isPost:NO postData:nil];
+    [tool requestCompletion:^(NSDictionary *result, NSError *erro) {
+        
+        if ([result isKindOfClass:[NSDictionary class]]) {
+            
+            NSDictionary *dataInfo = [result objectForKey:@"datainfo"];
+            if ([dataInfo isKindOfClass:[NSDictionary class]])
+            {
+                NSString *time = [dataInfo objectForKey:@"time"];
+                
+                if (time.length == 0) {
+                    return ;
+                }
+                
+                NSLog(@"time %@",time);
+                
+                NSString *localTimeline = [LCWTools cacheForKey:NOTICE_UPDATE_DATE_LOCAL];
+                
+                localTimeline = localTimeline.length ? localTimeline : @"0";
+                
+                if (![localTimeline isEqualToString:time]) {
+                    
+                    NSLog(@"新通知");
+                    
+                    [self getNoticeFromDateline:localTimeline endTimeline:time];
+                }
+            }
+        }
+        
+        
+    } failBlock:^(NSDictionary *failDic, NSError *erro) {
+        
+        NSLog(@"failDic %@",failDic);
+    }];
+
+}
+
+
+- (void)getNoticeFromDateline:(NSString *)startTimeLine
+                   endTimeline:(NSString *)endTimeline
+{
+    [loading show:YES];
+    
+    NSString *url = [NSString stringWithFormat:FBAUTO_NOTICE_NEW_COUNT,startTimeLine,endTimeline];
+    LCWTools *tools = [[LCWTools alloc]initWithUrl:url isPost:NO postData:nil];
+    [tools requestCompletion:^(NSDictionary *result, NSError *erro) {
+        NSLog(@"result %@",result);
+        
+        if ([result isKindOfClass:[NSDictionary class]]) {
+            
+            int erroCode = [[result objectForKey:@"errcode"]intValue];
+            
+            if (erroCode == 0) {
+                
+                int dataInfo = [[result objectForKey:@"datainfo"]integerValue];
+                
+                NSLog(@"新通知个数%d",dataInfo);
+                
+                int number = [[RCIM sharedRCIM] getTotalUnreadCount];
+                
+                [self updateTabbarNumber:(number + dataInfo)];
+                
+                [LCWTools cache:[NSString stringWithFormat:@"%d",dataInfo] ForKey:NOTICE_NEW_COUNT];
+                
+                [LCWTools cache:endTimeline ForKey:NOTICE_UPDATE_DATE_LOCAL];
+                
+            }
+            
+        }
+    }failBlock:^(NSDictionary *failDic, NSError *erro) {
+        NSLog(@"failDic %@",failDic);
+    }];
+}
+
 
 #pragma mark - 创建视图
 
@@ -434,6 +512,7 @@
     if (number > 0) {
         number_str = [NSString stringWithFormat:@"%d",number];
     }
+    
     _perSonalVC.tabBarItem.badgeValue = number_str;
     
     [UIApplication sharedApplication].applicationIconBadgeNumber = [number_str intValue];
@@ -642,7 +721,15 @@
     [self loginRongCloud];
     
     int number = [[RCIM sharedRCIM] getTotalUnreadCount];
+    
+    if (number < 0) {
+        number = 0;
+    }
+    
     [self updateTabbarNumber:number];
+    
+    
+    [self getNotice];
     
 }
 
@@ -860,16 +947,6 @@
     
     if ([type integerValue] == 1) {
         NSLog(@"聊天离线消息");
-        
-//        UITabBarController *tabV =  (UITabBarController *)self.window.rootViewController;
-//        tabV.selectedIndex = 3;
-//        UINavigationController *unVc = [[tabV viewControllers]objectAtIndex:3];
-//        
-//        FBChatViewController *chat = [[FBChatViewController alloc]init];
-//        chat.chatWithUser = fromphone;
-//        chat.chatUserId = fromId;
-//        chat.hidesBottomBarWhenPushed = YES;
-//        [unVc pushViewController:chat animated:YES];
     }
 
 }
@@ -884,8 +961,10 @@
             
             [[NSNotificationCenter defaultCenter]postNotificationName:@"unReadNumber" object:nil];
             
-            int number = [[RCIM sharedRCIM] getTotalUnreadCount];;
-            [self updateTabbarNumber:number];
+            int number = [[RCIM sharedRCIM] getTotalUnreadCount];
+            
+            int notice = [[LCWTools cacheForKey:NOTICE_NEW_COUNT]integerValue];
+            [self updateTabbarNumber:number + notice];
             
         });
     }

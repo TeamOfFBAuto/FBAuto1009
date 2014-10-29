@@ -50,9 +50,11 @@
 
 #define KPageSize  10 //每页条数
 
-#define CAR_UPDATE_DATE_SERVER @"CAR_UPDATE_DATE_SERVER" //服务器-型数据更新时间
-#define CAR_UPDATE_DATE_LOCAL @"CAR_UPDATE_DATE_LOCAL" //本地-数据更新时间(更新成功之后与服务器时间更新一致)
+#define CAR_UPDATE_DATE_LOCAL @"CAR_UPDATE_DATE_LOCAL" //本地-车型数据更新时间(更新成功之后与服务器时间更新一致)
 
+#define NOTICE_UPDATE_DATE_LOCAL @"NOTICE_UPDATE_DATE_LOCAL" //本地-通知数据更新时间(更新成功之后与服务器时间更新一致)
+
+#define NOTICE_NEW_COUNT @"NOTICE_COUNT"//通知个数
 
 //颜色
 
@@ -125,6 +127,11 @@ alpha:(a)]
 
 //获取通知详细内容
 #define FBAUTO_PERSONTZ @"http://fbautotest.fblife.com/index.php?c=interface&a=getnotice&nid=%@"
+
+#define FBAUTO_NOTICE_NEW_COUNT @"http://fbautotest.fblife.com/index.php?c=interface&a=getnoticenum&fromtime=%@&endtime=%@"//时间段内通知个数
+
+#define FBAUTO_NOTICE_TIME @"http://fbautotest.fblife.com/index.php?c=interface&a=getupdate&upfrom=noticedata"//获取通知更新时间
+
 
 //好友API=================
 
@@ -205,7 +212,7 @@ alpha:(a)]
 
 // 分享相关接口========
 #define FBAUTO_SHARE_CAR_SOURCE @"http://fbautotest.fblife.com/index.php?c=web&a=singleCheyuan&cid=%@"//车源分享
-
 #define FBAUTO_SHARE_CAR_FIND @"http://fbautotest.fblife.com/index.php?c=web&a=singleXunche&xid=%@" //寻车分享
+
 
 #endif

@@ -7,6 +7,7 @@
 
 #import <Foundation/Foundation.h>
 #import "RegexKitLite.h"
+#import "OHAttributedLabel.h"
 
 @interface FBHelper : NSObject
 
@@ -14,5 +15,6 @@
 + (NSMutableArray *)addPhoneNumArr:(NSString *)text;
 + (NSMutableArray *)addEmailArr:(NSString *)text;
 + (NSString *)transformString:(NSString *)originalStr;//表情转换为html
+//+ (void)creatAttributedText:(NSString *)o_text Label:(OHAttributedLabel *)label OHDelegate:(id<OHAttributedLabelDelegate>)delegate;
 
 @end

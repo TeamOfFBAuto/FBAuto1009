@@ -58,7 +58,7 @@
     }else if (indexPath.row == 1){//内容
         self.contentLabel = [[UILabel alloc]initWithFrame:CGRectZero];
         self.contentLabel.font = [UIFont systemFontOfSize:15];
-        self.contentLabel.text = self.delegate.contentStr;
+        self.contentLabel.text = [LCWTools ddecodeSpecialCharactersStringWith:self.delegate.contentStr];
         [self.contentLabel setMatchedFrame4LabelWithOrigin:CGPointMake(25, 22) width:320-22-22];
         [self.contentView addSubview:self.contentLabel];
         

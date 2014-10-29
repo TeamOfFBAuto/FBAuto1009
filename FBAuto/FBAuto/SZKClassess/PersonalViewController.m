@@ -55,11 +55,6 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     
-//    for (UIView *view in self.view.subviews) {
-//        [view removeFromSuperview];
-//    }
-    
-    
     //进入页面更新未读消息
     
     [self updateUnreadNumber:nil];
@@ -220,11 +215,23 @@
         self.xiaoxiRedPointView.hidden = NO;
     }
     
-    NSLog(@"未读条数:%d",number);
+    
+    int notice = [[LCWTools cacheForKey:NOTICE_NEW_COUNT]integerValue];
+    
+    if (notice == 0) {
+        self.tongzhiRedPointView.hidden = YES;
+        self.tongzhiNumLabel.hidden = YES;
+    }else{
+        self.tongzhiNumLabel.text = [NSString stringWithFormat:@"%d",notice];
+        self.tongzhiNumLabel.hidden = NO;
+        self.tongzhiRedPointView.hidden = NO;
+    }
+    
+    NSLog(@"未读条数:%d",number + notice);
     
     AppDelegate *delegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
     
-    [delegate updateTabbarNumber:number];
+    [delegate updateTabbarNumber:(number + notice)];
 }
 
 

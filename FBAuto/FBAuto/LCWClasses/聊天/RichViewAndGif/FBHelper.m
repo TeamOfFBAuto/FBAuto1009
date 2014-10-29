@@ -64,4 +64,73 @@
     return emojiDic;
 }
 
+/**
+ *  创建lable
+ */
+
+//+ (void)creatAttributedText:(NSString *)o_text Label:(OHAttributedLabel *)label OHDelegate:(id<OHAttributedLabelDelegate>)delegate
+//{
+//    [label setNeedsDisplay];
+//    
+//    label.automaticallyAddLinksForType = 0;//不让系统自动检测网址链接
+//    
+//    NSMutableArray *httpArr = [FBHelper addHttpArr:o_text];
+//    NSMutableArray *phoneNumArr = [FBHelper addPhoneNumArr:o_text];
+//    
+//    NSString *text = [FBHelper transformString:o_text];
+//    text = [NSString stringWithFormat:@"<font color='black' face='Palatino-Roman'>%@",text];
+//    
+//    MarkupParser* p = [[MarkupParser alloc] init];
+//    NSMutableAttributedString* attString = [p attrStringFromMarkup: text];
+//    [attString setFont:[UIFont systemFontOfSize:14]];
+//    [attString setTextAlignment:kCTTextAlignmentJustified lineBreakMode:kCTLineBreakByCharWrapping];
+//    
+//    [label setAttString:attString withImages:p.images];
+//    
+//    NSString *string = attString.string;
+//    
+//    //    if ([phoneNumArr count]) {
+//    //        for (NSString *phoneNum in phoneNumArr) {
+//    //            [label addCustomLink:[NSURL URLWithString:phoneNum] inRange:[string rangeOfString:phoneNum]];
+//    //        }
+//    //    }
+//    
+//    if ([httpArr count]) {
+//        for (NSString *httpStr in httpArr) {
+//            [label addCustomLink:[NSURL URLWithString:httpStr] inRange:[string rangeOfString:httpStr]];
+//        }
+//    }
+//    label.delegate = delegate;
+//    CGRect labelRect = label.frame;
+//    labelRect.size.width = [label sizeThatFits:CGSizeMake(225, CGFLOAT_MAX)].width;
+//    labelRect.size.height = [label sizeThatFits:CGSizeMake(225, CGFLOAT_MAX)].height;
+//    label.frame = labelRect;
+//    label.onlyCatchTouchesOnLinks = NO;
+//    label.underlineLinks = YES;//链接是否带下划线
+//    [label.layer display];
+//    // 调用这个方法立即触发label的|drawTextInRect:|方法，
+//    // |setNeedsDisplay|方法有滞后，因为这个需要画面稳定后才调用|drawTextInRect:|方法
+//    // 这里我们创建的时候就需要调用|drawTextInRect:|方法，所以用|display|方法，这个我找了很久才发现的
+//    
+//    [FBHelper drawImage:label];
+//}
+//
+///**
+// *  画图
+// */
+//+ (void)drawImage:(OHAttributedLabel *)label
+//{
+//    for (NSArray *info in label.imageInfoArr) {
+//        NSString *filePath = [[NSBundle mainBundle] pathForResource:[info objectAtIndex:0] ofType:nil];
+//        NSData *data = [[NSData alloc] initWithContentsOfFile:filePath];
+//        SCGIFImageView *imageView = [[SCGIFImageView alloc] initWithGIFData:data];
+//        imageView.frame = CGRectFromString([info objectAtIndex:2]);
+//        imageView.top += 2;
+//        
+//        [label addSubview:imageView];//label内添加图片层
+//        [label bringSubviewToFront:imageView];
+//    }
+//}
+
+
 @end

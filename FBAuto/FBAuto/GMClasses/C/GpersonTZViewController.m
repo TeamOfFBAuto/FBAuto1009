@@ -57,6 +57,9 @@
     _page = 1;
     
     [_tableView showRefreshHeader:YES];
+    
+    
+    [LCWTools cache:nil ForKey:NOTICE_NEW_COUNT];
 
 }
 
@@ -113,8 +116,9 @@
     if (!cell) {
         cell = [[GptzTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
     }
+    NSString *content = [_dataArray[indexPath.row]objectForKey:@"title"];
     
-    cell.contentLabel.text = [_dataArray[indexPath.row]objectForKey:@"content"];
+    cell.contentLabel.text = [LCWTools ddecodeSpecialCharactersStringWith:content];
     NSString *time1 = [_dataArray[indexPath.row]objectForKey:@"dateline"];
     NSString *time2 = [GTimeSwitch testtime:time1];
     
