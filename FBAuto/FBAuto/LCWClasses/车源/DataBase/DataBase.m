@@ -35,4 +35,23 @@ static sqlite3 *db = nil;
     sqlite3_close(db);
     db = nil;
 }
+
++ (BOOL)removeDb
+{
+    NSString *documents = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)objectAtIndex:0];//获取document路径
+    NSString *filePath = [documents stringByAppendingPathComponent:@"garea.sqlite"]; //将要存放位置
+    NSLog(@"数据库路径 = %@",filePath);
+    
+    NSError *erro;
+    NSFileManager *fm = [NSFileManager defaultManager];
+    if ([fm fileExistsAtPath:filePath]) {
+        
+        NSLog(@"erro %@",erro);
+        
+        return [fm removeItemAtPath:filePath error:&erro];
+    }
+    
+    return NO;
+}
+
 @end

@@ -50,6 +50,9 @@
 
 #define KPageSize  10 //每页条数
 
+#define CAR_UPDATE_DATE_SERVER @"CAR_UPDATE_DATE_SERVER" //服务器-型数据更新时间
+#define CAR_UPDATE_DATE_LOCAL @"CAR_UPDATE_DATE_LOCAL" //本地-数据更新时间(更新成功之后与服务器时间更新一致)
+
 
 //颜色
 
@@ -145,6 +148,8 @@ alpha:(a)]
 
 
 //车源API================
+
+#define FBAUTO_CARSOURCE_UPDATESTATE @"http://fbautotest.fblife.com/index.php?c=interface&a=getupdate&upfrom=cardata"//车型数据是否需要更新
 
 #define FBAUTO_CARSOURCE_CARTYPE @"http://fbautotest.fblife.com/index.php?c=interface&a=getcardata"//车型数据
 

@@ -13,6 +13,8 @@
 
 #import <ShareSDK/ShareSDK.h>
 
+@class MBProgressHUD;
+
 #define FBAUTO_CARSOURCE_TIME @"FBAUTO_CARSOURE_TIME"//车型数据请求时间
 
 #define ERROR_INFO @"erroinfo" //错误信息
@@ -86,6 +88,7 @@ typedef void(^ urlRequestBlock)(NSDictionary *result,NSError *erro);
 
 + (NSString *)currentTime;//当前时间 yyyy-mm-dd
 
++ (MBProgressHUD *)MBProgressWithText:(NSString *)text addToView:(UIView *)aView;
 + (void)showMBProgressWithText:(NSString *)text addToView:(UIView *)aView;
 
 +(void)showDXAlertViewWithText:(NSString *)text;

@@ -18,4 +18,6 @@
 //关闭数据库
 +(void)closeDB;
 
++ (BOOL)removeDb;//直接移除数据库,不用删除表了，呵呵
+
 @end

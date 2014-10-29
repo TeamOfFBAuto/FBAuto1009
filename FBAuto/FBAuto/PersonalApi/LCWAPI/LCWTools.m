@@ -483,6 +483,17 @@
     [alert show];
 }
 
++ (MBProgressHUD *)MBProgressWithText:(NSString *)text addToView:(UIView *)aView
+{
+    MBProgressHUD *hud = [[MBProgressHUD alloc]initWithView:aView];
+    //    hud.mode = MBProgressHUDModeText;
+    hud.labelText = text;
+    //    hud.margin = 15.f;
+    //    hud.yOffset = 0.0f;
+    [aView addSubview:hud];
+    hud.removeFromSuperViewOnHide = YES;
+    return hud;
+}
 
 + (void)showMBProgressWithText:(NSString *)text addToView:(UIView *)aView
 {

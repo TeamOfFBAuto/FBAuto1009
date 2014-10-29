@@ -31,6 +31,8 @@
 + (NSArray *)queryCarTypeWithParentId:(NSString *)parendId;
 + (NSArray *)queryCarStyleWithParentId:(NSString *)parendId;
 
++ (BOOL)deleteAllCarData;//清空数据
+
 #pragma - mark xmpp消息未读条数
 
 + (void)updateCurrentUserPhone:(NSString *)currentPhone fromUserPhone:(NSString *)FromPhone fromName:(NSString *)fromName fromId:(NSString *)fromId newestMessage:(NSString *)message time:(NSString *)time clearReadSum:(BOOL)clearSum;//有更新、没有时插入,clearReadSum 判断是未读 +1，还是置0

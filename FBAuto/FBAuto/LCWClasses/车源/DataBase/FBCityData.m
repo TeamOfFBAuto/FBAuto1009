@@ -273,21 +273,8 @@
 
 + (BOOL)deleteAllCarData
 {
-    sqlite3 *db = [DataBase openDB];
-    sqlite3_stmt *stmt = nil;
-    int result = sqlite3_prepare(db, "delete from carBrand,carStyle,carType", -1, &stmt, nil);
     
-    if (result == SQLITE_OK) {
-        
-        result = sqlite3_step(stmt);
-        
-        if (sqlite3_step(stmt) == SQLITE_DONE) {
-            
-            return YES;
-        }
-    }
-    
-    return NO;
+    return [DataBase removeDb];
 }
 
 
