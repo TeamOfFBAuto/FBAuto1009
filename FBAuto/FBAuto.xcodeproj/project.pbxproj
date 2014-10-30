@@ -1554,7 +1554,7 @@
 				1351C5C8197A4F8E000F7391 /* FBSearchResultController.m */,
 				13155373197923D90044C010 /* 寻车 */,
 				13D5E0451962A14E00804835 /* 车源 */,
-				13D5E05C1962A14E00804835 /* 发布 */,
+				13D5E05C1962A14E00804835 /* 发布参数 */,
 				13737C821965380900941746 /* 商圈好友 */,
 				138B4A1719667E2500B974A5 /* 聊天 */,
 			);
@@ -1844,7 +1844,7 @@
 			path = views;
 			sourceTree = "<group>";
 		};
-		13D5E05C1962A14E00804835 /* 发布 */ = {
+		13D5E05C1962A14E00804835 /* 发布参数 */ = {
 			isa = PBXGroup;
 			children = (
 				13D5E0681962A1D700804835 /* cell */,
@@ -1852,6 +1852,7 @@
 				13D5E06A1962A1D700804835 /* viewController */,
 				13D5E06B1962A1D700804835 /* views */,
 			);
+			name = "发布参数";
 			path = "发布";
 			sourceTree = "<group>";
 		};
@@ -2919,7 +2920,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "f2794893-6f40-4d34-b2ae-54d0f5e6cf98";
+				PROVISIONING_PROFILE = "6ebdae1d-c6a4-4118-aa8b-4995c823b087";
 				SDKROOT = iphoneos;
 				VALID_ARCHS = "armv7 armv7s";
 			};
@@ -2954,7 +2955,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "f2794893-6f40-4d34-b2ae-54d0f5e6cf98";
+				PROVISIONING_PROFILE = "6ebdae1d-c6a4-4118-aa8b-4995c823b087";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 				VALID_ARCHS = "armv7 armv7s";
@@ -3013,7 +3014,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "28b23bd8-a16c-4a4b-b1d8-9c2ffabe0318";
+				PROVISIONING_PROFILE = "6ebdae1d-c6a4-4118-aa8b-4995c823b087";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/**";
 				VALID_ARCHS = "armv7 arm64 armv7s";
@@ -3073,7 +3074,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "28b23bd8-a16c-4a4b-b1d8-9c2ffabe0318";
+				PROVISIONING_PROFILE = "6ebdae1d-c6a4-4118-aa8b-4995c823b087";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/**";
 				VALID_ARCHS = "armv7 arm64 armv7s";

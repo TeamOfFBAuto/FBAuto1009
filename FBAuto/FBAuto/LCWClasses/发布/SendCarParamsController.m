@@ -641,6 +641,18 @@
         
         return;
         
+    }else if (self.dataStyle == Data_Timelimit || self.dataStyle == Data_Standard)
+    {
+        NSString *select = [_dataArray objectAtIndex:indexPath.row];
+        
+        
+        int row = self.haveLimit ? (int)indexPath.row : (int)indexPath.row + 1;
+        
+        selectBlock(self.dataStyle,select,[NSString stringWithFormat:@"%d",row]);
+        
+        [self clickToBack:nil];
+        
+        return;
     }
     
     NSString *select = [_dataArray objectAtIndex:indexPath.row];

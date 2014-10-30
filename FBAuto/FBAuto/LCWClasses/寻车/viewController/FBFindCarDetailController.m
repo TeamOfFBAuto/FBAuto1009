@@ -163,12 +163,14 @@
         
         //调整地址显示长度
         
-        CGFloat aWidth = [LCWTools widthForText:area font:10];
+        NSString *userAddress = [NSString stringWithFormat:@"%@%@",[dic objectForKey:@"uprovince"],[dic objectForKey:@"ucity"]];
+        
+        CGFloat aWidth = [LCWTools widthForText:userAddress font:10];
         
         aWidth = (aWidth <= 140)?aWidth : 140;
         
         self.addressLabel.width = aWidth;
-        self.addressLabel.text = area;
+        self.addressLabel.text = userAddress;
         
         
         [self.headImage sd_setImageWithURL:[NSURL URLWithString:[dic objectForKey:@"headimage"]] placeholderImage:[UIImage imageNamed:@"defaultFace"]];

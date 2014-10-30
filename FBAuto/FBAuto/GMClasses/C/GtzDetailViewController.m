@@ -87,7 +87,7 @@
         NSString *time = [NSString stringWithFormat:@"%@年%@月%@日",time2,time3,time4];
         
         self.timeStr = time;
-        self.contentStr = [datainfo objectForKey:@"content"];
+        self.contentStr = [LCWTools ddecodeSpecialCharactersStringWith:[datainfo objectForKey:@"content"]];
         
         [_tableView reloadData];
         

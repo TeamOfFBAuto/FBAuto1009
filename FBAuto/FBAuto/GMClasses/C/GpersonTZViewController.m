@@ -118,13 +118,15 @@
     }
     NSString *content = [_dataArray[indexPath.row]objectForKey:@"title"];
     
-    cell.contentLabel.text = [LCWTools ddecodeSpecialCharactersStringWith:content];
+    cell.contentLabel.text = content;
     NSString *time1 = [_dataArray[indexPath.row]objectForKey:@"dateline"];
     NSString *time2 = [GTimeSwitch testtime:time1];
     
     NSString *str = [time2 substringWithRange:NSMakeRange(0, 4)];//年
     NSString *str1 = [time2 substringWithRange:NSMakeRange(5, 2)];
     NSString *str2 = [time2 substringWithRange:NSMakeRange(8, 2)];
+    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     NSString *timeStr = [NSString stringWithFormat:@"%@年%@月%@日",str,str1,str2];
     
