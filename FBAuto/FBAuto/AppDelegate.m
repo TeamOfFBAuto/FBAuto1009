@@ -352,7 +352,7 @@
         
     }else
     {
-        code = [NSString stringWithFormat:@"0%d",index];
+        code = [NSString stringWithFormat:@"%d",index];
     }
     return code;
 }

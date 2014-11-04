@@ -492,7 +492,7 @@
         Section_Button *btn = (Section_Button *)[secondBgView viewWithTag:105];
         btn.contentLabel.text = dateString;
         
-        build_time = [dateString isEqualToString:@"不填写"] ? @"" : dateString;
+        build_time = [dateString isEqualToString:@"不填写"] ? @" " : dateString;
     }];
 }
 
@@ -703,7 +703,6 @@
         
         return;
     }
-    
     
     BOOL is =  [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
     if (is) {
