@@ -98,6 +98,39 @@
     //上传详细地址
     [self testDizhi];
     
+
+    
+    NSString *message = nil;
+    
+    if (self.gtype == 4) {
+        
+        
+        if (_textView.text.length > 80) {
+            
+            message = @"简介请不要超过80字";
+            
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:message delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+            [alert show];
+            
+            return;
+        }
+        
+    }else if (self.gtype == 3){
+       
+        if (_textView.text.length > 50) {
+            
+            message = @"详细地址请不要超过50字";
+            
+            
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:message delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+            [alert show];
+            
+            return;
+        }
+    }
+    
+    
+    
     [self.navigationController popViewControllerAnimated:YES];
 }
 

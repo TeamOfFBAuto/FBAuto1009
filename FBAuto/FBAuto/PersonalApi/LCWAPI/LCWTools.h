@@ -97,6 +97,10 @@ typedef void(^ urlRequestBlock)(NSDictionary *result,NSError *erro);
 
 + (NSString *)NSStringNotNull:(NSString *)text;
 
++ (NSString *)NSStringRemoveSpace:(NSString *)text;
+
++ (NSString *)NSStringRemoveLineAndSpace:(NSString *)text;
+
 #pragma mark - 计算宽度、高度
 
 + (CGFloat)widthForText:(NSString *)text font:(CGFloat)size;

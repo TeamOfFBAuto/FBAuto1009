@@ -223,10 +223,23 @@
     
     for (FBCity *aCity in cityArr) {
         
-        NSMutableArray *cityGroup = [NSMutableArray arrayWithArray:[dic objectForKey:[aCity.cityName getFirstLetter]]];
-        [cityGroup addObject:aCity];
+        //多音字
+        if ([aCity.cityName isEqualToString:@"重庆市"]) {
+            
+            NSMutableArray *cityGroup = [NSMutableArray arrayWithArray:[dic objectForKey:@"C"]];
+            [cityGroup addObject:aCity];
+            
+            [dic setObject:cityGroup forKey:@"C"];
+        }else
+        {
+            NSMutableArray *cityGroup = [NSMutableArray arrayWithArray:[dic objectForKey:[aCity.cityName getFirstLetter]]];
+            [cityGroup addObject:aCity];
+            
+            [dic setObject:cityGroup forKey:[aCity.cityName getFirstLetter]];
+        }
         
-        [dic setObject:cityGroup forKey:[aCity.cityName getFirstLetter]];
+        NSLog(@"getFirstLetter %@ first %@",aCity.cityName,[aCity.cityName getFirstLetter]);
+        
     }
     
     NSArray *arr = [dic allKeys];

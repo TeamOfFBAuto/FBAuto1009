@@ -45,6 +45,8 @@
         
         [bgView addSubview:datePicker];
         
+//        datePicker.center = CGPointMake(self.width, datePicker.center.y);
+        
         
         UIView *toolsBarView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 320, 44)];
         toolsBarView.backgroundColor = [UIColor colorWithRed:223/255. green:223/255. blue:223/255. alpha:1];

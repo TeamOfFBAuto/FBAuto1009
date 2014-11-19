@@ -93,6 +93,8 @@
         
         NSString *carName = [dic objectForKey:@"car_name"];
         
+        carName = [LCWTools NSStringRemoveLineAndSpace:carName];
+        
         UILabel *nameLabel = [self labelWithTag:110];
         nameLabel.numberOfLines = 0;
         nameLabel.lineBreakMode = NSLineBreakByCharWrapping;

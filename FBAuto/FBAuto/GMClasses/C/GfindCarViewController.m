@@ -450,7 +450,7 @@
             cell.ciLable.text = @"求购";
         }
         
-        cell.cLabel.text = aCar.car_name;
+        cell.cLabel.text = [LCWTools NSStringRemoveLineAndSpace:aCar.car_name];
         cell.tLabel.text = [LCWTools timechange3:aCar.dateline];
     }
     

@@ -30,22 +30,8 @@
     
     NSString *contentText;
     NSMutableString *car_name = [NSMutableString stringWithString:aCar.car_name];
-    NSArray *arr = [car_name componentsSeparatedByString:@" "];
-    if (arr.count >= 2) {
-        NSString *prefix = [arr objectAtIndex:0];
-        [car_name replaceOccurrencesOfString:[NSString stringWithFormat:@"%@ ",prefix] withString:@"" options:0 range:NSMakeRange(0, car_name.length)];
-        
-        if ([car_name hasPrefix:prefix]) {
-            contentText = car_name;
-        }else
-        {
-            contentText = aCar.car_name;
-        }
-    }else
-    {
-        contentText = aCar.car_name;
-    }
     
+    contentText = [LCWTools NSStringRemoveLineAndSpace:car_name];
     self.contentLabel.text = [NSString stringWithFormat:@"寻%@",contentText];;
     
 //    NSString *area = [NSString stringWithFormat:@"发%@%@",aCar.province];

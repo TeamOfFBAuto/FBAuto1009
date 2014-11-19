@@ -120,6 +120,8 @@
         
         NSString *carName = [dic objectForKey:@"car_name"];
         
+        carName = [LCWTools NSStringRemoveLineAndSpace:carName];
+        
         UILabel *nameLabel = weakSelf.car_modle_label;
         nameLabel.numberOfLines = 0;
         nameLabel.lineBreakMode = NSLineBreakByCharWrapping;
@@ -273,7 +275,7 @@
         photosScroll.center = CGPointMake(150, photosScroll.center.y);
     }
     
-    self.bigBgScroll.contentSize = CGSizeMake(self.view.width,photosScroll.bottom + self.car_detail_label.bottom + 10);
+    self.bigBgScroll.contentSize = CGSizeMake(self.view.width,photosScroll.bottom + self.car_detail_label.bottom + 10 + 50);
 
 }
 

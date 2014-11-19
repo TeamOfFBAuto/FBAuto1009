@@ -270,13 +270,11 @@
             
             if ([FBCityData existCarBrandId:brandId]) {
                 
-                [FBCityData updateCarBrandId:brandId brandName:update.name firstLetter:update.eindex];
+                [FBCityData updateCarBrandId:brandId brandName:[LCWTools NSStringRemoveSpace:update.name] firstLetter:update.eindex];
             }else
             {
-                [FBCityData insertCarBrandId:brandId brandName:update.name firstLetter:update.eindex];
+                [FBCityData insertCarBrandId:brandId brandName:[LCWTools NSStringRemoveSpace:update.name] firstLetter:update.eindex];
             }
-            
-            NSLog(@"brand--->");
         }
         
     }
@@ -293,10 +291,10 @@
             
             if ([FBCityData existCarTypeId:codeId]) {
                 
-                [FBCityData updateCarTypeId:codeId typeName:update.name firstLetter:update.eindex];
+                [FBCityData updateCarTypeId:codeId typeName:[LCWTools NSStringRemoveSpace:update.name] firstLetter:update.eindex];
             }else
             {
-                [FBCityData insertCarTypeId:typeId parentId:parentId typeName:update.name firstLetter:update.eindex];
+                [FBCityData insertCarTypeId:typeId parentId:parentId typeName:[LCWTools NSStringRemoveSpace:update.name] firstLetter:update.eindex];
             }
             NSLog(@"type--->");
         }
@@ -316,12 +314,12 @@
             
             if ([FBCityData existCarStyleId:codeId]) {
                 
-                [FBCityData updateCarStyleId:codeId StyleName:update.name];
+                [FBCityData updateCarStyleId:codeId StyleName:[LCWTools NSStringRemoveSpace:update.name]];
             }else
             {
                 
                 NSString *p_id = [NSString stringWithFormat:@"%@%@",parentId_p,parentId];
-                [FBCityData insertCarStyleId:styleId parentId:p_id StyleName:update.name];
+                [FBCityData insertCarStyleId:styleId parentId:p_id StyleName:[LCWTools NSStringRemoveSpace:update.name]];
             }
             NSLog(@"style--->");
         }

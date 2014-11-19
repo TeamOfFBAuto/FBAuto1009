@@ -516,6 +516,7 @@
 		137926F61987776900377ED5 /* GxiaoxiViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GxiaoxiViewController.m; sourceTree = "<group>"; };
 		137926F91987776900377ED5 /* GzhuceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GzhuceViewController.h; sourceTree = "<group>"; };
 		137926FA1987776900377ED5 /* GzhuceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GzhuceViewController.m; sourceTree = "<group>"; };
+		137E7D3B1A1C8294009DBA1F /* FBAutoAPIHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBAutoAPIHeader.h; sourceTree = "<group>"; };
 		137FEB021974C9E700CDBD89 /* carData1.rtfd */ = {isa = PBXFileReference; lastKnownFileType = wrapper.rtfd; path = carData1.rtfd; sourceTree = "<group>"; };
 		137FEB041974D48100CDBD89 /* CarStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CarStyle.h; sourceTree = "<group>"; };
 		137FEB051974D48100CDBD89 /* CarStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CarStyle.m; sourceTree = "<group>"; };
@@ -931,7 +932,6 @@
 		190BFD81195AAD6A0098E0F4 /* SendCarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendCarViewController.m; sourceTree = "<group>"; };
 		190BFD83195AAD800098E0F4 /* FindCarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FindCarViewController.h; sourceTree = "<group>"; };
 		190BFD84195AAD800098E0F4 /* FindCarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FindCarViewController.m; sourceTree = "<group>"; };
-		190BFD89195AB00A0098E0F4 /* FBAutoAPIHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FBAutoAPIHeader.h; sourceTree = "<group>"; };
 		190BFD8B195AB15C0098E0F4 /* bbsselected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bbsselected@2x.png"; sourceTree = "<group>"; };
 		190BFD8C195AB15C0098E0F4 /* carportselected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "carportselected@2x.png"; sourceTree = "<group>"; };
 		190BFD8D195AB15C0098E0F4 /* fbselectios7@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fbselectios7@2x.png"; sourceTree = "<group>"; };
@@ -2066,6 +2066,7 @@
 				1327EF8119ECBE34003A73DB /* RongCloud */,
 				190BFD4F195AA0FB0098E0F4 /* AppDelegate.h */,
 				190BFD50195AA0FB0098E0F4 /* AppDelegate.m */,
+				137E7D3B1A1C8294009DBA1F /* FBAutoAPIHeader.h */,
 				190BFD55195AA0FB0098E0F4 /* Images.xcassets */,
 				190BFD52195AA0FB0098E0F4 /* FBAuto.xcdatamodeld */,
 				E362356B19657588003B23CC /* GMClasses */,
@@ -2129,7 +2130,6 @@
 				13D5E0741962B2B000804835 /* UIColor_ConvertColor */,
 				13D5DF7B19615A3500804835 /* NSString+PinYin */,
 				13D5DF6F1961306000804835 /* UIView+Frame */,
-				190BFD89195AB00A0098E0F4 /* FBAutoAPIHeader.h */,
 			);
 			path = Public;
 			sourceTree = "<group>";
@@ -2901,7 +2901,7 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Peixin Yue (8T8G6RFSMN)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Bing Jin (KMZ2AD5LZY)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Peixin Yue (8T8G6RFSMN)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -2920,7 +2920,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "02f3e862-e25d-46c2-86fe-66acb48e58fb";
+				PROVISIONING_PROFILE = "6ebdae1d-c6a4-4118-aa8b-4995c823b087";
 				SDKROOT = iphoneos;
 				VALID_ARCHS = "armv7 armv7s";
 			};
@@ -2942,7 +2942,7 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Peixin Yue (8T8G6RFSMN)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Bing Jin (KMZ2AD5LZY)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Peixin Yue (8T8G6RFSMN)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -2955,7 +2955,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "02f3e862-e25d-46c2-86fe-66acb48e58fb";
+				PROVISIONING_PROFILE = "6ebdae1d-c6a4-4118-aa8b-4995c823b087";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 				VALID_ARCHS = "armv7 armv7s";
@@ -2968,7 +2968,7 @@
 			buildSettings = {
 				ARCHS = armv7;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Bing Jin (KMZ2AD5LZY)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Bing Jin (KMZ2AD5LZY)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: FBauto (Tianjin) Media & Technology Co., Ltd. (BRE5T6FWFB)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/FBAuto/ShareSDK/Connection",
@@ -3014,7 +3014,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "6ebdae1d-c6a4-4118-aa8b-4995c823b087";
+				PROVISIONING_PROFILE = "42c1f150-b3bf-4543-9e42-f6ff0215aaf4";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/**";
 				VALID_ARCHS = "armv7 arm64 armv7s";
@@ -3074,7 +3074,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "6ebdae1d-c6a4-4118-aa8b-4995c823b087";
+				PROVISIONING_PROFILE = "42c1f150-b3bf-4543-9e42-f6ff0215aaf4";
 				SDKROOT = iphoneos;
 				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/**";
 				VALID_ARCHS = "armv7 arm64 armv7s";

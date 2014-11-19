@@ -602,7 +602,7 @@
     [publish addTarget:self action:@selector(clickToPublish:) forControlEvents:UIControlEventTouchUpInside];
     [bigBgScroll addSubview:publish];
     
-    bigBgScroll.contentSize = CGSizeMake(320, firstBgView.height + secondBgView.height + 16 + publish.height + 10 + 200);
+    bigBgScroll.contentSize = CGSizeMake(320, firstBgView.height + secondBgView.height + 16 + publish.height + 10 + 50);
 }
 
 - (UILabel *)createLabelFrame:(CGRect)aFrame text:(NSString *)text alignMent:(NSTextAlignment)align textColor:(UIColor *)color
@@ -991,7 +991,7 @@
     priceTF.text = @"";
     descriptionTF.text = @"";
     
-    for (int i = 0; i < 5; i ++) {
+    for (int i = 0; i < 6; i ++) {
         Section_Button *btn = (Section_Button *)[secondBgView viewWithTag:100 + i];
         btn.contentLabel.text = @"";
     }

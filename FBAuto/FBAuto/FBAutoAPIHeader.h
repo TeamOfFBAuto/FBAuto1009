@@ -48,7 +48,7 @@
 
 #define USERPASSWORD @"userpassword"
 
-#define KPageSize  10 //每页条数
+#define KPageSize  20 //每页条数
 
 #define CAR_UPDATE_DATE_LOCAL @"CAR_UPDATE_DATE_LOCAL" //本地-车型数据更新时间(更新成功之后与服务器时间更新一致)
 

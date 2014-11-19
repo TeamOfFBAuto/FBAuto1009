@@ -62,6 +62,7 @@
 -(id)init
 {
     self = [self initWithDate:[NSDate date]];
+    
     return self;
 }
 
@@ -290,13 +291,20 @@
     NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
     
     if (component == self.monthComponent) {
-        label.text = [self.monthStrings objectAtIndex:(row % self.monthStrings.count)];
+        
+        NSString *text = [self.monthStrings objectAtIndex:(row % self.monthStrings.count)];
+        
+        label.text = [self dataForText:text];
         formatter.dateFormat = @"MMMM";
-        label.textAlignment = component ? NSTextAlignmentLeft : NSTextAlignmentRight;
+        label.textAlignment = NSTextAlignmentCenter;
+        
+        NSLog(@"monthComponent %@",label.text);
+        
     } else {
         label.text = [NSString stringWithFormat:@"%d", [self yearFromRow:row]];
-        label.textAlignment = NSTextAlignmentCenter;
+        label.textAlignment = NSTextAlignmentRight;
         formatter.dateFormat = @"y";
+        NSLog(@"yyyy %@",label.text);
     }
     
 //    if (_enableColourRow && [[formatter stringFromDate:[NSDate date]] isEqualToString:label.text])
@@ -307,7 +315,70 @@
 //    label.shadowOffset = CGSizeMake(0.0f, 0.1f);
 //    label.shadowColor = [UIColor whiteColor];
     
+//    label.backgroundColor = [UIColor orangeColor];
+    
     return label;
+}
+
+- (NSString *)dataForText:(NSString *)text
+{
+    NSMutableString *str = [NSMutableString stringWithString:text];
+    NSString *prefix = @"";
+    NSString *replace = @"";
+    if ([text hasPrefix:@"一"]) {
+        
+        prefix = @"一";
+        replace = @"1";
+        
+    }else if ([text hasPrefix:@"十一"]){
+        prefix = @"十一";
+        replace = @"11";
+        
+    }else if ([text hasPrefix:@"十二"]){
+        prefix = @"十二";
+        
+        replace = @"12";
+    }else if ([text hasPrefix:@"二"]){
+        prefix = @"二";
+        replace = @"2";
+        
+    }else if ([text hasPrefix:@"三"]){
+        prefix = @"三";
+        replace = @"3";
+        
+    }else if ([text hasPrefix:@"四"]){
+        prefix = @"四";
+        replace = @"4";
+        
+    }else if ([text hasPrefix:@"五"]){
+        prefix = @"五";
+        replace = @"5";
+        
+    }else if ([text hasPrefix:@"六"]){
+        prefix = @"六";
+        replace = @"6";
+        
+    }else if ([text hasPrefix:@"七"]){
+        prefix = @"七";
+        replace = @"7";
+        
+    }else if ([text hasPrefix:@"八"]){
+        prefix = @"八";
+        replace = @"8";
+        
+    }else if ([text hasPrefix:@"九"]){
+        prefix = @"九";
+        replace = @"9";
+        
+    }else if ([text hasPrefix:@"十"]){
+        prefix = @"十";
+        replace = @"10";
+        
+    }
+    
+    [str replaceOccurrencesOfString:prefix withString:replace options:0 range:NSMakeRange(0, str.length)];
+    
+    return str;
 }
 
 @end

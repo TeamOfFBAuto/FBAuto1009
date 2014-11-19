@@ -25,7 +25,8 @@
 
 - (void)setCellDataWithModel:(CarSourceClass *)aCar
 {
-    self.carNameLabel.text = aCar.car_name;
+    
+    self.carNameLabel.text = [LCWTools NSStringRemoveLineAndSpace:aCar.car_name];
     self.priceLabel.text = [NSString stringWithFormat:@"%@万元",aCar.price];
     self.paramsLabel.text = [NSString stringWithFormat:@"%@%@ 外观%@、内饰%@",aCar.carfrom,aCar.spot_future,aCar.color_out,aCar.color_in];
     self.userAndAddressLabel.text = [NSString stringWithFormat:@"%@(%@)",aCar.username,aCar.usertype];

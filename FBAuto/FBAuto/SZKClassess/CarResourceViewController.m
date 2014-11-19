@@ -693,8 +693,6 @@
     
     NSLog(@"车源列表 %@",url);
     
-    __weak typeof(CarResourceViewController *)weakSelf = self;
-    
     LCWTools *tool = [[LCWTools alloc]initWithUrl:url isPost:NO postData:nil];
     [tool requestCompletion:^(NSDictionary *result, NSError *erro) {
         

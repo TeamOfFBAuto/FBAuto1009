@@ -546,6 +546,37 @@
     }
     return text;
 }
+/**
+ *  去除空格
+ */
++ (NSString *)NSStringRemoveSpace:(NSString *)text
+{
+    if (text.length == 0) {
+        return @"";
+    }
+    NSMutableString *tmp = [NSMutableString stringWithString:text];
+    [tmp replaceOccurrencesOfString:@" " withString:@"" options:0 range:NSMakeRange(0, tmp.length)];
+    return tmp;
+}
+
+/**
+ *  去除 |和空格
+ */
++ (NSString *)NSStringRemoveLineAndSpace:(NSString *)text
+{
+    if (text.length == 0) {
+        return @"";
+    }
+    NSMutableString *tmp = [NSMutableString stringWithString:text];
+    
+    while ([tmp hasPrefix:@"|"] || [tmp hasPrefix:@" "]) {
+        
+        [tmp replaceOccurrencesOfString:@" " withString:@"" options:0 range:NSMakeRange(0, 1)];
+        [tmp replaceOccurrencesOfString:@"|" withString:@"" options:0 range:NSMakeRange(0, tmp.length)];
+    }
+    
+    return tmp;
+}
 
 #pragma - mark 分享
 
