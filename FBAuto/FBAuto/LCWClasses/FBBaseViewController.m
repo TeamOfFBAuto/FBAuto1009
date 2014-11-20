@@ -76,8 +76,10 @@
         UIButton *saveButton =[[UIButton alloc]initWithFrame:CGRectMake(0,8,30,21.5)];
         [saveButton addTarget:self action:@selector(clickToCollect:) forControlEvents:UIControlEventTouchUpInside];
         [saveButton setImage:[UIImage imageNamed:@"shoucang_46_44"] forState:UIControlStateNormal];
+        [saveButton setImage:[UIImage imageNamed:@"shoucang_cancel"] forState:UIControlStateSelected];
         UIBarButtonItem *save_item=[[UIBarButtonItem alloc]initWithCustomView:saveButton];
         
+        self.collectButton = saveButton;
         
         UIButton *share_Button =[[UIButton alloc]initWithFrame:CGRectMake(0,8,30,21.5)];
         [share_Button addTarget:self action:@selector(clickToShare:) forControlEvents:UIControlEventTouchUpInside];

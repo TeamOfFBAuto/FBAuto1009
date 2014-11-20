@@ -212,7 +212,7 @@
             }
             
             
-            //titile
+            //title
             UILabel *titleLable = [[UILabel alloc]initWithFrame:CGRectMake(20, 20+i*55, 30, 15)];
             if (i == 5 || i ==0 || i==1 || i == 3) {//重复密码 公司全称 公司简介 详细地址
                 titleLable.frame = CGRectMake(20, 20+i*55, 60, 15);

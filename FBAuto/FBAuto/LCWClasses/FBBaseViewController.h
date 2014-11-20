@@ -24,7 +24,7 @@ typedef enum{
 @property (nonatomic,retain)UILabel *titleLabel;
 @property (nonatomic,retain)UIButton *button_back;
 
-
+@property(nonatomic,retain)UIButton *collectButton;//收藏按钮
 
 @property (nonatomic,assign)NavigationStyle style;
 

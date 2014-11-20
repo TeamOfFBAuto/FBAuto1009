@@ -171,7 +171,7 @@ alpha:(a)]
 
 #define FBAUTO_CARSOURCE_ADD_SOURCE @"http://fbautoapp.fblife.com/index.php?c=interface&a=addcheyuan"//添加车源
 
-#define FBAUTO_CARSOURCE_SINGLE_SOURE @"http://fbautoapp.fblife.com/index.php?c=interface&a=getsinglecheyuan&cid=%@"//获取单个车源
+#define FBAUTO_CARSOURCE_SINGLE_SOURE @"http://fbautoapp.fblife.com/index.php?c=interface&a=getsinglecheyuan&cid=%@&uid=%@"//获取单个车源
 
 #define FBAUTO_CARSOURCE_SEARCH @"http://fbautoapp.fblife.com/index.php?c=interface&a=searchcheyuan&keyword=%@&page=%d&ps=%d"//搜索车源
 
@@ -191,7 +191,7 @@ alpha:(a)]
 
 #define FBAUTO_FINDCAR_PUBLISH @"http://fbautoapp.fblife.com/index.php?c=interface&a=addxunche"//添加寻车信息
 
-#define FBAUTO_FINDCAR_SINGLE @"http://fbautoapp.fblife.com/index.php?c=interface&a=getsinglexunche&xid=%@"//单个寻车信息
+#define FBAUTO_FINDCAR_SINGLE @"http://fbautoapp.fblife.com/index.php?c=interface&a=getsinglexunche&xid=%@&uid=%@"//单个寻车信息
 
 #define FBAUTO_FINDCAR_EDIT @"http://fbautoapp.fblife.com/index.php?c=interface&a=editxunche"//编辑
 

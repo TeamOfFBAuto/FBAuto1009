@@ -74,9 +74,11 @@
 
 - (void)getSingleCarInfoWithId:(NSString *)carId
 {
-    NSString *url = [NSString stringWithFormat:FBAUTO_FINDCAR_SINGLE,carId];
+    NSString *url = [NSString stringWithFormat:FBAUTO_FINDCAR_SINGLE,carId,[GMAPI getUid]];
     
     NSLog(@"单个寻车信息 %@",url);
+    
+    __weak typeof(self)weakSelf = self;
     
     LCWTools *tool = [[LCWTools alloc]initWithUrl:url isPost:NO postData:nil];
     [tool requestCompletion:^(NSDictionary *result, NSError *erro) {
@@ -90,6 +92,12 @@
         }
         
         NSDictionary *dic = [dataInfo objectAtIndex:0];
+        
+        
+        //判断是否收藏
+        
+        int is_shoucang = [[dic objectForKey:@"is_shoucang"]integerValue];
+        weakSelf.collectButton.selected = is_shoucang > 0 ? YES : NO;
         
         NSString *carName = [dic objectForKey:@"car_name"];
         
@@ -307,6 +315,12 @@
     [tool requestCompletion:^(NSDictionary *result, NSError *erro) {
         
         NSLog(@"添加收藏 result %@, erro%@",result,[result objectForKey:@"errinfo"]);
+        
+        int errcode = [[result objectForKey:@"errcode"]integerValue];
+        if (errcode == 0) {
+            
+            self.collectButton.selected = YES;
+        }
         
         [LCWTools showDXAlertViewWithText:[result objectForKey:@"errinfo"]];
         
