@@ -84,8 +84,8 @@ alpha:(a)]
 //获取手机验证码
 #define FBAUTO_GET_VERIFICATION_CODE @"http://fbautoapp.fblife.com/index.php?c=interface&a=phonecode&phone=%@&optype=%d"
 
-//验证手机验证码
-#define FBAUTO_YANZHENG_VERIFICATION_CODE @"http://fbautoapp.fblife.com/index.php?c=interface&a=checkphonecode&phone=%@&code=%@"
+////验证手机验证码
+//#define FBAUTO_YANZHENG_VERIFICATION_CODE @"http://fbautoapp.fblife.com/index.php?c=interface&a=checkphonecode&phone=%@&code=%@"
 
 //用户注册
 #define FBAUTO_REGISTERED @"http://fbautoapp.fblife.com/index.php?c=interface&a=register&phone=%@&password=%@&name=%@&province=%ld&city=%ld&usertype=%d&code=%@&token=%@&fullname=%@"

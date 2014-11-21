@@ -214,6 +214,7 @@
 		13A37C881A1DCCBD00AECDB9 /* shoucang_cancel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13A37C871A1DCCBD00AECDB9 /* shoucang_cancel@2x.png */; };
 		13A61BD319FE4F37007BF353 /* SRMonthPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A61BD219FE4F37007BF353 /* SRMonthPicker.m */; };
 		13A8E8AA19E669CA004E7DB1 /* FBChatListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 13A8E8A919E669CA004E7DB1 /* FBChatListController.m */; };
+		13AB60DB1A1F43E9002C5543 /* baocun92_58@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 13AB60DA1A1F43E9002C5543 /* baocun92_58@2x.png */; };
 		13B626D219CC04DB008FB162 /* defaultFace.png in Resources */ = {isa = PBXBuildFile; fileRef = 13B626D119CC04DB008FB162 /* defaultFace.png */; };
 		13C4D8751986573E00281521 /* XMPPMessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 13C4D8741986573E00281521 /* XMPPMessageModel.m */; };
 		13C7172619824B5A008F7B42 /* QQConnection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 13C7170C19824B5A008F7B42 /* QQConnection.framework */; };
@@ -722,6 +723,7 @@
 		13A61BD219FE4F37007BF353 /* SRMonthPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRMonthPicker.m; sourceTree = "<group>"; };
 		13A8E8A819E669CA004E7DB1 /* FBChatListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBChatListController.h; sourceTree = "<group>"; };
 		13A8E8A919E669CA004E7DB1 /* FBChatListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBChatListController.m; sourceTree = "<group>"; };
+		13AB60DA1A1F43E9002C5543 /* baocun92_58@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "baocun92_58@2x.png"; sourceTree = "<group>"; };
 		13B626D119CC04DB008FB162 /* defaultFace.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = defaultFace.png; sourceTree = "<group>"; };
 		13C4D8731986573E00281521 /* XMPPMessageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMPPMessageModel.h; sourceTree = "<group>"; };
 		13C4D8741986573E00281521 /* XMPPMessageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMPPMessageModel.m; sourceTree = "<group>"; };
@@ -1197,6 +1199,7 @@
 		135EC5961A01042900A040F1 /* Image_new */ = {
 			isa = PBXGroup;
 			children = (
+				13AB60DA1A1F43E9002C5543 /* baocun92_58@2x.png */,
 				135EC5971A01043400A040F1 /* fabu92_58@2x.png */,
 				135EC5981A01043400A040F1 /* jiahaoyou 92_58@2x.png */,
 			);
@@ -2612,6 +2615,7 @@
 				13D5DFD91961758E00804835 /* fangdajing_icon36_36@2x.png in Resources */,
 				13D5E0ED1963E19300804835 /* yulan-button-kedian-100_58@2x.png in Resources */,
 				13D5DFE91961758E00804835 /* sousuo_bg548_58@2x.png in Resources */,
+				13AB60DB1A1F43E9002C5543 /* baocun92_58@2x.png in Resources */,
 				13D5DFDF1961758E00804835 /* fenxiang42_42@2x.png in Resources */,
 				13D5DFE81961758E00804835 /* geren_up46_46@2x.png in Resources */,
 				13D5E0081961758E00804835 /* haoyou_dianhua40_46@2x.png in Resources */,

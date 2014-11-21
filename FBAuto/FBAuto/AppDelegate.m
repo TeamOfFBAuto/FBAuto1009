@@ -229,7 +229,7 @@
     NSString *url = [NSString stringWithFormat:FBAUTO_CARSOURCE_GETUPDATEDATE,startTimeLine,endTimeline];
     LCWTools *tools = [[LCWTools alloc]initWithUrl:url isPost:NO postData:nil];
     [tools requestCompletion:^(NSDictionary *result, NSError *erro) {
-        NSLog(@"result %@",result);
+//        NSLog(@"result %@",result);
         
         if ([result isKindOfClass:[NSDictionary class]]) {
             
@@ -268,12 +268,15 @@
             
             NSString *brandId = [self carCodeForIndex:[update.list_index intValue]];
             
+            NSString *name = [LCWTools NSStringRemoveSpace:update.name];
+            NSString *firstLetter = [self firstLetterForEindex:update.eindex name:name];
+            
             if ([FBCityData existCarBrandId:brandId]) {
                 
-                [FBCityData updateCarBrandId:brandId brandName:[LCWTools NSStringRemoveSpace:update.name] firstLetter:update.eindex];
+                [FBCityData updateCarBrandId:brandId brandName:name firstLetter:firstLetter];
             }else
             {
-                [FBCityData insertCarBrandId:brandId brandName:[LCWTools NSStringRemoveSpace:update.name] firstLetter:update.eindex];
+                [FBCityData insertCarBrandId:brandId brandName:name firstLetter:firstLetter];
             }
         }
         
@@ -289,12 +292,15 @@
             NSString *typeId = [self carCodeForIndex:[update.list_index intValue]];
             NSString *codeId = [NSString stringWithFormat:@"%@%@",parentId,typeId];
             
+            NSString *name = [LCWTools NSStringRemoveSpace:update.name];
+            NSString *firstLetter = [self firstLetterForEindex:update.eindex name:name];
+            
             if ([FBCityData existCarTypeId:codeId]) {
                 
-                [FBCityData updateCarTypeId:codeId typeName:[LCWTools NSStringRemoveSpace:update.name] firstLetter:update.eindex];
+                [FBCityData updateCarTypeId:codeId typeName:name firstLetter:firstLetter];
             }else
             {
-                [FBCityData insertCarTypeId:typeId parentId:parentId typeName:[LCWTools NSStringRemoveSpace:update.name] firstLetter:update.eindex];
+                [FBCityData insertCarTypeId:typeId parentId:parentId typeName:name firstLetter:firstLetter];
             }
             NSLog(@"type--->");
         }
@@ -330,6 +336,16 @@
     [[NSNotificationCenter defaultCenter]postNotificationName:UPDATE_CARSOURCE_PARAMS object:nil];//通知更新
     
     [loading hide:YES];
+}
+
+//获取首字母，服务器返回的首字母有可能是空得，需要自己获取
+- (NSString *)firstLetterForEindex:(NSString *)eIndex name:(NSString *)name
+{
+    if (name.length == 0) {
+        return @"";
+    }
+    eIndex = (eIndex.length == 0)? [name getFirstLetter] : eIndex;
+    return eIndex;
 }
 
 /**

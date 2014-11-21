@@ -223,7 +223,7 @@
     sqlite3_stmt *stmt = nil;
     int result = sqlite3_prepare_v2(db, "select count(*) from carType where codeId = ?", -1, &stmt, nil);
     
-    NSLog(@"existCarTypeId %d %@",result,codeId);
+    NSLog(@"existCarTypeId series %d %@",result,codeId);
     
     if (result == SQLITE_OK) {
         
@@ -291,14 +291,17 @@
     }
     
     if (result == SQLITE_DONE) {
-        NSLog(@"updateCarBrandId %@ success",brandId);
+        NSLog(@"updateCarBrandId %@ success name %@",brandId,name);
     }
+    sqlite3_finalize(stmt);
 }
 
 + (void)updateCarTypeId:(NSString *)codeId
                typeName:(NSString *)name
             firstLetter:(NSString *)firstLetter//车型
 {
+    NSLog(@"---->codId:%@ name:%@ firstLetter:%@",codeId,name,firstLetter);
+    
     if (codeId == nil || firstLetter.length == 0 || name.length == 0) {
         return;
     }
@@ -317,8 +320,10 @@
     }
     
     if (result == SQLITE_DONE) {
-        NSLog(@"updateCarTypeId %@ success",codeId);
+        NSLog(@"updateCarTypeId %@ success %@",codeId,name);
     }
+    
+    sqlite3_finalize(stmt);
 
 }
 
@@ -344,6 +349,8 @@
     if (result == SQLITE_DONE) {
         NSLog(@"updateCarStyleId %@ success",codeId);
     }
+    
+    sqlite3_finalize(stmt);
 }
 
 
