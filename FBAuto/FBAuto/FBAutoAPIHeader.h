@@ -181,6 +181,8 @@ alpha:(a)]
 
 #define FBAUTO_CARSOURCE_EDIT @"http://fbautoapp.fblife.com/index.php?c=interface&a=editcheyuan"//修改车源信息
 
+#define FBAUTO_CARSOURCE_REFRESH @"http://fbautoapp.fblife.com/index.php?c=interface&a=flushcheyuan&cid=%@&authkey=%@"//刷新车源
+
 //寻车API================
 
 #define FBAUTO_FINDCAR_LIST @"http://fbautoapp.fblife.com/index.php?c=interface&a=getxunche"//寻车列表数据
@@ -196,6 +198,8 @@ alpha:(a)]
 #define FBAUTO_FINDCAR_EDIT @"http://fbautoapp.fblife.com/index.php?c=interface&a=editxunche"//编辑
 
 #define FBAUTO_FINDCAR_DELETE @"http://fbautoapp.fblife.com/index.php?c=interface&a=delxunche&authkey=%@&xid=%@"//删除寻车信息
+
+#define FBAUTO_FINDCAR_REFRESH @"http://fbautoapp.fblife.com/index.php?c=interface&a=flushxunche&xid=%@&authkey=%@" //刷新寻车
 
 //收藏API============
 

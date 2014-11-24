@@ -509,6 +509,10 @@
             row = 12;
         }
         
+        if ([colorName isEqualToString:@"其他"]) {
+            row = 11;
+        }
+        
         selectBlock(blockStyle,colorName,[NSString stringWithFormat:@"%d",row]);
         [self hidden];
         

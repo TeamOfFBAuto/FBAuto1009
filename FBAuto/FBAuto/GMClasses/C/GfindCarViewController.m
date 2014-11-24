@@ -78,6 +78,49 @@
 }
 
 #pragma mark - 请求网络数据
+
+- (void)refreshData:(NSString *)infoId
+{
+    __weak typeof(GfindCarViewController *)weakSelf = self;
+    
+    __weak typeof(RefreshTableView *)weakTable = _tableView;
+    
+    NSString *api = @"";
+    
+    if (self.gtype == 2) {
+        api = [NSString stringWithFormat:FBAUTO_CARSOURCE_REFRESH,infoId,[GMAPI getAuthkey]];
+        NSLog(@"我的车源接口:%@",api);
+    }else if (self.gtype == 3)
+    {
+        api = [NSString stringWithFormat:FBAUTO_FINDCAR_REFRESH,infoId,[GMAPI getAuthkey]];
+        NSLog(@"我的寻车接口：%@",api);
+    }
+    
+    LCWTools *tool = [[LCWTools alloc]initWithUrl:api isPost:NO postData:nil];
+    [tool requestCompletion:^(NSDictionary *result, NSError *erro) {
+        
+        NSLog(@"refresh erro%@",[result objectForKey:@"errinfo"]);
+        
+        int errcode = [[result objectForKey:@"errcode"] intValue];
+        if (errcode == 0) {
+            
+            [weakTable showRefreshHeader:NO];
+        }
+        
+        
+        
+    }failBlock:^(NSDictionary *failDic, NSError *erro) {
+        
+        NSLog(@"failDic %@",failDic);
+        
+        [LCWTools showDXAlertViewWithText:[failDic objectForKey:ERROR_INFO]];
+        
+        
+    }];
+
+}
+
+
 //我的车源
 -(void)prepareDataForType:(int)aType{
     //获取我的车源列表
@@ -422,7 +465,11 @@
                 weakSelf.lastIndexPath = nil;
                 weakSelf.flagIndexPath = nil;
                 weakSelf.flagHeight = 60;
-                [btableview showRefreshHeader:YES];
+//                [btableview showRefreshHeader:YES];
+                
+                CarSourceClass *aCar = [weakDataArray objectAtIndex:indexPath.row];
+                
+                [weakSelf refreshData:aCar.id];
             }
                 break;
             case 13://分享
