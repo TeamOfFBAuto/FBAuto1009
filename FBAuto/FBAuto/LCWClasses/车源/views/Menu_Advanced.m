@@ -503,7 +503,13 @@
     }else if (tableView == colorTable)
     {
         NSString *colorName = [colorArray objectAtIndex:indexPath.row];
-        selectBlock(blockStyle,colorName,[NSString stringWithFormat:@"%d",indexPath.row]);
+        
+        int row = indexPath.row;
+        if ([colorName isEqualToString:@"棕色"] || [colorName isEqualToString:@"米色"]) {
+            row = 12;
+        }
+        
+        selectBlock(blockStyle,colorName,[NSString stringWithFormat:@"%d",row]);
         [self hidden];
         
     }else

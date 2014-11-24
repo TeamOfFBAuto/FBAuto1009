@@ -153,7 +153,13 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    selectBlock(selectStyle,[NSString stringWithFormat:@"%d",indexPath.row]);
+    NSString *colorName = [dataArray objectAtIndex:indexPath.row];
+    int row = indexPath.row;
+    if ([colorName isEqualToString:@"棕色"] || [colorName isEqualToString:@"米色"]) {
+        row = 12;
+    }
+    
+    selectBlock(selectStyle,[NSString stringWithFormat:@"%d",row]);
     
     [self hidden];
 }

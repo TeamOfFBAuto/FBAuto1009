@@ -672,7 +672,7 @@
     
     int row;
     
-    if (!self.haveLimit) { //有不限
+    if (!self.haveLimit) { //没有不限
         
         if (indexPath.row == 0) {
             
@@ -687,6 +687,10 @@
         }else
         {
             row = (int)indexPath.row;
+            
+            if ([select isEqualToString:@"棕色"] || [select isEqualToString:@"米色"]) {
+                row = 12;
+            }
         }
         
     }else //有不限选项
@@ -703,6 +707,11 @@
         }else if(indexPath.row > 1)
         {
             row = (int)indexPath.row - 1;
+            
+            if ([select isEqualToString:@"棕色"] || [select isEqualToString:@"米色"]) {
+                row = 12;
+            }
+            
         }else
         {
             row = (int)indexPath.row;
