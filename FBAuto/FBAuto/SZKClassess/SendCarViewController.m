@@ -244,7 +244,7 @@
     }failBlock:^(NSDictionary *failDic, NSError *erro) {
 
         [LCWTools showDXAlertViewWithText:[failDic objectForKey:ERROR_INFO]];
-        NSLog(@"faildic %@",[failDic objectForKey:ERROR_INFO]);
+        NSLog(@"faildic %@ failDic %@",[failDic objectForKey:ERROR_INFO],failDic);
         
         [weakLoading hide:NO];
     }];
@@ -259,7 +259,7 @@
  */
 - (void)getSingleCarInfoWithId:(NSString *)carId
 {
-    NSString *url = [NSString stringWithFormat:FBAUTO_CARSOURCE_SINGLE_SOURE,carId];
+    NSString *url = [NSString stringWithFormat:FBAUTO_CARSOURCE_SINGLE_SOURE,carId,[GMAPI getUid]];
     
     NSLog(@"单个车源信息 %@",url);
     
