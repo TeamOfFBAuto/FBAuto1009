@@ -21,6 +21,10 @@
 
 #import "DXAlertView.h"
 
+#import <TencentOpenAPI/QQApi.h>
+
+#import "WXApi.h"
+
 @implementation LCWTools
 
 + (id)shareInstance
@@ -582,6 +586,43 @@
 
 + (void)shareText:(NSString *)text  title:(NSString *)title image:(UIImage *)aImage linkUrl:(NSString *)linkUrl ShareType:(ShareType)aShareType{
     
+    
+    switch (aShareType) {
+        case ShareTypeQQ:
+        case ShareTypeQQSpace:
+        {
+            
+            if (![QQApi isQQInstalled] || ![QQApi isQQSupportApi]) {
+                
+                [self showDXAlertViewWithText:@"抱歉,没有安装QQ客户端"];
+                
+                return;
+            }
+            
+        }
+            break;
+            
+        case ShareTypeWeixiSession: //微信好友
+        case ShareTypeWeixiTimeline: //朋友圈
+        {
+            //微信好友
+            
+            if (![WXApi isWXAppInstalled] || [WXApi isWXAppSupportApi]) {
+                
+                [self showDXAlertViewWithText:@"您的设备没有安装微信客户端"];
+                
+                return;
+            }
+            
+        }
+            break;
+
+        default:
+            break;
+    }
+    
+    
+    
     //创建分享内容
     
     id<ISSContent> publishContent = [ShareSDK content:text
@@ -599,15 +640,6 @@
                                                          authViewStyle:SSAuthViewStyleFullScreenPopup
                                                           viewDelegate:nil
                                                authManagerViewDelegate:nil];
-    
-    //    //在授权页面中添加关注官方微博
-    //    [authOptions setFollowAccounts:[NSDictionary dictionaryWithObjectsAndKeys:
-    //                                    [ShareSDK userFieldWithType:SSUserFieldTypeName value:@"ShareSDK"],
-    //                                    SHARE_TYPE_NUMBER(ShareTypeSinaWeibo),
-    //                                    [ShareSDK userFieldWithType:SSUserFieldTypeName value:@"ShareSDK"],
-    //                                    SHARE_TYPE_NUMBER(ShareTypeTencentWeibo),
-    //
-    //                                    nil]];
     
     //显示分享菜单
     [ShareSDK showShareViewWithType:aShareType
@@ -633,6 +665,24 @@
                                  else if (state == SSPublishContentStateFail)
                                  {
                                      NSLog(@"分享失败!error code == %d, error code == %@ ", [error errorCode], [error errorDescription]);
+                                     
+                                     //微信 朋友圈 分享失败!error code == -22003, error code == WeChat is not installed
+                                     
+                                     //QQ 分享失败!error code == -24002, error code == QQ is not installed
+                                     
+                                     //分享失败!error code == -6004, error code == ERROR_DESC_QQ_CLIENT_NOT_INSTALLED
+                                     
+                                     NSInteger erroCode = [error errorCode];
+                                     
+                                     if (erroCode == -22003) {
+                                         
+                                         [self showDXAlertViewWithText:@"设备未安装微信客户端"];
+                                         
+                                     }else if (erroCode == -24002 || erroCode == -6004){
+                                      
+                                         [self showDXAlertViewWithText:@"设备未安装QQ客户端"];
+                                     }
+                                     
                                      
                                  }
                              }];

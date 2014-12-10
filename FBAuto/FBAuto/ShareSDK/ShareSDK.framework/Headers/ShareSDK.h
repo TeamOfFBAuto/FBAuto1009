@@ -24,11 +24,13 @@
 #import "NSArray+ShareSDK.h"
 #import "ShareSDKTypeDef.h"
 #import "ShareSDKEventHandlerDef.h"
+
 #import "ShareSDKDef.h"
 #import "ISSAuthOptions.h"
 #import "ISSViewDelegate.h"
 #import "ISSPage.h"
 #import "ISSContent.h"
+
 #import "ISSShareActionSheet.h"
 #import "ISSShareOptions.h"
 #import "ISSShareViewDelegate.h"
@@ -189,7 +191,6 @@
  */
 ///#end
 + (void)useAppTrusteeship:(BOOL)enabled;
-
 
 #pragma mark 初始化
 
@@ -671,22 +672,28 @@
 ///#begin zh-cn
 /**
  *	@brief	连接微信应用以使用相关功能，此应用需要引用WeChatConnection.framework和微信官方SDK
- *          http://open.weixin.qq.com上注册应用，并将相关信息填写以下字段
+ *          http://open.weixin.qq.com上注册应用，并将相关信息填写以下字段。如果需要使用微信授权获取用户信息等，则可使用下面中带appSecret的方法。
  *
  *	@param 	appId 	应用ID
+ *  @param 	appSecret 	应用密钥
  *	@param 	wechatCls 	微信Api类型，引入WXApi.h后，将[WXApi class]传入此参数
  */
 ///#end
 ///#begin en
 /**
- *	@brief	Initialize WeChat platform. This platform need import WeChatConnection.framework and libWeChatSDK.a
+ *	@brief	Initialize WeChat platform. If you want get the user's infomation then you may choose the method that with the appSecret.This platform need import WeChatConnection.framework and libWeChatSDK.a
  *          Go to http://open.weixin.qq.com register app，Then fill in the relevant information into the field below
  *
  *	@param 	appId 	App id.
+ *  @param 	appSecret 	App Secret
  *	@param 	wechatCls 	WXApi class，You should import WXApi.h，then passed [WXApi class] this parameter.
  */
 ///#end
 + (void)connectWeChatWithAppId:(NSString *)appId
+                     wechatCls:(Class)wechatCls;
+
++ (void)connectWeChatWithAppId:(NSString *)appId
+                     appSecret:(NSString *)appSecret
                      wechatCls:(Class)wechatCls;
 
 ///#begin zh-cn
@@ -1026,67 +1033,85 @@
 
 ///#begin zh-cn
 /**
- *	@brief	连接微信好友
+ *	@brief	连接微信好友。如果需要使用微信授权获取用户信息等，则可使用下面中带appSecret的方法。
  *
  *  @since  ver2.6.0
  *
  *	@param 	appId 	应用ID，必须要和朋友圈传入ID一致
+ *  @param 	appSecret 	应用密钥
  *	@param 	wechatCls 	微信Api类型，引入WXApi.h后，将[WXApi class]传入此参数
  */
 ///#end
 ///#begin en
 /**
- *	@brief	Initialize WeChat Session platform.
+ *	@brief	Initialize WeChat Session platform.If you want get the user's infomation then you may choose the method that with the appSecret.
  *
  *  @since  ver2.6.0
  *
  *	@param 	appId 	App id. Must be consistent and WeChat Timeline passed ID
+ *  @param 	appSecret 	App Secret
  *	@param 	wechatCls 	WXApi class，You should import WXApi.h，then passed [WXApi class] this parameter.
  */
 ///#end
 + (void)connectWeChatSessionWithAppId:(NSString *)appId
                             wechatCls:(Class)wechatCls;
 
++ (void)connectWeChatSessionWithAppId:(NSString *)appId
+                            appSecret:(NSString *)appSecret
+                            wechatCls:(Class)wechatCls;
+
 ///#begin zh-cn
 /**
- *	@brief	连接微信朋友圈
+ *	@brief	连接微信朋友圈。如果需要使用微信授权获取用户信息等，则可使用下面中带appSecret的方法。
  *
  *  @since  ver2.6.0
  *
  *	@param 	appId 	应用ID，必须要和好友传入ID一致
+ *  @param 	appSecret 	应用密钥
  *	@param 	wechatCls 	微信Api类型，引入WXApi.h后，将[WXApi class]传入此参数
  */
 ///#end
 ///#begin en
 /**
- *	@brief	Initialize WeChat Timeline platform.
+ *	@brief	Initialize WeChat Timeline platform.If you want get the user's infomation then you may choose the method that with the appSecret.
  *
  *  @since  ver2.6.0
  *
  *	@param 	appId 	App id. Must be consistent and WeChat Session passed ID
+ *  @param 	appSecret 	App Secret
  *	@param 	wechatCls 	WXApi class，You should import WXApi.h，then passed [WXApi class] this parameter.
  */
 ///#end
 + (void)connectWeChatTimelineWithAppId:(NSString *)appId
                              wechatCls:(Class)wechatCls;
 
++ (void)connectWeChatTimelineWithAppId:(NSString *)appId
+                             appSecret:(NSString *)appSecret
+                             wechatCls:(Class)wechatCls;
+
 ///#begin zh-cn
 /**
- *	@brief	连接微信收藏
+ *	@brief	连接微信收藏。如果需要使用微信授权获取用户信息等，则可使用下面中带appSecret的方法。
  *
  *	@param 	appId 	应用ID，必须要和好友、朋友圈传入ID一致。
+ *  @param 	appSecret 	应用密钥
  *	@param 	wechatCls 	微信Api类型，引入WXApi.h后，将[WXApi class]传入此参数
  */
 ///#end
 ///#begin en
 /**
- *	@brief	Initialize WeChat Favorite platform.
+ *	@brief	Initialize WeChat Favorite platform.If you want get the user's infomation then you may choose the method that with the appSecret.
  *
  *	@param 	appId 	App id，Must be consistent and WeChat Session、WeChat Timeline passed ID
+ *  @param 	appSecret 	App Secret
  *	@param 	wechatCls 	WXApi class，You should import WXApi.h，then passed [WXApi class] this parameter.
  */
 ///#end
 + (void)connectWeChatFavWithAppId:(NSString *)appId
+                        wechatCls:(Class)wechatCls;
+
++ (void)connectWeChatFavWithAppId:(NSString *)appId
+                        appSecret:(NSString *)appSecret
                         wechatCls:(Class)wechatCls;
 
 ///#begin zh-cn
@@ -1217,6 +1242,40 @@
  */
 ///#end
 + (void)connectWhatsApp;
+
+///#begin zh-cn
+/**
+ *	@brief	链接KaKao Talk以使用相关功能。
+ *
+ *  @since  ver2.10.0
+ *
+ */
+///#end
+///#begin en
+/**
+ *	@brief	Initialize KaKao Talk platform，This platform need import KaKaoTalkConnection.framework
+ *
+ *	@since  ver2.10.0
+ */
+///#end
++ (void)connectKaKaoTalk;
+
+///#begin zh-cn
+/**
+ *	@brief	链接KaKao Story以使用相关功能。
+ *
+ *  @since  ver2.10.0
+ *
+ */
+///#end
+///#begin en
+/**
+ *	@brief	Initialize KaKao Story platform，This platform need import KaKaoTalkConnection.framework
+ *
+ *	@since  ver2.10.0
+ */
+///#end
++ (void)connectKaKaoStory;
 
 ///#begin zh-cn
 /**
